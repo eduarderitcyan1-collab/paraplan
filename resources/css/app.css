@@ -1,0 +1,270 @@
+/* Nunito Sans */
+@import "@fontsource/nunito-sans/200.css";
+@import "@fontsource/nunito-sans/300.css";
+@import "@fontsource/nunito-sans/400.css";
+@import "@fontsource/nunito-sans/500.css";
+@import "@fontsource/nunito-sans/600.css";
+@import "@fontsource/nunito-sans/700.css";
+@import "@fontsource/nunito-sans/800.css";
+@import "@fontsource/nunito-sans/900.css";
+
+/* Mulish */
+@import "@fontsource/mulish/200.css";
+@import "@fontsource/mulish/300.css";
+@import "@fontsource/mulish/400.css";
+@import "@fontsource/mulish/500.css";
+@import "@fontsource/mulish/600.css";
+@import "@fontsource/mulish/700.css";
+@import "@fontsource/mulish/800.css";
+@import "@fontsource/mulish/900.css";
+
+/* Unbounded */
+@import "@fontsource/unbounded/200.css";
+@import "@fontsource/unbounded/300.css";
+@import "@fontsource/unbounded/400.css";
+@import "@fontsource/unbounded/500.css";
+@import "@fontsource/unbounded/600.css";
+@import "@fontsource/unbounded/700.css";
+@import "@fontsource/unbounded/800.css";
+@import "@fontsource/unbounded/900.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* user-select: none; */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    pointer-events: none;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 50px 100px;
+    gap: 50px;
+    overflow: hidden;
+}
+
+.page:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0E0D588C;
+    z-index: -1;
+}
+
+.page:after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/public/images/back.webp');
+    background-size: 100%;
+    background-repeat: repeat;
+    z-index: -2;
+}
+
+.page .container {
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+:root {
+    --white: #fff;
+    --orange: #FFA22D;
+    --violet: #4A49C4;
+    --sizeH1: clamp(1.25rem, 0.9531rem + 1.3575vw, 3.125rem);
+    --sizeH2: clamp(1rem, 0.7624rem + 1.086vw, 2.5rem);
+    --sizeH3: clamp(1rem, 0.8812rem + 0.543vw, 1.75rem);
+    --sizeText: clamp(0.75rem, 0.6906rem + 0.2715vw, 1.125rem);
+    --mulish: 'Mulish', sans-serif;
+    --nunito: 'Nunito Sans', sans-serif;
+    --unbounded: 'Unbounded', sans-serif;
+}
+
+.pageTitle {
+    font-family: var(--nunito);
+    font-size: var(--sizeH1);
+    color: var(--white);
+    font-weight: 400;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.subTitle {
+    font-family: var(--nunito);
+    font-size: var(--sizeH2);
+    color: var(--white);
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.text {
+    font-family: var(--mulish);
+    font-size: var(--sizeText);
+    color: var(--white);
+    line-height: 1.5em;
+    font-weight: 600;
+}
+
+.text:not(:last-child) {
+    margin-bottom: 14px;
+}
+
+.glass {
+    position: relative;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px) saturate(120%);
+    -webkit-backdrop-filter: blur(6px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.25);
+    overflow: hidden;
+}
+
+a {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: none;
+}
+
+ul,
+ol {
+    padding-left: 20px;
+}
+
+/* Меню */
+.menu,
+.menuList {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    z-index: 1;
+}
+
+.menu .logo .logoImage {
+    width: 75px;
+    height: auto;
+}
+
+.menu .menuList .menuLink {
+    font-family: var(--mulish);
+    font-size: var(--sizeText);
+    color: var(--white);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* Свяжитесь с нами */
+.socialBlock .socialWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.socialBlock .socialWrapper .glass {
+    justify-content: center;
+    padding: 10px 10px;
+    width: 300px;
+    font-family: var(--mulish);
+    font-size: var(--sizeH3);
+    font-weight: 800;
+    color: var(--white);
+    border-radius: 100px;
+}
+
+.socialBlock .socialWrapper .socialLink:not(.glass) svg {
+    width: 35px;
+    height: 35px;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiperNavigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 25px;
+    gap: 50px;
+}
+
+.swiper-button-prev.glass,
+.swiper-button-next.glass {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer !important;
+}
+
+.swiper-button-prev svg,
+.swiper-button-next svg {
+    width: 20px;
+    height: 20px;
+}
+
+.button {
+    font-family: var(--mulish);
+    font-size: var(--sizeText);
+    color: var(--violet);
+    font-weight: 700;
+    background-color: var(--orange);
+    padding: 15px 60px;
+    border-radius: 100px;
+    justify-content: center;
+}
+
+@media (max-width: 1440px) {
+    .page {
+        padding: 50px;
+    }
+
+    .page .container {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .page {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 700px) {
+    .page {
+        padding: 25px 10px;
+        gap: 25px;
+    }
+}

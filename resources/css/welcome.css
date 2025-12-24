@@ -1,0 +1,342 @@
+/* Баннер */
+.page:nth-child(1) {
+    background-image: url('/public/images/bannerBack.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.page:nth-child(1):before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.25) !important;
+    z-index: 0;
+}
+
+.page:nth-child(1) .banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    height: 100%;
+    z-index: 1;
+}
+
+.page:nth-child(1) .banner .bannerContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+}
+
+/* О нас */
+.about svg {
+    width: 100%;
+    height: 100%;
+    margin-bottom: -75px;
+}
+
+.about .aboutWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.about .aboutWrapper .aboutContent .subTitle {
+    margin-bottom: 14px;
+    text-align: left;
+}
+
+.about .aboutImage {
+    width: 100%;
+    height: 375px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+/* Тарифы */
+.tarifSwiper .swiper-wrapper .glass {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    border-radius: 20px;
+}
+
+.tarifSwiper .swiper-wrapper .glass .tarifPhoto {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.tarifSwiper .swiper-wrapper .glass .tarifWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.tarifSwiper .swiper-wrapper .glass .tarifWrapper .tarifContent .tarifTitle {
+    font-family: var(--nunito);
+    font-size: var(--sizeH3);
+    color: var(--white);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.tarifSwiper .swiper-wrapper .glass .tarifWrapper .tarifPrice {
+    font-family: var(--nunito);
+    font-size: var(--sizeH3);
+    color: var(--white);
+    font-weight: 800;
+    text-transform: uppercase;
+    background-color: var(--violet);
+    padding: 10px;
+    border-radius: 100px;
+    transform: rotate(-2.5deg);
+    transition: 0.8s;
+}
+
+.tarifSwiper .swiper-wrapper .glass svg {
+    width: 65px;
+    height: 65px;
+}
+
+.tarifSwiper .swiper-wrapper .glass svg path:nth-child(1) {
+    transition: 0.8s;
+}
+
+.tarifSwiper .swiper-wrapper .glass:hover svg path:nth-child(1) {
+    fill: var(--orange);
+}
+
+.tarifSwiper .swiper-wrapper .glass:hover .tarifWrapper .tarifPrice {
+    background-color: var(--orange);
+    color: var(--violet);
+}
+
+/* Услуги */
+.serviceSwiper .swiper-wrapper .swiper-slide {
+    position: relative;
+    padding: 25px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.serviceSwiper .swiper-wrapper .swiper-slide .servicePhoto {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.serviceSwiper .swiper-wrapper .swiper-slide .serviceWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    z-index: 1;
+}
+
+
+.serviceSwiper .swiper-wrapper .swiper-slide .serviceWrapper .serviceTitle {
+    font-family: var(--nunito);
+    font-size: var(--sizeH3);
+    color: var(--white);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.serviceSwiper .swiper-wrapper .swiper-slide .serviceWrapper .text {
+    margin: 0;
+}
+
+.serviceSwiper .swiper-wrapper .swiper-slide .serviceWrapper .servicePrice {
+    font-family: var(--nunito);
+    font-size: var(--sizeH3);
+    color: var(--violet);
+    font-weight: 800;
+    text-transform: uppercase;
+    background-color: var(--orange);
+    padding: 10px;
+    border-radius: 100px;
+    transform: rotate(-2.5deg);
+    transition: 0.8s;
+
+}
+
+.serviceSwiper .swiper-wrapper .swiper-slide .serviceLink {
+    font-family: var(--mulish);
+    font-size: var(--sizeText);
+    color: var(--white);
+    font-weight: 600;
+    padding: 15px;
+    justify-content: center;
+    border-radius: 100px;
+}
+
+.serviceSwiper .swiper-wrapper .swiper-slide:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(122, 121, 244, 0.2) 50%, #7A79F4 100%);
+    border-radius: 20px;
+    z-index: 0;
+}
+
+.serviceSwiper .swiper-wrapper .swiper-slide:nth-child(3),
+.serviceSwiper .swiper-wrapper .swiper-slide:nth-child(4) {
+    justify-content: flex-end;
+}
+
+.serviceSwiper .swiper-wrapper .swiper-slide:nth-child(3) .serviceWrapper .servicePrice,
+.serviceSwiper .swiper-wrapper .swiper-slide:nth-child(4) .serviceWrapper .servicePrice {
+    color: var(--white);
+    background-color: var(--violet);
+}
+
+/* Сертификат */
+.giftWrapper {
+    background-image: url('/public/images/bannerBack.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 25px;
+    border-radius: 20px;
+    position: relative;
+}
+
+.giftWrapper:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+}
+
+.giftWrapper .giftContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+    height: 450px;
+    width: 50%;
+}
+
+.giftWrapper .glass {
+    background: rgba(255, 255, 255, 0.35) !important;
+}
+
+.giftWrapper .giftContent .text:nth-child(1) {
+    margin: 0;
+    color: var(--violet);
+}
+
+.giftWrapper .giftContent .giftTitle {
+    font-family: var(--nunito);
+    font-size: var(--sizeH3);
+    color: var(--violet);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.giftWrapper .giftContent .button {
+    margin-top: auto;
+}
+
+/* Команда */
+.teamSwiper .swiper-wrapper .swiper-slide.glass {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 25px;
+    height: 600px;
+}
+
+.teamSwiper .swiper-wrapper .swiper-slide.glass .teamPhoto {
+    position: absolute;
+    top: auto;
+    bottom: 12px;
+    left: 0;
+    width: 100%;
+    height: 475px;
+    object-fit: cover;
+    border-radius: 20px;
+    z-index: -2;
+}
+
+.teamSwiper .swiper-wrapper .swiper-slide.glass .teamContent {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    z-index: 3;
+}
+
+.teamSwiper .swiper-wrapper .swiper-slide.glass .teamName {
+    font-family: var(--nunito);
+    font-size: var(--sizeH3);
+    color: var(--white);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.teamSwiper .swiper-wrapper .swiper-slide.glass .teamPosition.glass {
+    padding: 15px;
+    text-align: center;
+    font-family: var(--mulish);
+    font-size: var(--sizeText);
+    color: var(--white);
+    font-weight: 600;
+    line-height: 1;
+}
+
+.teamSwiper .swiper-wrapper .swiper-slide {
+    transition: 0.5s;
+}
+
+.teamSwiper .swiper-wrapper .swiper-slide:not(.swiper-slide-active) {
+    opacity: 0.6;
+    transform: scale(0.75);
+}
+
+.teamSwiper .swiper-wrapper .swiper-slide.glass:before {
+    content: "";
+    position: absolute;
+    top: auto;
+    bottom: 12px;
+    left: auto;
+    right: 50%;
+    width: calc(100% - 25px);
+    height: 250px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, #4A49C4 100%);
+    border-radius: 20px;
+    z-index: -1;
+    transform: translateX(50%);
+}
