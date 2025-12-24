@@ -340,3 +340,76 @@
     z-index: -1;
     transform: translateX(50%);
 }
+
+/* Сертификат */
+.sertificate .text {
+    margin: 0;
+    text-align: center;
+}
+
+.sertificate .sertificateSwiper .swiper-wrapper .swiper-slide {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.sertificate .sertificateSwiper .swiper-wrapper .swiper-slide .sertificatePhotoWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.sertificate .sertificateSwiper .swiper-wrapper .swiper-slide .sertificatePhotoWrapper:before {
+    content: "";
+    position: absolute;
+    top: auto;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    height: 75%;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px) saturate(120%);
+    -webkit-backdrop-filter: blur(6px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.25);
+}
+
+.sertificate .sertificateSwiper .swiper-wrapper .swiper-slide .sertificatePhotoWrapper .sertificatePhoto {
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 20px;
+    transform: rotate(2.5deg);
+}
+
+.sertificate .sertificateSwiper .swiper-wrapper .swiper-slide .sertificateTitle {
+    font-family: var(--nunito);
+    font-size: var(--sizeH3);
+    color: var(--white);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.sertificate .sertificateSwiper .swiper-wrapper .swiper-slide .sertificateContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.sertificate .sertificateSwiper .swiper-wrapper .swiper-slide .sertificateContent .sertificatePrice {
+    font-family: var(--nunito);
+    font-size: var(--sizeH3);
+    color: var(--violet);
+    font-weight: 800;
+    text-transform: uppercase;
+    background-color: var(--orange);
+    padding: 10px;
+    border-radius: 100px;
+    transform: rotate(-2.5deg);
+    line-height: 1;
+    transition: 0.8s;
+}

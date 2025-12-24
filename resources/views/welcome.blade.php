@@ -1,6 +1,6 @@
     @extends('app')
     @section('style')
-        @vite(['resources/css/app.css', 'resources/css/welcome.css', 'resources/js/app.js', 'resources/js/swiper.js'])
+        @vite(['resources/css/welcome.css', 'resources/js/swiper.js'])
     @endsection
     @section('content')
         <div class="page">
@@ -304,10 +304,42 @@
                 <div class="swiper sertificateSwiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="{{ asset('images\team.webp') }}" alt="Team Member" class="teamPhoto">
-                            <div class="teamContent">
-                                <div class="teamName">Александр Счастливый</div>
-                                <div class="teamPosition glass">инструктор</div>
+                            <div class="sertificatePhotoWrapper">
+                                <img src="{{ asset('images/sertificate.webp') }}" alt="Sertificate"
+                                    class="sertificatePhoto">
+                            </div>
+                            <div class="sertificateTitle">Сертификат</div>
+                            <div class="sertificateContent">
+                                <p class="text">
+                                    при заказе от
+                                </p>
+                                <div class="sertificatePrice">4 000 ₽</div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="sertificatePhotoWrapper">
+                                <img src="{{ asset('images/sertificate.webp') }}" alt="Sertificate"
+                                    class="sertificatePhoto">
+                            </div>
+                            <div class="sertificateTitle">Сертификат</div>
+                            <div class="sertificateContent">
+                                <p class="text">
+                                    при заказе от
+                                </p>
+                                <div class="sertificatePrice">4 000 ₽</div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="sertificatePhotoWrapper">
+                                <img src="{{ asset('images/sertificate.webp') }}" alt="Sertificate"
+                                    class="sertificatePhoto">
+                            </div>
+                            <div class="sertificateTitle">Сертификат</div>
+                            <div class="sertificateContent">
+                                <p class="text">
+                                    при заказе от
+                                </p>
+                                <div class="sertificatePrice">4 000 ₽</div>
                             </div>
                         </div>
                     </div>
@@ -333,4 +365,5 @@
                     </div>
                 </div>
             </div>
-        @endsection
+        </div>
+    @endsection
