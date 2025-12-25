@@ -244,6 +244,8 @@ ol {
     padding: 15px 60px;
     border-radius: 100px;
     justify-content: center;
+    border: none;
+    cursor: pointer;
 }
 
 @media (max-width: 1440px) {
@@ -267,4 +269,92 @@ ol {
         padding: 25px 10px;
         gap: 25px;
     }
+}
+
+/* Форма */
+.formBlock {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 25px;
+}
+
+.formBlock .formPhoto {
+    width: 100%;
+    height: 450px;
+    object-fit: contain;
+}
+
+.formBlock .formWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.formBlock .formWrapper .subTitle {
+    text-align: left;
+}
+
+.formBlock .formWrapper .contactForm {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--mulish);
+    gap: 12px;
+}
+
+.formBlock .formWrapper .contactForm .formRow {
+    display: flex;
+    flex-direction: column;
+}
+
+.formBlock .formWrapper .contactForm label {
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: var(--sizeText);
+    margin: 0;
+}
+
+.formBlock .formWrapper .contactForm input[type="text"],
+.formBlock .formWrapper .contactForm input[type="tel"] {
+    border: 2px solid var(--white);
+    background: transparent;
+    color: var(--white);
+    padding: 12px 10px;
+    border-radius: 20px;
+    font-family: var(--mulish);
+    font-size: var(--sizeText);
+}
+
+.formBlock .formWrapper .contactForm input::placeholder {
+    color: var(--white);
+    opacity: 0.85;
+}
+
+.formBlock .formWrapper .contactForm input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.formBlock .formWrapper .formCheckbox {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 8px;
+}
+
+.formBlock .formWrapper .formCheckbox input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+}
+
+.formBlock .formWrapper .error {
+    color: #ffb3b3;
+    font-size: 0.9rem;
+    margin-top: 4px;
+    display: none;
+}
+
+.formBlock .formWrapper .error.active {
+    display: block;
 }
