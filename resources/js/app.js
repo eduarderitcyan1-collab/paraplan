@@ -1,3 +1,6 @@
+import $ from "jquery";
+window.$ = window.jQuery = $;
+
 document.addEventListener("DOMContentLoaded", function () {
     const phoneInput = document.getElementById("phone");
     const nameInput = document.getElementById("name");
@@ -44,6 +47,33 @@ document.addEventListener("DOMContentLoaded", function () {
             );
             phoneInput.focus();
             return;
+        }
+    });
+});
+
+jQuery(document).ready(function ($) {
+    $(".accordion-item").each(function () {
+        if (!$(this).hasClass("active")) {
+            $(this).find(".accordion-content").hide();
+        }
+    });
+
+    $(".accordion-item").on("click", function () {
+        const $item = $(this).closest(".accordion-item");
+        const isActive = $item.hasClass("active");
+
+        $(".accordion-item")
+            .not($item)
+            .removeClass("active")
+            .find(".accordion-content")
+            .hide();
+
+        if (isActive) {
+            $item.removeClass("active");
+            $item.find(".accordion-content").hide();
+        } else {
+            $item.addClass("active");
+            $item.find(".accordion-content").show();
         }
     });
 });

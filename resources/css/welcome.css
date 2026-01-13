@@ -475,3 +475,87 @@
     line-height: 1;
     transition: 0.8s;
 }
+
+/* Точки полетов */
+.flyPoint .flyPointWrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.flyPoint .flyPointWrapper .flyPointContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    position: relative;
+}
+
+.flyPoint .flyPointWrapper .flyPointContent .flyPointPhoto {
+    height: 350px;
+}
+
+.flyPoint .flyPointWrapper .flyPointContent .flyPointName.glass {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin-top: -50px;
+    margin-right: 25px;
+    gap: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.35) !important;
+    font-family: var(--mulish);
+    font-size: var(--sizeText);
+    color: var(--violet);
+    font-weight: 600;
+}
+
+/* Галерея */
+.gallerySwiper .swiper-wrapper .swiper-slide {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: 0.5s;
+}
+
+.gallerySwiper .swiper-wrapper .swiper-slide .galleryPhoto {
+    height: 475px;
+}
+
+.gallerySwiper .swiper-wrapper .swiper-slide:not(.swiper-slide-active) {
+    opacity: 0.6;
+    transform: scale(0.75);
+}
+
+/* FAQ */
+.faq .accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.faq .accordion .accordion-item {
+    padding: 20px 0;
+    cursor: pointer;
+    border-bottom: 1px solid var(--white);
+}
+
+.faq .accordion .accordion-item .accordion-title {
+    font-family: var(--nunito);
+    font-size: var(--sizeH3);
+    color: var(--white);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.faq .accordion .accordion-item .accordion-content {
+    font-family: var(--mulish);
+    font-size: var(--sizeText);
+    color: var(--white);
+    font-weight: 400;
+    padding-top: 15px;
+    transition: 0.3s;
+    display: none;
+}
