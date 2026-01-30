@@ -166,10 +166,17 @@ body {
     gap: 25px;
 }
 
+/* Футер */
 .siteFooter .container .oneSection {
     display: grid;
-    grid-template-columns: 10% 1fr;
+    grid-template-columns: auto 1fr;
     gap: 25px;
+}
+
+.siteFooter .container .oneSection .logo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
 .siteFooter .container .oneSection .sectionWrapper {
