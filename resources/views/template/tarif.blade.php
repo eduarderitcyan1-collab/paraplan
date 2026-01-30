@@ -79,7 +79,7 @@
             </div>
 
         </div>
-        <div class="swiperNavigation">
+        <div class="swiperNavigation swiperMobileNavigation">
             <div class="swiper-button-prev glass">
                 <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27"
                     fill="none">
@@ -96,6 +96,38 @@
                     <path d="M25.0417 13.0208H1.00006" stroke="white" stroke-width="2" stroke-linecap="round" />
                 </svg>
             </div>
+        </div>
+    </div>
+    <div class="tarifPremium glass">
+        <img src="{{ asset('images\tarif.webp') }}" alt="Tarif" class="tarifPhoto">
+        <div class="tarifPremiumContent">
+            <div class="tarifWrapper">
+                <div class="tarifTitle">Премиум+</div>
+                <p class="tarifPrice">13 000 ₽</p>
+            </div>
+            <ul class="tarifOptions text">
+                <li class="tarifOption">
+                    30 минут полёта
+                </li>
+                <li class="tarifOption">
+                    Съемка на камеру 360°
+                </li>
+                <li class="tarifOption">
+                    2 готовых смонтированных ролика
+                </li>
+                <li class="tarifOption">
+                    Максимальный пакет подарков с аксессуаром из частички параплана
+                </li>
+            </ul>
+            <div class="button modal">Записаться</div>
+        </div>
+    </div>
+    <div class="tarifWar glass">
+        <img src="{{ asset('images\war.webp') }}" alt="Tarif" class="tarifPhoto glass">
+        <div class="tarifContent">
+            <p class="text">Акция</p>
+            <div class="tarifTitle">Для ветеранов СВО <span>+5 минут бесплатно</span> к любому тарифу*</div>
+            <p class="text">* - Кроме тарифа Премиум</p>
         </div>
     </div>
 </div>

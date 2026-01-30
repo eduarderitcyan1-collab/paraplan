@@ -96,3 +96,49 @@
     height: 175px;
     border-radius: 50% !important;
 }
+
+@media(max-width: 1200px) {
+    .history {
+        max-width: calc(145px * 6 + 25px * 5);
+    }
+
+    .history .historyWrapper {
+        grid-auto-columns: 145px;
+    }
+
+    .history .historyWrapper .historyItem .historyImage img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .history .historyWrapper .historyItem .historyImage:before {
+        width: 110px;
+        height: 110px;
+    }
+}
+
+@media(max-width: 700px) {
+
+    /* Баннер */
+    .page:nth-child(1) {
+        height: 100dvh;
+    }
+
+    .history {
+        max-width: calc(125px * 6 + 25px * 5);
+    }
+
+    .history .historyWrapper {
+        grid-auto-columns: 125px;
+    }
+
+    .history .historyWrapper .historyItem .historyImage img {
+        width: 75px;
+        height: 75px;
+    }
+
+    .history .historyWrapper .historyItem .historyImage:before {
+        width: 80px;
+        height: 80px;
+    }
+}

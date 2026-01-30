@@ -14,10 +14,16 @@ var swiperProd = new Swiper(".tarifSwiper", {
         0: {
             slidesPerView: 1,
         },
-        700: {
+        450: {
             slidesPerView: 2,
         },
+        1000: {
+            slidesPerView: 3,
+        },
         1200: {
+            slidesPerView: 3,
+        },
+        1201: {
             slidesPerView: 4,
         },
     },
@@ -35,10 +41,16 @@ var swiperProd = new Swiper(".serviceSwiper", {
         0: {
             slidesPerView: 1,
         },
-        700: {
+        450: {
             slidesPerView: 2,
         },
+        1000: {
+            slidesPerView: 3,
+        },
         1200: {
+            slidesPerView: 3,
+        },
+        1201: {
             slidesPerView: 4,
         },
     },
@@ -57,8 +69,8 @@ var swiperProd = new Swiper(".teamSwiper", {
         0: {
             slidesPerView: 1,
         },
-        700: {
-            slidesPerView: 2,
+        450: {
+            slidesPerView: 1.5,
         },
         1200: {
             slidesPerView: 3,
@@ -99,8 +111,8 @@ var swiperProd = new Swiper(".gallerySwiper", {
         0: {
             slidesPerView: 1,
         },
-        700: {
-            slidesPerView: 2,
+        450: {
+            slidesPerView: 1.5,
         },
         1200: {
             slidesPerView: 3,

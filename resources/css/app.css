@@ -320,16 +320,17 @@ body {
     border-radius: 50%;
 }
 
-.tarifSwiper .swiper-wrapper .glass .tarifWrapper {
+.tarifWrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
+    gap: 25px;
     flex-grow: 1;
     width: 100%;
 }
 
-.tarifSwiper .swiper-wrapper .glass .tarifWrapper .tarifContent .tarifTitle {
+.tarifTitle {
     font-family: var(--nunito);
     font-size: var(--sizeH3);
     color: var(--white);
@@ -337,7 +338,7 @@ body {
     text-transform: uppercase;
 }
 
-.tarifSwiper .swiper-wrapper .glass .tarifWrapper .tarifPrice {
+.tarifPrice {
     font-family: var(--nunito);
     font-size: var(--sizeH3);
     color: var(--white);
@@ -357,6 +358,58 @@ body {
 
 .tarifSwiper .swiper-wrapper .glass svg path:nth-child(1) {
     transition: 0.8s;
+}
+
+.tarifPremium.glass {
+    border-radius: 200px;
+    border: 3px solid #FFB900
+}
+
+.tarif .tarifPremium .tarifPremiumContent,
+.tarif .tarifWar .tarifContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+}
+
+.tarif .tarifWar .tarifContent .text {
+    margin-bottom: 0;
+}
+
+.tarif .tarifPremium {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    align-items: center;
+    gap: 25px;
+}
+
+.tarif .tarifPremium .tarifWrapper {
+    justify-content: flex-start;
+}
+
+.tarif .tarifPremium .tarifPhoto {
+    width: 100%;
+    height: 250px;
+    border-radius: 50%;
+}
+
+.tarif .tarifWar {
+    display: grid;
+    grid-template-columns: 175px 1fr;
+    align-items: center;
+    gap: 25px;
+}
+
+.tarif .tarifWar .tarifPhoto {
+    width: 100%;
+    height: 175px;
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+.tarif .tarifWar .tarifContent .tarifTitle span {
+    color: var(--orange);
 }
 
 /* Услуги */
@@ -720,11 +773,11 @@ body {
 /* Точки полетов */
 .flyPoint .flyPointWrapper {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 25px;
 }
 
-.flyPoint .flyPointWrapper .flyPointContent {
+.flyPoint .flyPointContent {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -732,11 +785,11 @@ body {
     position: relative;
 }
 
-.flyPoint .flyPointWrapper .flyPointContent .flyPointPhoto {
-    height: 350px;
+.flyPoint .flyPointContent .flyPointPhoto {
+    height: 325px;
 }
 
-.flyPoint .flyPointWrapper .flyPointContent .flyPointName.glass {
+.flyPoint .flyPointContent .flyPointName.glass {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -751,6 +804,22 @@ body {
     font-size: var(--sizeText);
     color: var(--violet);
     font-weight: 600;
+}
+
+.flyPoint .flyPointContentOther {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.flyPoint .flyPointContentOther .content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.flyPoint .flyPointContentOther .content .subTitle {
+    text-align: left;
 }
 
 /* Галерея */
@@ -801,6 +870,43 @@ body {
     display: none;
 }
 
+/* Старт точки */
+.startPoint .text {
+    text-align: center;
+}
+
+.startPoint iframe {
+    border-radius: 20px;
+}
+
+/* Призыв к действию */
+.recording {
+    align-items: center;
+}
+
+.recording .subTitle span {
+    color: var(--orange);
+}
+
+.recording .subTitle {
+    position: relative;
+}
+
+.recording .subTitle:before {
+    content: "";
+    position: absolute;
+    top: auto;
+    left: auto;
+    bottom: -50px;
+    right: -35px;
+    width: 90px;
+    height: 90px;
+    background-image: url('/public/images/svg/arrow-recording.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: rotate(-15deg);
+}
+
 /* Меню */
 .menu,
 .menuList {
@@ -845,11 +951,20 @@ body {
     border-radius: 100px;
 }
 
+.socialBlock .socialWrapper .socialIcons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
 .socialBlock .socialWrapper .socialLink:not(.glass) svg {
     width: 35px;
     height: 35px;
 }
 
+/* Карусель */
 .swiper {
     width: 100%;
     height: 100%;
@@ -888,6 +1003,10 @@ body {
     justify-content: center;
     border: none;
     cursor: pointer;
+}
+
+.swiperMobileNavigation {
+    display: none;
 }
 
 /* Форма */
@@ -1008,17 +1127,49 @@ img {
 }
 
 @media (max-width: 1440px) {
-    .page {
+
+    .page,
+    .siteFooter {
         padding: 50px;
     }
 
     .page .container {
         max-width: 100%;
     }
+
+    /* Тарифы */
+    .tarifSwiper .swiper-wrapper .glass .tarifPhoto {
+        width: 175px;
+        height: 175px;
+    }
+
+    .tarifSwiper .swiper-wrapper .glass .tarifWrapper {
+        flex-direction: row;
+    }
+
+    .tarifSwiper .swiper-wrapper .glass .tarifWrapper .tarifPrice {
+        padding: 5px;
+    }
+
+    .tarifSwiper .swiper-wrapper .glass svg {
+        width: 45px;
+        height: 45px;
+    }
+
+    /* Призыв к действию */
+    .recording .subTitle:before {
+        bottom: -25px;
+        right: -50px;
+        width: 60px;
+        height: 60px;
+        transform: rotate(-30deg);
+    }
 }
 
 @media (max-width: 1200px) {
-    .page {
+
+    .page,
+    .siteFooter {
         padding: 25px;
     }
 
@@ -1035,11 +1186,445 @@ img {
     *::-webkit-scrollbar-thumb {
         background: var(--orange);
     }
+
+    .swiperMobileNavigation {
+        display: flex;
+    }
+
+    /* Меню */
+    .menu,
+    .menuList {
+        gap: 50px;
+    }
+
+    .menu .logo .logoImage {
+        width: 50px;
+    }
+
+    /* Почему мы */
+    .whyUs .whyUsWrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .whyUs .whyUsWrapper .whyUsItem .whyUsIcon {
+        padding: 10px;
+    }
+
+    .whyUs .whyUsWrapper .whyUsItem .whyUsIcon svg {
+        width: 50px;
+        height: 50px;
+    }
+
+    /* О нас */
+    .about svg {
+        margin-bottom: -50px;
+    }
+
+    .about .aboutWrapper {
+        grid-template-columns: 1fr;
+    }
+
+    /* Тарифы */
+    .tarifPremium.glass {
+        border-radius: 20px;
+    }
+
+    .tarif .tarifPremium .tarifPremiumContent,
+    .tarif .tarifWar .tarifContent {
+        gap: 10px;
+    }
+
+    .tarif .tarifPremium {
+        grid-template-columns: 175px 1fr;
+    }
+
+    .tarif .tarifPremium .tarifWrapper {
+        justify-content: flex-start;
+    }
+
+    .tarif .tarifPremium .tarifPhoto {
+        height: 175px;
+    }
+
+    /* Услуги */
+    .serviceSwiper .swiper-wrapper .swiper-slide {
+        height: 300px;
+    }
+
+    /* Сертификат */
+    .giftWrapper {
+        padding: 25px;
+    }
+
+    .giftWrapper .giftContent {
+        align-items: center;
+        text-align: center;
+        height: auto;
+        width: 100%;
+    }
+
+    /* Команда */
+    .teamSwiper .swiper-wrapper .swiper-slide.glass {
+        padding: 25px;
+        height: 500px;
+    }
+
+    .teamSwiper .swiper-wrapper .swiper-slide.glass .teamPhoto {
+        height: 100%;
+    }
+
+    /* Оффер */
+    .offer .offerWrapper .offerItem .offerPhotoWrapper:before {
+        height: 70%;
+    }
+
+    .offer .offerWrapper .offerItem .offerPhotoWrapper .offerPhoto {
+        height: 250px;
+    }
+
+    /* Форма */
+    .formBlock {
+        grid-template-columns: repeat(1, 1fr);
+        text-align: center;
+    }
+
+    .formBlock .formPhoto {
+        height: 350px;
+        order: 1;
+    }
+
+    .formBlock .formWrapper .subTitle {
+        text-align: center;
+    }
+
+    /* Точки полетов */
+    .flyPoint .flyPointWrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .flyPoint .flyPointContent .flyPointPhoto {
+        height: 300px;
+    }
+
+    .flyPoint .flyPointContent .flyPointName.glass {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        margin-top: -50px;
+        margin-right: 25px;
+        gap: 10px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.35) !important;
+        font-family: var(--mulish);
+        font-size: var(--sizeText);
+        color: var(--violet);
+        font-weight: 600;
+    }
+
+    .flyPoint .flyPointContentOther {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    /* Галерея */
+    .gallerySwiper .swiper-wrapper .swiper-slide .galleryPhoto {
+        height: 350px;
+    }
+
+    /* Старт точки */
+    .startPoint iframe {
+        height: 300px;
+    }
+
+    /* Футер */
+    .siteFooter .container .oneSection {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .siteFooter .container .oneSection .logo {
+        width: 125px;
+    }
+
+    .siteFooter .container .oneSection .sectionWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .siteFooter .container .oneSection .sectionWrapper .legalInfo {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .siteFooter .container .oneSection .sectionWrapper .legalInfo .text {
+        font-size: 14px;
+    }
+
+    .siteFooter .container .oneSection .sectionWrapper .legalInfo .legalLink:last-child {
+        margin-left: 0px;
+    }
+
+    .siteFooter .container .secondSection .menu .menuList {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        justify-items: center;
+        gap: 25px;
+    }
+
+    .siteFooter .container .thirdSection .sectionWrapper {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 25px;
+    }
+
+    .siteFooter .container .fourthSection {
+        flex-direction: column;
+    }
+
+    .siteFooter .container .fourthSection .sectionItem {
+        justify-content: center;
+    }
+
+    .siteFooter .container .fourthSection .sectionItem .review .reviewIcon {
+        width: 100%;
+        height: 100%;
+    }
+
+    .siteFooter .container .fourthSection .socialBlock {
+        flex-direction: column;
+        width: 100%;
+    }
 }
 
 @media (max-width: 700px) {
-    .page {
+
+    .page,
+    .siteFooter {
         padding: 25px 10px;
         gap: 25px;
+    }
+
+    .glass {
+        padding: 25px 10px;
+    }
+
+    /* Меню */
+    .menu,
+    .menuList {
+        gap: 10px;
+        width: 100%
+    }
+
+    .menuList {
+        justify-content: space-around;
+    }
+
+    .menu .logo {
+        order: -1;
+    }
+
+    .menu .logo .logoImage {
+        width: 30px;
+    }
+
+    /* Почему мы */
+    .whyUs .whyUsWrapper {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+    }
+
+    .whyUs .whyUsWrapper .whyUsItem {
+        gap: 5px;
+        padding: 10px;
+    }
+
+    .whyUs .whyUsWrapper .whyUsItem .whyUsIcon {
+        padding: 10px;
+    }
+
+    .whyUs .whyUsWrapper .whyUsItem .whyUsIcon svg {
+        width: 35px;
+        height: 35px;
+    }
+
+    .whyUs .whyUsWrapper .whyUsItem .whyUsTitle {
+        font-family: var(--nunito);
+        font-size: var(--sizeH3);
+        color: var(--white);
+        font-weight: 600;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .whyUs .whyUsWrapper .whyUsItem .text {
+        text-align: center;
+    }
+
+    /* О нас */
+    .about svg {
+        margin-bottom: -35px;
+    }
+
+    .about .aboutImage {
+        height: 100%;
+    }
+
+    /* Свяжитесь с нами */
+    .socialBlock .socialWrapper {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .socialBlock .socialWrapper .glass {
+        width: 100%;
+    }
+
+    .socialBlock .socialWrapper .socialIcons {
+        order: 1;
+    }
+
+    /* Тарифы */
+    .tarif .tarifPremium {
+        grid-template-columns: 1fr;
+    }
+
+    .tarif .tarifPremium .tarifWrapper {
+        justify-content: flex-start;
+    }
+
+    .tarif .tarifPremium .tarifPhoto {
+        height: 175px;
+        border-radius: 20px;
+    }
+
+    .tarif .tarifWar {
+        grid-template-columns: 1fr;
+    }
+
+    .tarif .tarifWar .tarifPhoto {
+        border-radius: 20px;
+    }
+
+    /* Услуги */
+    .serviceSwiper .swiper-wrapper .swiper-slide {
+        padding: 25px 10px;
+    }
+
+    /* Сертификат */
+    .giftWrapper {
+        padding: 25px 10px;
+    }
+
+    /* Команда */
+    .teamSwiper .swiper-wrapper .swiper-slide.glass {
+        padding: 25px 10px;
+        height: 375px;
+    }
+
+    .teamSwiper .swiper-wrapper .swiper-slide.glass .teamPhoto {
+        object-fit: cover;
+        border-radius: 30px;
+    }
+
+    .teamSwiper .swiper-wrapper .swiper-slide.glass:before {
+        width: calc(100% - 10px);
+        height: 175px;
+    }
+
+    /* Оффер */
+    .offer .offerWrapper {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .offer .offerWrapper .offerItem {
+        align-items: center;
+    }
+
+    .offer .offerWrapper .offerItem .offerPhotoWrapper .offerPhoto {
+        height: 225px;
+    }
+
+    /* Форма */
+    .formBlock .formPhoto {
+        height: 100%;
+    }
+
+    /* Точки полетов */
+    .flyPoint .flyPointWrapper {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+
+    .flyPoint .flyPointContent .flyPointPhoto {
+        height: 100%;
+    }
+
+    .flyPoint .flyPointContent .flyPointName.glass {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        margin-top: -50px;
+        margin-right: 25px;
+        gap: 10px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.35) !important;
+        font-family: var(--mulish);
+        font-size: var(--sizeText);
+        color: var(--violet);
+        font-weight: 600;
+    }
+
+    .flyPoint .flyPointContentOther {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    /* Галерея */
+    .gallerySwiper .swiper-wrapper .swiper-slide .galleryPhoto {
+        height: 300px;
+    }
+
+    /* Старт точки */
+    .startPoint iframe {
+        height: 175px;
+    }
+
+    /* Призыв к действию */
+    .recording .subTitle:before {
+        display: none;
+    }
+
+    /* Футер */
+    .siteFooter .container .oneSection .logo {
+        width: 100px;
+    }
+
+    .siteFooter .container .oneSection .sectionWrapper .legalInfo {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .siteFooter .container .oneSection .sectionWrapper .legalInfo .text {
+        font-size: 12px;
+    }
+
+    .siteFooter .container .oneSection .sectionWrapper .legalInfo .legalLink:last-child {
+        margin-left: 0px;
+    }
+
+    .siteFooter .container .secondSection .menu .menuList {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .siteFooter .container .fourthSection .sectionItem {
+        flex-direction: column;
+        align-items: center;
     }
 }

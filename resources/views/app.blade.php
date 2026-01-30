@@ -11,4 +11,5 @@
 
 <body>
     @yield('content')
+    @include('template.footer')
 </body>
