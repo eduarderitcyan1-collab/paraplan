@@ -80,6 +80,7 @@
             @include('template.sertificate')
             @include('template.offer')
             @include('template.formBlock')
+            @include('template.reviews')
             @include('template.flyPoint')
             @include('template.gallery')
             <div class="container faq">

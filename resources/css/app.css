@@ -69,6 +69,7 @@ body {
     --white: #fff;
     --orange: #FFA22D;
     --violet: #4A49C4;
+    --dark: #454545;
     --sizeH1: clamp(1.25rem, 0.9531rem + 1.3575vw, 3.125rem);
     --sizeH2: clamp(1rem, 0.7624rem + 1.086vw, 2.5rem);
     --sizeH3: clamp(1rem, 0.8812rem + 0.543vw, 1.75rem);
@@ -1104,6 +1105,76 @@ body {
     display: block;
 }
 
+/* Отзывы */
+.reviews .text {
+    text-align: center;
+    margin: 0;
+}
+
+.reviews .reviewsSwiper {
+    height: 475px;
+    border-radius: 20px;
+}
+
+.reviews .reviewsSwiper .swiper-wrapper .swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+.reviews .reviewsSwiper .swiper-wrapper .swiper-slide .authorIcon {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    border-radius: 50%;
+}
+
+.reviews .reviewsSwiper .swiper-wrapper .swiper-slide .authorIcon svg {
+    width: 35px;
+    height: 35px;
+}
+
+.reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 15px;
+}
+
+.reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent .reviewPhotos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent .reviewPhotos .reviewPhoto {
+    height: 175px;
+}
+
+.reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent .text {
+    text-align: left;
+}
+
+.reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent .reviewMetaData {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent .reviewMetaData .subTitle {
+    text-align: left;
+    font-size: var(--sizeH3);
+}
+
+.reviews .reviewsSwiper .swiper-pagination-bullet-active {
+    background-color: var(--white);
+}
+
 img {
     pointer-events: none;
     line-height: 0;
@@ -1302,6 +1373,20 @@ img {
 
     .formBlock .formWrapper .subTitle {
         text-align: center;
+    }
+
+    /* Отзывы */
+    .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent .reviewPhotos .reviewPhoto {
+        height: 150px;
+    }
+
+    .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .authorIcon {
+        padding: 10px;
+    }
+
+    .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .authorIcon svg {
+        width: 30px;
+        height: 30px;
     }
 
     /* Точки полетов */
@@ -1559,6 +1644,20 @@ img {
     /* Форма */
     .formBlock .formPhoto {
         height: 100%;
+    }
+
+    /* Отзывы */
+    .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent .reviewPhotos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent .reviewPhotos .reviewPhoto {
+        height: 75px;
+    }
+
+    .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .authorIcon svg {
+        width: 25px;
+        height: 25px;
     }
 
     /* Точки полетов */

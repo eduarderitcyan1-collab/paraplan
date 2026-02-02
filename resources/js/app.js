@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!phoneRegex.test(phone)) {
             e.preventDefault();
             alert(
-                "Пожалуйста, введите корректный телефон в формате +7 (999) 999-99-99."
+                "Пожалуйста, введите корректный телефон в формате +7 (999) 999-99-99.",
             );
             phoneInput.focus();
             return;
@@ -74,6 +74,15 @@ jQuery(document).ready(function ($) {
         } else {
             $item.addClass("active");
             $item.find(".accordion-content").show();
+        }
+    });
+});
+
+jQuery(document).ready(function ($) {
+    $("a").click(function (e) {
+        let href = $(this).attr("href");
+        if (href === "#") {
+            e.preventDefault();
         }
     });
 });
