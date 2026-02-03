@@ -255,6 +255,19 @@ body {
     gap: 25px;
 }
 
+.whyUsWrapper.is-swiper {
+    display: block;
+}
+
+.whyUsWrapper.is-swiper .swiper-wrapper {
+    display: flex;
+}
+
+.whyUsWrapper.is-swiper .swiper-slide {
+    display: flex;
+    height: auto;
+}
+
 .whyUs .whyUsWrapper .whyUsItem {
     display: flex;
     flex-direction: column;
