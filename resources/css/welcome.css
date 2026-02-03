@@ -118,8 +118,14 @@
 }
 
 @media(max-width: 700px) {
-    .page:nth-child(1) .banner .bannerContent {
-        padding-bottom: 150px;
+
+    /* Баннер */
+    .page:nth-child(1) {
+        height: 500px;
+    }
+
+    .page:nth-child(1):before {
+        height: 500px;
     }
 
     .history {
