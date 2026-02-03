@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const phoneInput = document.getElementById("phone");
     const nameInput = document.getElementById("name");
     const form = document.querySelector(".contactForm");
+    if (!phoneInput || !nameInput || !form) {
+        return;
+    }
 
     function formatPhone(value) {
         let digits = value.replace(/\D/g, "").slice(0, 11);
@@ -24,8 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return out;
     }
 
-    phoneInput.addEventListener("input", function (e) {
-        const pos = this.selectionStart;
+    phoneInput.addEventListener("input", function () {
         this.value = formatPhone(this.value);
         this.setSelectionRange(this.value.length, this.value.length);
     });

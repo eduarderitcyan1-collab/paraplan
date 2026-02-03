@@ -71,7 +71,6 @@
                 </div>
             </div>
             @include('template.whyUs')
-            @include('template.about')
             @include('template.socialBlock')
             @include('template.tarif')
             @include('template.service')
@@ -81,6 +80,7 @@
             @include('template.offer')
             @include('template.formBlock')
             @include('template.reviews')
+            @include('template.about')
             @include('template.flyPoint')
             @include('template.gallery')
             <div class="container faq">
