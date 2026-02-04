@@ -433,6 +433,10 @@ body {
     color: var(--orange);
 }
 
+.tarifOptions {
+    margin: 0 !important;
+}
+
 /* Услуги */
 .serviceSwiper .swiper-wrapper .swiper-slide {
     position: relative;
@@ -798,6 +802,19 @@ body {
     gap: 25px;
 }
 
+.flyPointWrapper.is-swiper {
+    display: block;
+}
+
+.flyPointWrapper.is-swiper .swiper-wrapper {
+    display: flex;
+}
+
+.flyPointWrapper.is-swiper .swiper-slide {
+    display: flex;
+    height: auto;
+}
+
 .flyPoint .flyPointContent {
     display: flex;
     flex-direction: column;
@@ -942,6 +959,7 @@ body {
 .menu .logo .logoImage {
     width: 75px;
     height: auto;
+    border-radius: 0px;
 }
 
 .menu .menuList .menuLink {
@@ -997,6 +1015,11 @@ body {
     justify-content: center;
     margin-top: 25px;
     gap: 50px;
+}
+
+.whyUs .swiperNavigation,
+.flyPoint .swiperNavigation {
+    margin: 0 !important;
 }
 
 .swiper-button-prev.glass,
@@ -1119,9 +1142,33 @@ body {
 }
 
 /* Отзывы */
+.reviews .reviewWrapper {
+    display: grid;
+    grid-template-columns: 1fr 275px;
+    align-items: center;
+    gap: 25px;
+}
+
+.reviews .reviewWrapper .reviewContent {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.reviews .reviewWrapper .reviewContent .review.glass {
+    padding: 10px;
+    justify-content: center;
+}
+
+.reviews .reviewWrapper .reviewContent .review.glass .reviewIcon {
+    width: auto;
+    height: 40px;
+}
+
+.reviews .subTitle,
 .reviews .text {
-    text-align: center;
     margin: 0;
+    text-align: left;
 }
 
 .reviews .reviewsSwiper {
@@ -1598,12 +1645,27 @@ img {
         grid-template-columns: 1fr;
     }
 
+    .tarifSwiper .swiper-wrapper .glass .tarifPhoto {
+        width: 100px;
+        height: 100px;
+    }
+
+    .tarifPrice {
+        font-size: var(--sizeText);
+        padding: 5px;
+    }
+
+    .tarif .tarifPremium,
+    .tarif .tarifWar {
+        gap: 10px;
+    }
+
     .tarif .tarifPremium .tarifWrapper {
         justify-content: flex-start;
     }
 
     .tarif .tarifPremium .tarifPhoto {
-        height: 175px;
+        height: 125px;
         border-radius: 20px;
     }
 
@@ -1613,6 +1675,8 @@ img {
 
     .tarif .tarifWar .tarifPhoto {
         border-radius: 20px;
+        height: 125px;
+        padding: 5px;
     }
 
     /* Услуги */
@@ -1628,7 +1692,7 @@ img {
     /* Команда */
     .teamSwiper .swiper-wrapper .swiper-slide.glass {
         padding: 25px 10px;
-        height: 375px;
+        height: 300px;
     }
 
     .teamSwiper .swiper-wrapper .swiper-slide.glass .teamPhoto {
@@ -1643,7 +1707,7 @@ img {
 
     /* Оффер */
     .offer .offerWrapper {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .offer .offerWrapper .offerItem {
@@ -1651,7 +1715,21 @@ img {
     }
 
     .offer .offerWrapper .offerItem .offerPhotoWrapper .offerPhoto {
-        height: 225px;
+        height: 75px;
+    }
+
+    .offer .offerWrapper .offerItem {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .offer .offerWrapper .offerItem .offerTitle {
+        padding-top: 15px;
+    }
+
+    .offer .offerWrapper .offerItem .offerPrice {
+        font-size: var(--sizeText);
+        padding: 5px;
     }
 
     /* Форма */
@@ -1660,6 +1738,28 @@ img {
     }
 
     /* Отзывы */
+    .reviews .reviewWrapper {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .reviews .reviewWrapper .reviewContent {
+        gap: 5px;
+    }
+
+    .reviews .reviewWrapper .reviewContent .review.glass .reviewIcon {
+        height: 30px;
+    }
+
+    .reviews .subTitle,
+    .reviews .text {
+        text-align: center;
+    }
+
+    .reviews .reviewsSwiper {
+        height: 325px;
+    }
+
     .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent .reviewPhotos {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -1668,9 +1768,8 @@ img {
         height: 75px;
     }
 
-    .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .authorIcon svg {
-        width: 25px;
-        height: 25px;
+    .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .authorIcon.glass {
+        display: none;
     }
 
     /* Точки полетов */
@@ -1706,7 +1805,7 @@ img {
 
     /* Галерея */
     .gallerySwiper .swiper-wrapper .swiper-slide .galleryPhoto {
-        height: 300px;
+        height: 250px;
     }
 
     /* Старт точки */

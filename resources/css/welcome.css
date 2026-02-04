@@ -97,6 +97,14 @@
     border-radius: 50% !important;
 }
 
+.seoBlock.glass {
+    gap: 0;
+}
+
+.seoBlock .subTitle {
+    margin-bottom: 25px;
+}
+
 @media(max-width: 1200px) {
     .history {
         max-width: calc(145px * 6 + 25px * 5);

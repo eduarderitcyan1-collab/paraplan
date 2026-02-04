@@ -64,6 +64,7 @@
                 <div class="tarifWrapper">
                     <div class="tarifContent">
                         <div class="tarifTitle">премиум</div>
+                        <p class="text">ㅤ</p>
                     </div>
                     <div class="tarifPrice">6 000 ₽</div>
                 </div>
@@ -77,7 +78,6 @@
                     <path d="M44.0416 32.0208H20" stroke="#4A49C4" stroke-width="2" stroke-linecap="round" />
                 </svg>
             </div>
-
         </div>
         <div class="swiperNavigation swiperMobileNavigation">
             <div class="swiper-button-prev glass">

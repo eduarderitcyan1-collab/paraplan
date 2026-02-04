@@ -4,15 +4,16 @@ import "swiper/css/pagination";
 import Swiper from "swiper/bundle";
 
 var swiperProd = new Swiper(".tarifSwiper", {
-    loop: true,
     spaceBetween: 25,
+    loop: true,
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
     },
     breakpoints: {
         0: {
-            slidesPerView: 1,
+            slidesPerView: 1.5,
+            spaceBetween: 10,
         },
         450: {
             slidesPerView: 2,
@@ -39,7 +40,8 @@ var swiperProd = new Swiper(".serviceSwiper", {
 
     breakpoints: {
         0: {
-            slidesPerView: 1,
+            slidesPerView: 1.5,
+            spaceBetween: 10,
         },
         450: {
             slidesPerView: 2,
@@ -67,7 +69,7 @@ var swiperProd = new Swiper(".teamSwiper", {
 
     breakpoints: {
         0: {
-            slidesPerView: 1,
+            slidesPerView: 1.5,
         },
         450: {
             slidesPerView: 1.5,
@@ -109,7 +111,7 @@ var swiperProd = new Swiper(".gallerySwiper", {
 
     breakpoints: {
         0: {
-            slidesPerView: 1,
+            slidesPerView: 1.5,
         },
         450: {
             slidesPerView: 1.5,
@@ -130,6 +132,61 @@ var swiper = new Swiper(".reviewsSwiper", {
         dynamicBullets: true,
     },
 });
+
+let flyPointSwiper = null;
+
+function toggleflyPointSwiper() {
+    const wrapper = document.querySelector(".flyPointWrapper");
+
+    if (window.innerWidth <= 700) {
+        if (flyPointSwiper) return;
+
+        wrapper.classList.add("swiper", "is-swiper");
+
+        if (!wrapper.querySelector(".swiper-wrapper")) {
+            const slides = Array.from(wrapper.children);
+            const swiperWrapper = document.createElement("div");
+            swiperWrapper.classList.add("swiper-wrapper");
+
+            slides.forEach((slide) => {
+                slide.classList.add("swiper-slide");
+                swiperWrapper.appendChild(slide);
+            });
+
+            wrapper.appendChild(swiperWrapper);
+        }
+
+        flyPointSwiper = new Swiper(wrapper, {
+            slidesPerView: 1.25,
+            spaceBetween: 10,
+            loop: true,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    } else {
+        if (!flyPointSwiper) return;
+
+        flyPointSwiper.destroy(true, true);
+        flyPointSwiper = null;
+
+        wrapper.classList.remove("swiper", "is-swiper");
+
+        const swiperWrapper = wrapper.querySelector(".swiper-wrapper");
+        if (swiperWrapper) {
+            const slides = Array.from(swiperWrapper.children);
+            slides.forEach((slide) => {
+                slide.classList.remove("swiper-slide");
+                wrapper.appendChild(slide);
+            });
+            swiperWrapper.remove();
+        }
+    }
+}
+
+toggleflyPointSwiper();
+window.addEventListener("resize", toggleflyPointSwiper);
 
 let whyUsSwiper = null;
 
@@ -172,7 +229,6 @@ function toggleWhyUsSwiper() {
 
         wrapper.classList.remove("swiper", "is-swiper");
 
-        // возвращаем обратно в grid
         const swiperWrapper = wrapper.querySelector(".swiper-wrapper");
         if (swiperWrapper) {
             const slides = Array.from(swiperWrapper.children);
