@@ -1061,7 +1061,7 @@ body {
     font-family: var(--mulish);
     font-size: var(--sizeText);
     color: var(--violet);
-    font-weight: 700;
+    font-weight: 900;
     background-color: var(--orange);
     padding: 15px 60px;
     border-radius: 100px;
@@ -1705,9 +1705,20 @@ img {
         padding: 25px 10px;
     }
 
+    .serviceSwiper .swiper-wrapper .swiper-slide .serviceWrapper .servicePrice {
+        font-size: var(--sizeText);
+        padding: 5px;
+    }
+
     /* Сертификат */
     .giftWrapper {
         padding: 25px 10px;
+    }
+
+    /* Сертификат */
+    .sertificate .sertificateSwiper .swiper-wrapper .swiper-slide .sertificateContent .sertificatePrice {
+        font-size: var(--sizeText);
+        padding: 5px;
     }
 
     /* Команда */
@@ -1794,7 +1805,6 @@ img {
     .flyPoint .flyPointWrapper {
         grid-template-columns: repeat(1, 1fr);
     }
-
 
     .flyPoint .flyPointContent .flyPointPhoto {
         height: 100%;
