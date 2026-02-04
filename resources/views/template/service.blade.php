@@ -56,4 +56,10 @@
             </div>
         </div>
     </div>
+    <div class="serviceOther glass">
+        <p class="text">Уникальный сувенир</p>
+        <div class="subTitle">Только у нас при полете по тарифу <span>Премиум+</span> вы сможете забрать частичку
+            параплана*</div>
+        <p class="text">* - Получите браслет или брелок на ключи из строп параплана</p>
+    </div>
 </div>

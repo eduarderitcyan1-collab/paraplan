@@ -527,6 +527,25 @@ body {
     background-color: var(--violet);
 }
 
+.service .serviceOther {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.service .serviceOther .text {
+    margin: 0;
+}
+
+.service .serviceOther .subTitle {
+    font-size: var(--sizeH3);
+    text-align: left;
+}
+
+.service .serviceOther .subTitle span {
+    color: var(--orange);
+}
+
 /* Сертификат */
 .giftWrapper {
     background-image: url('/public/images/bannerBack.webp');
@@ -1757,18 +1776,15 @@ img {
     }
 
     .reviews .reviewsSwiper {
-        height: 325px;
-    }
-
-    .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent .reviewPhotos {
-        grid-template-columns: repeat(2, 1fr);
+        height: 225px;
     }
 
     .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent .reviewPhotos .reviewPhoto {
         height: 75px;
     }
 
-    .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .authorIcon.glass {
+    .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .authorIcon.glass,
+    .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent .reviewPhotos {
         display: none;
     }
 
