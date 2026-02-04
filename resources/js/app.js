@@ -88,3 +88,11 @@ jQuery(document).ready(function ($) {
         }
     });
 });
+
+function setRealVh() {
+    document.documentElement.style.setProperty(
+        "--vh",
+        `${window.innerHeight * 0.01}px`,
+    );
+}
+setRealVh();
