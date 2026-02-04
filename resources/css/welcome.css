@@ -38,6 +38,22 @@
     gap: 25px;
 }
 
+.siteHeader {
+    display: block;
+    padding: 0;
+}
+
+.siteHeader:before,
+.siteHeader:after {
+    display: none;
+}
+
+.siteHeader .container {
+    width: 100%;
+    max-width: 100%;
+    gap: 0;
+}
+
 /* Истории */
 .history {
     max-width: calc(200px * 6 + 25px * 5);
@@ -103,6 +119,7 @@
 
 .seoBlock .subTitle {
     margin-bottom: 25px;
+    text-align: left;
 }
 
 @media(max-width: 1200px) {

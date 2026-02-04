@@ -1,7 +1,6 @@
     @extends('app')
-    @section('style')
-        @vite(['resources/css/welcome.css', 'resources/js/swiper.js'])
-    @endsection
+    @section('title', 'Главная')
+    @vite(['resources/css/app.css', 'resources/css/welcome.css', 'resources/js/app.js', 'resources/js/swiper.js'])
     @section('content')
         <div class="page">
             <div class="container banner">

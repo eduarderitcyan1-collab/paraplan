@@ -33,7 +33,7 @@
                     <a href="#" class="menuLink">Галерея</a>
                     <a href="#" class="menuLink">Статьи</a>
                     <a href="#" class="menuLink">Маршруты</a>
-                    <a href="#" class="menuLink">Контакты</a>
+                    <a href="{{ route('contacts') }}" class="menuLink">Контакты</a>
                 </div>
             </div>
         </div>

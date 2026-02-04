@@ -4,12 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @include('template.favicon')
-    <title>Главная | Параплан Анапа</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @yield('style')
+    <title>@yield('title') | Параплан Анапа</title>
 </head>
 
 <body>
+    @unless (request()->routeIs('welcome'))
+        @include('template.menu')
+    @endunless
     @yield('content')
     @include('template.footer')
 </body>
