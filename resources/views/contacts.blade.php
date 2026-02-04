@@ -1,6 +1,6 @@
     @extends('app')
     @section('title', 'Контакты')
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @section('content')
         <div class="page">
             @include('template.socialBlock')
