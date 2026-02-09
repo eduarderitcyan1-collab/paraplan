@@ -202,6 +202,10 @@ body.modalOpen {
     overflow: hidden;
 }
 
+.page {
+    padding: 0 100px;
+}
+
 .page:before,
 .siteHeader:before,
 .siteFooter:before {
@@ -1403,8 +1407,13 @@ img {
 @media (max-width: 1440px) {
 
     .page,
+    .siteHeader,
     .siteFooter {
         padding: 50px;
+    }
+
+    .page {
+        padding: 0 50px;
     }
 
     .page .container {
@@ -1446,6 +1455,10 @@ img {
     .siteHeader,
     .siteFooter {
         padding: 25px;
+    }
+
+    .page {
+        padding: 0 25px;
     }
 
     *::-webkit-scrollbar {
@@ -1697,6 +1710,10 @@ img {
     .siteFooter {
         padding: 25px 10px;
         gap: 25px;
+    }
+
+    .page {
+        padding: 0 10px;
     }
 
     .glass {

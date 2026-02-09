@@ -99,6 +99,5 @@
                 </a>
             </div>
         </div>
-        @include('template.recording')
     </div>
 @endsection

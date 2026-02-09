@@ -6,6 +6,5 @@
         @include('template.socialBlock')
         @include('template.formBlock')
         @include('template.startPoint')
-        @include('template.recording')
     </div>
 @endsection

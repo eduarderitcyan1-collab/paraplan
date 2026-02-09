@@ -1,4 +1,5 @@
 <footer class="siteFooter">
+    @include('template.recording')
     <div class="container">
         <div class="oneSection">
             <a href="/" class="logo">
@@ -26,13 +27,13 @@
         <div class="secondSection glass">
             <div class="menu">
                 <div class="menuList">
-                    <a href="#" class="menuLink">Услуги</a>
-                    <a href="#" class="menuLink">Обучение</a>
-                    <a href="#" class="menuLink">Чегем</a>
+                    <a href="{{ route('service') }}" class="menuLink">Услуги</a>
+                    <a href="{{ route('training') }}" class="menuLink">Обучение</a>
+                    <a href="{{ route('chegem') }}" class="menuLink">Чегем</a>
                     <a href="{{ route('about') }}" class="menuLink">О нас</a>
                     <a href="{{ route('gallery') }}" class="menuLink">Галерея</a>
-                    <a href="#" class="menuLink">Статьи</a>
-                    <a href="#" class="menuLink">Маршруты</a>
+                    <a href="{{ route('stati') }}" class="menuLink">Статьи</a>
+                    <a href="{{ route('marshruty') }}" class="menuLink">Маршруты</a>
                     <a href="{{ route('contacts') }}" class="menuLink">Контакты</a>
                 </div>
             </div>

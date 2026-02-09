@@ -19,6 +19,37 @@ Route::get('/galereya/', function () {
     return view('gallery');
 })->name('gallery');
 
+Route::get('/uslugi/', function () {
+    return view('service');
+})->name('service');
+
+Route::get('/stati/', function () {
+    return view('stati');
+})->name('stati');
+
+Route::get('/stati-page/', function () {
+    return view('stati-page');
+})->name('stati-page');
+
+Route::get('/obuchenie-poletam-na-paraplane/', function () {
+    return view('training');
+})->name('training');
+
+Route::get('/obuchenie-poletam-na-paraplane/', function () {
+    return view('training');
+})->name('training');
+
+Route::get('/marshruty/', function () {
+    return view('marshruty');
+})->name('marshruty');
+
+Route::get('/marshrut-page/', function () {
+    return view('marshrut-page');
+})->name('marshrut-page');
+
+Route::get('/chegem/', function () {
+    return view('chegem');
+})->name('chegem');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

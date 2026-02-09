@@ -2,14 +2,14 @@
     <div class="container">
         <div class="menu">
             <div class="menuList">
-                <a href="#" class="menuLink">Услуги</a>
-                <a href="#" class="menuLink">Обучение</a>
+                <a href="{{ route('service') }}" class="menuLink">Услуги</a>
+                <a href="{{ route('training') }}" class="menuLink">Обучение</a>
             </div>
             <a href="/" class="logo">
                 <img src="{{ asset('images/logo/logo.svg') }}" alt="Paraplan Logo" class="logoImage">
             </a>
             <div class="menuList">
-                <a href="#" class="menuLink">Маршруты</a>
+                <a href="{{ route('marshruty') }}" class="menuLink">Маршруты</a>
                 <a href="{{ route('about') }}" class="menuLink">О нас</a>
             </div>
         </div>

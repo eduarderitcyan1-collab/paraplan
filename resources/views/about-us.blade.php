@@ -32,6 +32,5 @@
         </div>
         @include('template.reviews')
         @include('template.team')
-        @include('template.recording')
     </div>
 @endsection

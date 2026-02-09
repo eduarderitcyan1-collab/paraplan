@@ -1,0 +1,41 @@
+.grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.trainingPhoto {
+    height: 350px;
+}
+
+.left {
+    text-align: left;
+}
+
+.text {
+    margin: 0 !important;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 14.400px;
+}
+
+div.subTitle {
+    font-size: var(--sizeH3);
+}
+
+@media(max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .left {
+        text-align: center;
+    }
+
+    .trainingPhoto {
+        height: 275px;
+    }
+}
