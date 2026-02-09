@@ -1,0 +1,21 @@
+.flyInfo {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.flyInfo .flyInfoContent {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.flyInfo .flyInfoContent .subTitle {
+    text-align: left;
+    font-size: var(--sizeH3);
+}
+
+@media(max-width: 700px) {
+    .flyInfo {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

@@ -3,5 +3,5 @@
         <span>Исполните свою мечту</span><br>
         в один клик
     </h2>
-    <a href="#" class="button" id="modalButton">Записаться на полет</a>
+    <a href="#" class="button modalButton">Записаться на полет</a>
 </div>

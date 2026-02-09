@@ -10,7 +10,7 @@
             </a>
             <div class="menuList">
                 <a href="#" class="menuLink">Маршруты</a>
-                <a href="#" class="menuLink">О нас</a>
+                <a href="{{ route('about') }}" class="menuLink">О нас</a>
             </div>
         </div>
         @unless (request()->routeIs('welcome'))
@@ -26,7 +26,7 @@
                         @yield('title')
                     </h1>
                 </div>
-                <a href="#" class="button glass" id="modalButton">Записаться на полет</a>
+                <a href="#" class="button glass modalButton">Записаться на полет</a>
             </div>
         @endunless
     </div>

@@ -29,8 +29,8 @@
                     <a href="#" class="menuLink">Услуги</a>
                     <a href="#" class="menuLink">Обучение</a>
                     <a href="#" class="menuLink">Чегем</a>
-                    <a href="#" class="menuLink">О нас</a>
-                    <a href="#" class="menuLink">Галерея</a>
+                    <a href="{{ route('about') }}" class="menuLink">О нас</a>
+                    <a href="{{ route('gallery') }}" class="menuLink">Галерея</a>
                     <a href="#" class="menuLink">Статьи</a>
                     <a href="#" class="menuLink">Маршруты</a>
                     <a href="{{ route('contacts') }}" class="menuLink">Контакты</a>

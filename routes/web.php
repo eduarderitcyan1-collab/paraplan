@@ -11,6 +11,15 @@ Route::get('/kontakty/', function () {
     return view('contacts');
 })->name('contacts');
 
+Route::get('/about/', function () {
+    return view('about-us');
+})->name('about');
+
+Route::get('/galereya/', function () {
+    return view('gallery');
+})->name('gallery');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

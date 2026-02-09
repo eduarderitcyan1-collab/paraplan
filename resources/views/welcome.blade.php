@@ -1,6 +1,6 @@
     @extends('app')
     @section('title', 'Главная')
-    @vite(['resources/css/app.css', 'resources/css/welcome.css', 'resources/js/app.js', 'resources/js/swiper.js'])
+    @vite(['resources/css/app.css', 'resources/css/welcome.css', 'resources/js/app.js', 'resources/js/whyUs-swiper.js', 'resources/js/tarif-swiper.js', 'resources/js/service-swiper.js', 'resources/js/team-swiper.js', 'resources/js/sertificate-swiper.js', 'resources/js/reviews-swiper.js', 'resources/js/flypoint-swiper.js', 'resources/js/gallery-swiper.js'])
     @section('content')
         <div class="page">
             <div class="container banner">

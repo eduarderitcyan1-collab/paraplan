@@ -2,7 +2,7 @@
     <h2 class="subTitle">Тарифы на полеты</h2>
     <div class="swiper tarifSwiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide glass">
+            <div class="swiper-slide glass modalButton">
                 <img src="{{ asset('images\tarif.webp') }}" alt="Tarif" class="tarifPhoto">
                 <div class="tarifWrapper">
                     <div class="tarifContent">
@@ -21,7 +21,7 @@
                     <path d="M44.0416 32.0208H20" stroke="#4A49C4" stroke-width="2" stroke-linecap="round" />
                 </svg>
             </div>
-            <div class="swiper-slide glass">
+            <div class="swiper-slide glass modalButton">
                 <img src="{{ asset('images\tarif.webp') }}" alt="Tarif" class="tarifPhoto">
                 <div class="tarifWrapper">
                     <div class="tarifContent">
@@ -40,7 +40,7 @@
                     <path d="M44.0416 32.0208H20" stroke="#4A49C4" stroke-width="2" stroke-linecap="round" />
                 </svg>
             </div>
-            <div class="swiper-slide glass">
+            <div class="swiper-slide glass modalButton">
                 <img src="{{ asset('images\tarif.webp') }}" alt="Tarif" class="tarifPhoto">
                 <div class="tarifWrapper">
                     <div class="tarifContent">
@@ -59,7 +59,7 @@
                     <path d="M44.0416 32.0208H20" stroke="#4A49C4" stroke-width="2" stroke-linecap="round" />
                 </svg>
             </div>
-            <div class="swiper-slide glass">
+            <div class="swiper-slide glass modalButton">
                 <img src="{{ asset('images\tarif.webp') }}" alt="Tarif" class="tarifPhoto">
                 <div class="tarifWrapper">
                     <div class="tarifContent">
@@ -98,7 +98,7 @@
             </div>
         </div>
     </div>
-    <div class="tarifPremium glass">
+    <div class="tarifPremium glass modalButton">
         <img src="{{ asset('images\tarif.webp') }}" alt="Tarif" class="tarifPhoto">
         <div class="tarifPremiumContent">
             <div class="tarifWrapper">
@@ -122,7 +122,7 @@
             <div class="button modal">Записаться</div>
         </div>
     </div>
-    <div class="tarifWar glass">
+    <div class="tarifWar glass modalButton">
         <img src="{{ asset('images\war.webp') }}" alt="Tarif" class="tarifPhoto glass">
         <div class="tarifContent">
             <p class="text">Акция</p>

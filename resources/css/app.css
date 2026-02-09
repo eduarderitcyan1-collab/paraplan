@@ -124,6 +124,71 @@ body {
     box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.25);
 }
 
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+    z-index: 998;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+    z-index: 999;
+}
+
+.modalContent {
+    position: relative;
+    max-width: 520px;
+    width: 90%;
+    transform: translateY(30px);
+    transition: 0.3s ease;
+}
+
+.modalClose {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    background: #fff;
+    z-index: 999;
+    line-height: 1em;
+}
+
+.modal.show,
+.modalOverlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal.show .modalContent {
+    transform: translateY(0);
+}
+
+body.modalOpen {
+    overflow: hidden;
+}
+
+#modalButton {
+    cursor: pointer;
+}
+
 .page,
 .siteHeader,
 .siteFooter {
@@ -1144,23 +1209,23 @@ body {
     gap: 25px;
 }
 
-.formBlock .formWrapper .subTitle {
+.formWrapper .subTitle {
     text-align: left;
 }
 
-.formBlock .formWrapper .contactForm {
+.formWrapper .contactForm {
     display: flex;
     flex-direction: column;
     font-family: var(--mulish);
     gap: 12px;
 }
 
-.formBlock .formWrapper .contactForm .formRow {
+.formWrapper .contactForm .formRow {
     display: flex;
     flex-direction: column;
 }
 
-.formBlock .formWrapper .contactForm label {
+.formWrapper .contactForm label {
     color: var(--white);
     font-weight: 600;
     margin-bottom: 6px;
@@ -1168,8 +1233,8 @@ body {
     margin: 0;
 }
 
-.formBlock .formWrapper .contactForm input[type="text"],
-.formBlock .formWrapper .contactForm input[type="tel"] {
+.formWrapper .contactForm input[type="text"],
+.formWrapper .contactForm input[type="tel"] {
     border: 2px solid var(--white);
     background: transparent;
     color: var(--white);
@@ -1179,36 +1244,36 @@ body {
     font-size: var(--sizeText);
 }
 
-.formBlock .formWrapper .contactForm input::placeholder {
+.formWrapper .contactForm input::placeholder {
     color: var(--white);
     opacity: 0.85;
 }
 
-.formBlock .formWrapper .contactForm input:focus {
+.formWrapper .contactForm input:focus {
     outline: none;
     box-shadow: none;
 }
 
-.formBlock .formWrapper .formCheckbox {
+.formWrapper .formCheckbox {
     display: flex;
     flex-direction: row !important;
     align-items: center;
     gap: 8px;
 }
 
-.formBlock .formWrapper .formCheckbox input[type="checkbox"] {
+.formWrapper .formCheckbox input[type="checkbox"] {
     width: 15px;
     height: 15px;
 }
 
-.formBlock .formWrapper .error {
+.formWrapper .error {
     color: #ffb3b3;
     font-size: 0.9rem;
     margin-top: 4px;
     display: none;
 }
 
-.formBlock .formWrapper .error.active {
+.formWrapper .error.active {
     display: block;
 }
 
