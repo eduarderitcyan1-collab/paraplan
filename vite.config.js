@@ -16,7 +16,7 @@ export default defineConfig({
                 "resources/js/flypoint-swiper.js",
                 "resources/js/gallery-swiper.js",
                 "resources/js/gallery.js",
-                "resources/js/review-swiper.js",
+                "resources/js/reviews-swiper.js",
                 "resources/js/sertificate-swiper.js",
                 "resources/js/service-swiper.js",
                 "resources/js/tarif-swiper.js",
