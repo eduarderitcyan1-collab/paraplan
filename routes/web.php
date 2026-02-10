@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\BlockController;
-use App\Http\Controllers\Admin\MediaController;
-use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\BlockItemController;
+use App\Http\Controllers\Admin\GalleryItemController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +19,7 @@ Route::get('/marshruty/', fn () => view('marshruty'))->name('marshruty');
 Route::get('/marshrut-page/', fn () => view('marshrut-page'))->name('marshrut-page');
 Route::get('/chegem/', fn () => view('chegem'))->name('chegem');
 
-Route::get('/dashboard', fn () => view('dashboard'))
+Route::get('/dashboard', fn () => redirect()->route('admin.blocks.index'))
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
@@ -33,13 +33,15 @@ Route::middleware(['auth', 'verified', 'role:admin,editor'])
     ->prefix('admin')
     ->as('admin.')
     ->group(function (): void {
-        Route::resource('pages', PageController::class);
-        Route::resource('media', MediaController::class)->parameters(['media' => 'medium']);
+        Route::resource('blocks', BlockController::class);
+        Route::post('blocks/reorder', [BlockController::class, 'reorder'])->name('blocks.reorder');
 
-        Route::prefix('pages/{page}')->as('pages.')->group(function (): void {
-            Route::resource('blocks', BlockController::class)->except(['show']);
-            Route::post('blocks/reorder', [BlockController::class, 'reorder'])->name('blocks.reorder');
+        Route::prefix('blocks/{block}')->as('blocks.')->group(function (): void {
+            Route::resource('items', BlockItemController::class)->except(['show']);
+            Route::post('items/reorder', [BlockItemController::class, 'reorder'])->name('items.reorder');
         });
+
+        Route::resource('gallery-items', GalleryItemController::class)->parameters(['gallery-items' => 'galleryItem'])->except(['show']);
     });
 
 Route::middleware(['auth', 'verified', 'role:admin'])

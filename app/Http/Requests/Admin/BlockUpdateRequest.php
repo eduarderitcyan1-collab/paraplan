@@ -15,21 +15,26 @@ class BlockUpdateRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        if ($this->filled('content_json') && ! $this->has('content')) {
-            $decoded = json_decode((string) $this->input('content_json'), true);
-            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
-                $this->merge(['content' => $decoded]);
+        if ($this->filled('schema_json') && ! $this->has('schema')) {
+            $data = json_decode((string) $this->input('schema_json'), true);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                $this->merge(['schema' => $data]);
             }
         }
     }
 
     public function rules(): array
     {
+        /** @var Block $block */
+        $block = $this->route('block');
+
         return [
-            'type' => ['required', 'string', Rule::in(Block::allowedTypes())],
-            'content' => ['required', 'array'],
-            'content_json' => ['nullable', 'json'],
+            'name' => ['required', 'string', 'max:255'],
+            'code' => ['required', 'string', 'max:255', 'alpha_dash', Rule::unique('blocks', 'code')->ignore($block->id)],
+            'schema' => ['nullable', 'array'],
+            'schema_json' => ['nullable', 'json'],
             'display_order' => ['nullable', 'integer', 'min:0'],
+            'is_active' => ['nullable', 'boolean'],
         ];
     }
 }

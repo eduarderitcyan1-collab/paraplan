@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Models\Block;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class BlockStoreRequest extends FormRequest
 {
@@ -15,10 +13,10 @@ class BlockStoreRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        if ($this->filled('content_json') && ! $this->has('content')) {
-            $decoded = json_decode((string) $this->input('content_json'), true);
-            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
-                $this->merge(['content' => $decoded]);
+        if ($this->filled('schema_json') && ! $this->has('schema')) {
+            $data = json_decode((string) $this->input('schema_json'), true);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                $this->merge(['schema' => $data]);
             }
         }
     }
@@ -26,10 +24,12 @@ class BlockStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => ['required', 'string', Rule::in(Block::allowedTypes())],
-            'content' => ['required', 'array'],
-            'content_json' => ['nullable', 'json'],
+            'name' => ['required', 'string', 'max:255'],
+            'code' => ['required', 'string', 'max:255', 'alpha_dash', 'unique:blocks,code'],
+            'schema' => ['nullable', 'array'],
+            'schema_json' => ['nullable', 'json'],
             'display_order' => ['nullable', 'integer', 'min:0'],
+            'is_active' => ['nullable', 'boolean'],
         ];
     }
 }

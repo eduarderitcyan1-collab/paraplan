@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,7 +9,6 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     protected $fillable = [
@@ -33,19 +31,19 @@ class User extends Authenticatable
         ];
     }
 
-    public function pagesCreated(): HasMany
-    {
-        return $this->hasMany(Page::class, 'created_by');
-    }
-
     public function blocksCreated(): HasMany
     {
         return $this->hasMany(Block::class, 'created_by');
     }
 
-    public function mediaUploaded(): HasMany
+    public function blockItemsCreated(): HasMany
     {
-        return $this->hasMany(Media::class, 'uploaded_by');
+        return $this->hasMany(BlockItem::class, 'created_by');
+    }
+
+    public function galleryItemsCreated(): HasMany
+    {
+        return $this->hasMany(GalleryItem::class, 'created_by');
     }
 
     public function isAdmin(): bool

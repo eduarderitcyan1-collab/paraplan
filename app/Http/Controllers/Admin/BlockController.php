@@ -7,7 +7,6 @@ use App\Http\Requests\Admin\BlockReorderRequest;
 use App\Http\Requests\Admin\BlockStoreRequest;
 use App\Http\Requests\Admin\BlockUpdateRequest;
 use App\Models\Block;
-use App\Models\Page;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
@@ -15,72 +14,65 @@ use Illuminate\View\View;
 
 class BlockController extends Controller
 {
-    public function index(Page $page): View
+    public function index(): View
     {
-        $blocks = $page->blocks()->with('media')->get();
+        $blocks = Block::query()->withCount('items')->orderBy('display_order')->paginate(20);
 
-        return view('admin.blocks.index', compact('page', 'blocks'));
+        return view('admin.blocks.index', compact('blocks'));
     }
 
-    public function create(Page $page): View
+    public function create(): View
     {
-        $blockTypes = Block::allowedTypes();
-
-        return view('admin.blocks.create', compact('page', 'blockTypes'));
+        return view('admin.blocks.create');
     }
 
-    public function store(BlockStoreRequest $request, Page $page): RedirectResponse
+    public function store(BlockStoreRequest $request): RedirectResponse
     {
-        $data = $request->safe()->except('content_json');
-
-        $page->blocks()->create([
+        $data = $request->safe()->except('schema_json');
+        Block::create([
             ...$data,
-            'display_order' => $request->integer('display_order', $page->blocks()->count()),
+            'is_active' => (bool) $request->boolean('is_active', true),
             'created_by' => $request->user()->id,
             'updated_by' => $request->user()->id,
         ]);
 
-        return redirect()->route('admin.pages.blocks.index', $page)->with('status', 'Блок добавлен.');
+        return redirect()->route('admin.blocks.index')->with('status', 'Блок создан.');
     }
 
-    public function edit(Page $page, Block $block): View
+    public function show(Block $block): View
     {
-        abort_unless($block->page_id === $page->id, 404);
+        $block->load('items');
 
-        $blockTypes = Block::allowedTypes();
-
-        return view('admin.blocks.edit', compact('page', 'block', 'blockTypes'));
+        return view('admin.blocks.show', compact('block'));
     }
 
-    public function update(BlockUpdateRequest $request, Page $page, Block $block): RedirectResponse
+    public function edit(Block $block): View
     {
-        abort_unless($block->page_id === $page->id, 404);
+        return view('admin.blocks.edit', compact('block'));
+    }
 
-        $data = $request->safe()->except('content_json');
-
+    public function update(BlockUpdateRequest $request, Block $block): RedirectResponse
+    {
+        $data = $request->safe()->except('schema_json');
         $block->update([
             ...$data,
+            'is_active' => (bool) $request->boolean('is_active', false),
             'updated_by' => $request->user()->id,
         ]);
 
-        return redirect()->route('admin.pages.blocks.index', $page)->with('status', 'Блок обновлен.');
+        return redirect()->route('admin.blocks.index')->with('status', 'Блок обновлен.');
     }
 
-    public function destroy(Page $page, Block $block): RedirectResponse
+    public function destroy(Block $block): RedirectResponse
     {
-        abort_unless($block->page_id === $page->id, 404);
-
         $block->delete();
 
-        return redirect()->route('admin.pages.blocks.index', $page)->with('status', 'Блок удален.');
+        return redirect()->route('admin.blocks.index')->with('status', 'Блок удален.');
     }
 
-    public function reorder(BlockReorderRequest $request, Page $page): JsonResponse
+    public function reorder(BlockReorderRequest $request): JsonResponse
     {
         $ids = $request->validated('ordered_ids');
-
-        $count = Block::query()->where('page_id', $page->id)->whereIn('id', $ids)->count();
-        abort_if($count !== count($ids), 422, 'Некорректный список блоков.');
 
         DB::transaction(function () use ($ids, $request): void {
             foreach ($ids as $index => $id) {
@@ -91,6 +83,6 @@ class BlockController extends Controller
             }
         });
 
-        return response()->json(['message' => 'Порядок сохранен.']);
+        return response()->json(['message' => 'Порядок блоков сохранен']);
     }
 }

@@ -1,1 +1,1 @@
-@include('admin.blocks._form', ['block' => null, 'page' => $page, 'action' => route('admin.pages.blocks.store', $page), 'method' => 'POST'])
+@include('admin.blocks.form', ['action' => route('admin.blocks.store'), 'method' => 'POST', 'block' => null])

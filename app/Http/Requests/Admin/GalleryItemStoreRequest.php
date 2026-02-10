@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class MediaStoreRequest extends FormRequest
+class GalleryItemStoreRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,10 +15,10 @@ class MediaStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'block_id' => ['nullable', 'integer', 'exists:blocks,id'],
-            'type' => ['required', Rule::in(['image', 'video'])],
+            'type' => ['required', Rule::in(['photo', 'video'])],
             'url' => ['required', 'string', 'max:2048'],
-            'alt_text' => ['nullable', 'string', 'max:255'],
+            'preview_url' => ['nullable', 'string', 'max:2048'],
+            'title' => ['nullable', 'string', 'max:255'],
             'display_order' => ['nullable', 'integer', 'min:0'],
         ];
     }

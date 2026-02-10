@@ -8,11 +8,13 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('blocks', function (Blueprint $table): void {
+        Schema::create('block_items', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('page_id')->constrained()->cascadeOnDelete();
-            $table->string('type');
-            $table->json('content');
+            $table->foreignId('block_id')->constrained()->cascadeOnDelete();
+            $table->string('title')->nullable();
+            $table->string('subtitle')->nullable();
+            $table->text('description')->nullable();
+            $table->json('payload')->nullable();
             $table->unsignedInteger('display_order')->default(0);
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
@@ -22,6 +24,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('blocks');
+        Schema::dropIfExists('block_items');
     }
 };

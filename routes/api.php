@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\PageController;
+use App\Http\Controllers\Api\ContentController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/pages', [PageController::class, 'index']);
-Route::get('/pages/{slug}', [PageController::class, 'show']);
+Route::get('/blocks', [ContentController::class, 'index']);
+Route::get('/blocks/{code}', [ContentController::class, 'show']);

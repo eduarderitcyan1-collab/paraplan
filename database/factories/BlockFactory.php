@@ -3,9 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Block;
-use App\Models\Page;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class BlockFactory extends Factory
 {
@@ -13,11 +13,14 @@ class BlockFactory extends Factory
 
     public function definition(): array
     {
+        $name = fake()->words(2, true);
+
         return [
-            'page_id' => Page::factory(),
-            'type' => fake()->randomElement(Block::allowedTypes()),
-            'content' => ['text' => fake()->sentence()],
+            'name' => Str::title($name),
+            'code' => Str::slug($name, '_').'_'.fake()->unique()->numberBetween(10, 999),
+            'schema' => ['fields' => ['title', 'description', 'payload']],
             'display_order' => fake()->numberBetween(0, 20),
+            'is_active' => true,
             'created_by' => User::factory(),
             'updated_by' => null,
         ];

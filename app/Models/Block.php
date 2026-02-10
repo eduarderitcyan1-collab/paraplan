@@ -12,31 +12,23 @@ class Block extends Model
     use HasFactory;
 
     protected $fillable = [
-        'page_id',
-        'type',
-        'content',
+        'name',
+        'code',
+        'schema',
         'display_order',
+        'is_active',
         'created_by',
         'updated_by',
     ];
 
     protected $casts = [
-        'content' => 'array',
+        'schema' => 'array',
+        'is_active' => 'boolean',
     ];
 
-    public static function allowedTypes(): array
+    public function items(): HasMany
     {
-        return config('content.block_types', ['text']);
-    }
-
-    public function page(): BelongsTo
-    {
-        return $this->belongsTo(Page::class);
-    }
-
-    public function media(): HasMany
-    {
-        return $this->hasMany(Media::class)->orderBy('display_order')->orderBy('id');
+        return $this->hasMany(BlockItem::class)->orderBy('display_order')->orderBy('id');
     }
 
     public function creator(): BelongsTo

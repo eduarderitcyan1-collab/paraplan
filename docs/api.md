@@ -1,58 +1,58 @@
-# Paraplan Анапа Backend API
+# API контента Paraplan Анапа
 
-## Public frontend endpoints
+## Публичные endpoints
 
-### `GET /api/pages`
-Returns published pages only.
+### `GET /api/blocks`
+Возвращает весь контент для фронта: блоки и галерею.
 
-```bash
-curl -s http://localhost/api/pages
-```
-
-### `GET /api/pages/{slug}`
-Returns one published page with ordered blocks and media.
-
-```bash
-curl -s http://localhost/api/pages/about
-```
-
-Response example:
+Структура:
 
 ```json
 {
-  "title": "О компании",
-  "slug": "about",
-  "meta_title": "Параплан Анапа",
-  "meta_description": "Полеты в Анапе",
   "blocks": [
     {
-      "type": "whyUs",
-      "content": {"title": "Почему выбирают нас"},
-      "media": [
-        {"type": "image", "url": "/uploads/banner.jpg", "alt_text": "Баннер"}
+      "name": "Отзывы",
+      "code": "reviews",
+      "items": [
+        {
+          "title": "Иван",
+          "subtitle": "2026-02-10",
+          "description": "Текст отзыва",
+          "payload": {
+            "images": ["/uploads/reviews/1.jpg", "/uploads/reviews/2.jpg"]
+          }
+        }
       ]
-    },
-    {
-      "type": "service",
-      "content": {"items": [{"title": "Тандем"}]},
-      "media": []
     }
-  ]
+  ],
+  "gallery": {
+    "photo": [
+      {"url": "/uploads/gallery/photo1.jpg"}
+    ],
+    "video": [
+      {"url": "https://rutube.ru/play/embed/...", "preview_url": "/uploads/gallery/video-preview.jpg"}
+    ]
+  }
 }
 ```
 
-## Supported block types
+### `GET /api/blocks/{code}`
+Возвращает конкретный блок (`fly_points`, `reviews`, `service`, `tarif`, `team`, `why_us`, `articles`, `article_page`, `route_categories`, `route_page`, и т.д.).
 
-`text, image, video, gallery, button, about, flyPoint, footer, formBlock, gift, menu, offer, recording, reviews, service, sertificate, startPoint, tarif, team, whyUs`
+## Как хранить контент сложных сущностей
 
-## Admin endpoints (web)
+- **Точки полетов** (`fly_points`): `payload.image`, `title`, `description`.
+- **Отзывы** (`reviews`): `title` (имя), `subtitle` (дата), `description` (текст), `payload.images[]`.
+- **Услуги** (`service`): `payload.image`, `title`, `description`, `payload.price`, `payload.button_url`.
+- **Тарифы** (`tarif`): `payload.image`, `title`, `description`, `payload.price`.
+- **Команда** (`team`): `payload.image`, `title` (имя), `subtitle` (должность).
+- **Почему мы** (`why_us`): `payload.icon`, `title`, `description`.
+- **Статьи** (`articles`, `article_page`): карточка статьи и детальная страница с `payload.gallery[]`.
+- **Маршруты** (`route_categories`, `route_page`): категории + маршруты, характеристики `payload.features[]`, преимущества `payload.advantages[]`, галерея `payload.gallery[]`.
 
-- `/admin/pages` — CRUD pages
-- `/admin/pages/{page}/blocks` — CRUD blocks + reorder (`POST /admin/pages/{page}/blocks/reorder`)
-- `/admin/media` — CRUD media
-- `/admin/users` — role management (`admin` only)
+## Админка
 
-## Roles
-
-- `admin` — full access, including user role management.
-- `editor` — content management (`pages`, `blocks`, `media`).
+- `/admin/blocks` — CRUD блоков контента.
+- `/admin/blocks/{block}/items` — CRUD элементов блока + drag&drop порядка.
+- `/admin/gallery-items` — CRUD фото/видео галереи.
+- `/admin/users` — роли пользователей (`admin` only).

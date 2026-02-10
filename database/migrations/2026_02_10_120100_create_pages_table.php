@@ -8,14 +8,13 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('pages', function (Blueprint $table): void {
+        Schema::create('blocks', function (Blueprint $table): void {
             $table->id();
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->enum('status', ['draft', 'published', 'archived'])->default('draft');
-            $table->string('meta_title')->nullable();
-            $table->text('meta_description')->nullable();
+            $table->string('name');
+            $table->string('code')->unique();
+            $table->json('schema')->nullable();
             $table->unsignedInteger('display_order')->default(0);
+            $table->boolean('is_active')->default(true);
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
@@ -24,6 +23,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('blocks');
     }
 };

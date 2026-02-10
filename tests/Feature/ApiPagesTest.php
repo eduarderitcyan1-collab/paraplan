@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Block;
-use App\Models\Media;
-use App\Models\Page;
+use App\Models\BlockItem;
+use App\Models\GalleryItem;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -13,40 +13,46 @@ class ApiPagesTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_api_pages_returns_only_published(): void
+    public function test_api_returns_blocks_and_gallery(): void
     {
         $user = User::factory()->create();
-        Page::factory()->create(['slug' => 'published-page', 'status' => 'published', 'created_by' => $user->id]);
-        Page::factory()->create(['slug' => 'draft-page', 'status' => 'draft', 'created_by' => $user->id]);
 
-        $response = $this->getJson('/api/pages');
-
-        $response->assertOk()->assertJsonFragment(['slug' => 'published-page']);
-        $response->assertJsonMissing(['slug' => 'draft-page']);
-    }
-
-    public function test_api_page_show_returns_blocks_and_media(): void
-    {
-        $user = User::factory()->create();
-        $page = Page::factory()->create(['slug' => 'about', 'status' => 'published', 'created_by' => $user->id]);
         $block = Block::factory()->create([
-            'page_id' => $page->id,
-            'type' => 'whyUs',
-            'content' => ['title' => 'Добро пожаловать'],
+            'name' => 'Почему мы',
+            'code' => 'why_us',
+            'is_active' => true,
             'created_by' => $user->id,
         ]);
-        Media::factory()->create([
+
+        BlockItem::factory()->create([
             'block_id' => $block->id,
-            'type' => 'image',
-            'url' => '/uploads/banner.jpg',
-            'display_order' => 0,
-            'uploaded_by' => $user->id,
+            'title' => 'Опыт',
+            'payload' => ['icon' => '/uploads/icon.svg'],
+            'created_by' => $user->id,
         ]);
 
-        $this->getJson('/api/pages/about')
+        GalleryItem::factory()->create([
+            'type' => 'photo',
+            'url' => '/uploads/photo.jpg',
+            'created_by' => $user->id,
+        ]);
+
+        $this->getJson('/api/blocks')
             ->assertOk()
-            ->assertJsonPath('slug', 'about')
-            ->assertJsonPath('blocks.0.type', 'whyUs')
-            ->assertJsonPath('blocks.0.media.0.url', '/uploads/banner.jpg');
+            ->assertJsonPath('blocks.0.code', 'why_us')
+            ->assertJsonPath('blocks.0.items.0.title', 'Опыт')
+            ->assertJsonPath('gallery.photo.0.url', '/uploads/photo.jpg');
+    }
+
+    public function test_api_returns_single_block_by_code(): void
+    {
+        $user = User::factory()->create();
+        $block = Block::factory()->create(['name' => 'Отзывы', 'code' => 'reviews', 'created_by' => $user->id]);
+        BlockItem::factory()->create(['block_id' => $block->id, 'title' => 'Иван', 'created_by' => $user->id]);
+
+        $this->getJson('/api/blocks/reviews')
+            ->assertOk()
+            ->assertJsonPath('code', 'reviews')
+            ->assertJsonPath('items.0.title', 'Иван');
     }
 }

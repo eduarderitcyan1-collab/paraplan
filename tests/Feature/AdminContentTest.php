@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Block;
-use App\Models\Page;
+use App\Models\BlockItem;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -12,37 +12,41 @@ class AdminContentTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_editor_can_create_page(): void
+    public function test_editor_can_create_block(): void
     {
-        $user = User::factory()->create(['role' => 'editor']);
+        $editor = User::factory()->create(['role' => 'editor']);
 
-        $this->actingAs($user)
-            ->post('/admin/pages', [
-                'title' => 'О компании',
-                'slug' => 'about',
-                'status' => 'published',
-                'meta_title' => 'О компании',
-                'meta_description' => 'Описание',
+        $this->actingAs($editor)
+            ->post('/admin/blocks', [
+                'name' => 'Отзывы',
+                'code' => 'reviews',
                 'display_order' => 1,
+                'is_active' => 1,
+                'schema_json' => json_encode(['required' => ['title', 'description']], JSON_THROW_ON_ERROR),
             ])
-            ->assertRedirect('/admin/pages');
+            ->assertRedirect('/admin/blocks');
 
-        $this->assertDatabaseHas('pages', ['slug' => 'about', 'created_by' => $user->id]);
+        $this->assertDatabaseHas('blocks', ['code' => 'reviews', 'created_by' => $editor->id]);
     }
 
-    public function test_editor_can_create_template_block_type(): void
+    public function test_editor_can_create_block_item_for_service_block(): void
     {
-        $user = User::factory()->create(['role' => 'editor']);
-        $page = Page::factory()->create(['created_by' => $user->id]);
+        $editor = User::factory()->create(['role' => 'editor']);
+        $block = Block::factory()->create(['code' => 'service', 'created_by' => $editor->id]);
 
-        $this->actingAs($user)
-            ->post("/admin/pages/{$page->id}/blocks", [
-                'type' => 'whyUs',
-                'content_json' => json_encode(['title' => 'Преимущества'], JSON_THROW_ON_ERROR),
+        $this->actingAs($editor)
+            ->post("/admin/blocks/{$block->id}/items", [
+                'title' => 'Тандем-полет',
+                'description' => 'Короткое описание услуги',
+                'payload_json' => json_encode([
+                    'image' => '/uploads/service.jpg',
+                    'price' => '7000',
+                    'button_url' => 'https://example.com/order',
+                ], JSON_THROW_ON_ERROR),
             ])
-            ->assertRedirect("/admin/pages/{$page->id}/blocks");
+            ->assertRedirect("/admin/blocks/{$block->id}/items");
 
-        $this->assertDatabaseHas('blocks', ['page_id' => $page->id, 'type' => 'whyUs']);
+        $this->assertDatabaseHas('block_items', ['block_id' => $block->id, 'title' => 'Тандем-полет']);
     }
 
     public function test_editor_cannot_manage_users(): void
@@ -52,18 +56,18 @@ class AdminContentTest extends TestCase
         $this->actingAs($editor)->get('/admin/users')->assertForbidden();
     }
 
-    public function test_block_reorder_endpoint_changes_order(): void
+    public function test_item_reorder_works(): void
     {
-        $user = User::factory()->create(['role' => 'admin']);
-        $page = Page::factory()->create(['created_by' => $user->id]);
-        $a = Block::factory()->create(['page_id' => $page->id, 'display_order' => 0, 'created_by' => $user->id]);
-        $b = Block::factory()->create(['page_id' => $page->id, 'display_order' => 1, 'created_by' => $user->id]);
+        $admin = User::factory()->create(['role' => 'admin']);
+        $block = Block::factory()->create(['created_by' => $admin->id]);
+        $first = BlockItem::factory()->create(['block_id' => $block->id, 'display_order' => 0, 'created_by' => $admin->id]);
+        $second = BlockItem::factory()->create(['block_id' => $block->id, 'display_order' => 1, 'created_by' => $admin->id]);
 
-        $this->actingAs($user)
-            ->postJson("/admin/pages/{$page->id}/blocks/reorder", ['ordered_ids' => [$b->id, $a->id]])
+        $this->actingAs($admin)
+            ->postJson("/admin/blocks/{$block->id}/items/reorder", ['ordered_ids' => [$second->id, $first->id]])
             ->assertOk();
 
-        $this->assertDatabaseHas('blocks', ['id' => $b->id, 'display_order' => 0]);
-        $this->assertDatabaseHas('blocks', ['id' => $a->id, 'display_order' => 1]);
+        $this->assertDatabaseHas('block_items', ['id' => $second->id, 'display_order' => 0]);
+        $this->assertDatabaseHas('block_items', ['id' => $first->id, 'display_order' => 1]);
     }
 }
