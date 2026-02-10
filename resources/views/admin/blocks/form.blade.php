@@ -25,7 +25,7 @@
 
     <div>
         <label class="mb-1 block text-sm">Схема полей (JSON, необязательно)</label>
-        <textarea id="schema_json" name="schema_json" rows="8" class="w-full rounded border-gray-300">{{ old('schema_json', json_encode($block->schema, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT)) }}</textarea>
+        <textarea id="schema_json" name="schema_json" rows="8" class="w-full rounded border-gray-300">{{ old('schema_json', json_encode($block?->schema ?? null, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT)) }}</textarea>
     </div>
 
     <div><label class="mb-1 block text-sm">Порядок</label><input type="number" min="0" name="display_order" class="w-full rounded border-gray-300" value="{{ old('display_order', $block->display_order ?? 0) }}"></div>
