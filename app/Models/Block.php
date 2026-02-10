@@ -26,6 +26,21 @@ class Block extends Model
         'is_active' => 'boolean',
     ];
 
+    public static function definitions(): array
+    {
+        return config('content.blocks', []);
+    }
+
+    public static function allowedCodes(): array
+    {
+        return array_keys(self::definitions());
+    }
+
+    public function definition(): ?array
+    {
+        return self::definitions()[$this->code] ?? null;
+    }
+
     public function items(): HasMany
     {
         return $this->hasMany(BlockItem::class)->orderBy('display_order')->orderBy('id');

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Block;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class BlockStoreRequest extends FormRequest
 {
@@ -25,7 +27,7 @@ class BlockStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'code' => ['required', 'string', 'max:255', 'alpha_dash', 'unique:blocks,code'],
+            'code' => ['required', 'string', Rule::in(Block::allowedCodes()), 'unique:blocks,code'],
             'schema' => ['nullable', 'array'],
             'schema_json' => ['nullable', 'json'],
             'display_order' => ['nullable', 'integer', 'min:0'],

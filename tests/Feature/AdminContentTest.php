@@ -70,4 +70,20 @@ class AdminContentTest extends TestCase
         $this->assertDatabaseHas('block_items', ['id' => $second->id, 'display_order' => 0]);
         $this->assertDatabaseHas('block_items', ['id' => $first->id, 'display_order' => 1]);
     }
+
+    public function test_service_item_requires_price_in_payload(): void
+    {
+        $editor = User::factory()->create(['role' => 'editor']);
+        $block = Block::factory()->create(['code' => 'service', 'created_by' => $editor->id]);
+
+        $this->actingAs($editor)
+            ->from("/admin/blocks/{$block->id}/items/create")
+            ->post("/admin/blocks/{$block->id}/items", [
+                'title' => 'Услуга без цены',
+                'payload_json' => json_encode(['image' => '/uploads/service.jpg'], JSON_THROW_ON_ERROR),
+            ])
+            ->assertRedirect("/admin/blocks/{$block->id}/items/create")
+            ->assertSessionHasErrors('payload_json');
+    }
+
 }

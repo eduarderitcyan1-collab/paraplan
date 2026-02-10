@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Block;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BlockItemStoreRequest extends FormRequest
@@ -31,5 +32,22 @@ class BlockItemStoreRequest extends FormRequest
             'payload_json' => ['nullable', 'json'],
             'display_order' => ['nullable', 'integer', 'min:0'],
         ];
+    }
+
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator): void {
+            /** @var Block|null $block */
+            $block = $this->route('block');
+            $definition = $block?->definition();
+            $required = $definition['required_payload_keys'] ?? [];
+            $payload = $this->input('payload', []);
+
+            foreach ($required as $key) {
+                if (! is_array($payload) || ! array_key_exists($key, $payload) || $payload[$key] === null || $payload[$key] === '') {
+                    $validator->errors()->add('payload_json', "Для блока '{$block?->code}' обязательно поле payload.{$key}");
+                }
+            }
+        });
     }
 }

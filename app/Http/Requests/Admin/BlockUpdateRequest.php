@@ -30,7 +30,7 @@ class BlockUpdateRequest extends FormRequest
 
         return [
             'name' => ['required', 'string', 'max:255'],
-            'code' => ['required', 'string', 'max:255', 'alpha_dash', Rule::unique('blocks', 'code')->ignore($block->id)],
+            'code' => ['required', 'string', Rule::in(Block::allowedCodes()), Rule::unique('blocks', 'code')->ignore($block->id)],
             'schema' => ['nullable', 'array'],
             'schema_json' => ['nullable', 'json'],
             'display_order' => ['nullable', 'integer', 'min:0'],

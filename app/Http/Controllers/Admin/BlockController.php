@@ -23,7 +23,9 @@ class BlockController extends Controller
 
     public function create(): View
     {
-        return view('admin.blocks.create');
+        $definitions = Block::definitions();
+
+        return view('admin.blocks.create', compact('definitions'));
     }
 
     public function store(BlockStoreRequest $request): RedirectResponse
@@ -48,7 +50,9 @@ class BlockController extends Controller
 
     public function edit(Block $block): View
     {
-        return view('admin.blocks.edit', compact('block'));
+        $definitions = Block::definitions();
+
+        return view('admin.blocks.edit', compact('block', 'definitions'));
     }
 
     public function update(BlockUpdateRequest $request, Block $block): RedirectResponse
