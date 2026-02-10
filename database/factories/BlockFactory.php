@@ -15,7 +15,7 @@ class BlockFactory extends Factory
     {
         return [
             'page_id' => Page::factory(),
-            'type' => fake()->randomElement(['text', 'image', 'video', 'gallery', 'button']),
+            'type' => fake()->randomElement(Block::allowedTypes()),
             'content' => ['text' => fake()->sentence()],
             'display_order' => fake()->numberBetween(0, 20),
             'created_by' => User::factory(),

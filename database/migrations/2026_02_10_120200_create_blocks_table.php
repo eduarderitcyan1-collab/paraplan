@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('blocks', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('page_id')->constrained()->cascadeOnDelete();
-            $table->enum('type', ['text', 'image', 'video', 'gallery', 'button']);
+            $table->string('type');
             $table->json('content');
             $table->unsignedInteger('display_order')->default(0);
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();

@@ -30,6 +30,21 @@ class AdminContentTest extends TestCase
         $this->assertDatabaseHas('pages', ['slug' => 'about', 'created_by' => $user->id]);
     }
 
+    public function test_editor_can_create_template_block_type(): void
+    {
+        $user = User::factory()->create(['role' => 'editor']);
+        $page = Page::factory()->create(['created_by' => $user->id]);
+
+        $this->actingAs($user)
+            ->post("/admin/pages/{$page->id}/blocks", [
+                'type' => 'whyUs',
+                'content_json' => json_encode(['title' => 'Преимущества'], JSON_THROW_ON_ERROR),
+            ])
+            ->assertRedirect("/admin/pages/{$page->id}/blocks");
+
+        $this->assertDatabaseHas('blocks', ['page_id' => $page->id, 'type' => 'whyUs']);
+    }
+
     public function test_editor_cannot_manage_users(): void
     {
         $editor = User::factory()->create(['role' => 'editor']);

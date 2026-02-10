@@ -24,4 +24,13 @@ class ContentModelsTest extends TestCase
         $this->assertTrue($block->media->contains($media));
         $this->assertSame('Hi', $block->content['text']);
     }
+
+    public function test_user_role_helpers_work(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $editor = User::factory()->create(['role' => 'editor']);
+
+        $this->assertTrue($admin->isAdmin());
+        $this->assertFalse($editor->isAdmin());
+    }
 }

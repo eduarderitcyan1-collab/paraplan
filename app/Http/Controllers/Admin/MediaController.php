@@ -14,7 +14,7 @@ class MediaController extends Controller
 {
     public function index(): View
     {
-        $media = Media::query()->with('block.page')->latest()->paginate(20);
+        $media = Media::query()->with('block.page')->orderBy('display_order')->latest('id')->paginate(20);
 
         return view('admin.media.index', compact('media'));
     }
@@ -28,8 +28,12 @@ class MediaController extends Controller
 
     public function store(MediaStoreRequest $request): RedirectResponse
     {
+        $blockId = $request->input('block_id');
+        $maxOrder = Media::query()->where('block_id', $blockId)->max('display_order');
+
         Media::create([
             ...$request->validated(),
+            'display_order' => $request->integer('display_order', (int) $maxOrder + 1),
             'uploaded_by' => $request->user()->id,
             'updated_by' => $request->user()->id,
         ]);

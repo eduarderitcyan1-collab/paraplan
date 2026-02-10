@@ -24,6 +24,11 @@ class Block extends Model
         'content' => 'array',
     ];
 
+    public static function allowedTypes(): array
+    {
+        return config('content.block_types', ['text']);
+    }
+
     public function page(): BelongsTo
     {
         return $this->belongsTo(Page::class);
@@ -31,7 +36,7 @@ class Block extends Model
 
     public function media(): HasMany
     {
-        return $this->hasMany(Media::class)->orderBy('id');
+        return $this->hasMany(Media::class)->orderBy('display_order')->orderBy('id');
     }
 
     public function creator(): BelongsTo

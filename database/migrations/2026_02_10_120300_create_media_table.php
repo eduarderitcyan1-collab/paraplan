@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('url');
             $table->string('alt_text')->nullable();
             $table->foreignId('uploaded_by')->constrained('users')->cascadeOnDelete();
+            $table->unsignedInteger('display_order')->default(0);
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
         });

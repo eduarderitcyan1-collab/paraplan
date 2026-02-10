@@ -29,13 +29,24 @@ class ApiPagesTest extends TestCase
     {
         $user = User::factory()->create();
         $page = Page::factory()->create(['slug' => 'about', 'status' => 'published', 'created_by' => $user->id]);
-        $block = Block::factory()->create(['page_id' => $page->id, 'type' => 'text', 'content' => ['text' => 'Добро пожаловать'], 'created_by' => $user->id]);
-        Media::factory()->create(['block_id' => $block->id, 'type' => 'image', 'url' => '/uploads/banner.jpg', 'uploaded_by' => $user->id]);
+        $block = Block::factory()->create([
+            'page_id' => $page->id,
+            'type' => 'whyUs',
+            'content' => ['title' => 'Добро пожаловать'],
+            'created_by' => $user->id,
+        ]);
+        Media::factory()->create([
+            'block_id' => $block->id,
+            'type' => 'image',
+            'url' => '/uploads/banner.jpg',
+            'display_order' => 0,
+            'uploaded_by' => $user->id,
+        ]);
 
         $this->getJson('/api/pages/about')
             ->assertOk()
             ->assertJsonPath('slug', 'about')
-            ->assertJsonPath('blocks.0.type', 'text')
+            ->assertJsonPath('blocks.0.type', 'whyUs')
             ->assertJsonPath('blocks.0.media.0.url', '/uploads/banner.jpg');
     }
 }

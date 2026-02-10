@@ -17,6 +17,7 @@ class Media extends Model
         'type',
         'url',
         'alt_text',
+        'display_order',
         'uploaded_by',
         'updated_by',
     ];

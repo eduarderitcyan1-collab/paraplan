@@ -3,14 +3,14 @@
 ## Public frontend endpoints
 
 ### `GET /api/pages`
-Returns only published pages.
+Returns published pages only.
 
 ```bash
 curl -s http://localhost/api/pages
 ```
 
 ### `GET /api/pages/{slug}`
-Returns a published page with blocks and attached media.
+Returns one published page with ordered blocks and media.
 
 ```bash
 curl -s http://localhost/api/pages/about
@@ -26,20 +26,24 @@ Response example:
   "meta_description": "Полеты в Анапе",
   "blocks": [
     {
-      "type": "text",
-      "content": {"text": "Добро пожаловать!"},
-      "media": []
-    },
-    {
-      "type": "image",
-      "content": {"caption": "Баннер"},
+      "type": "whyUs",
+      "content": {"title": "Почему выбирают нас"},
       "media": [
         {"type": "image", "url": "/uploads/banner.jpg", "alt_text": "Баннер"}
       ]
+    },
+    {
+      "type": "service",
+      "content": {"items": [{"title": "Тандем"}]},
+      "media": []
     }
   ]
 }
 ```
+
+## Supported block types
+
+`text, image, video, gallery, button, about, flyPoint, footer, formBlock, gift, menu, offer, recording, reviews, service, sertificate, startPoint, tarif, team, whyUs`
 
 ## Admin endpoints (web)
 

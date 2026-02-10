@@ -18,6 +18,7 @@ class MediaFactory extends Factory
             'type' => fake()->randomElement(['image', 'video']),
             'url' => fake()->imageUrl(),
             'alt_text' => fake()->sentence(4),
+            'display_order' => fake()->numberBetween(0, 20),
             'uploaded_by' => User::factory(),
             'updated_by' => null,
         ];

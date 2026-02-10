@@ -24,13 +24,17 @@ class BlockController extends Controller
 
     public function create(Page $page): View
     {
-        return view('admin.blocks.create', compact('page'));
+        $blockTypes = Block::allowedTypes();
+
+        return view('admin.blocks.create', compact('page', 'blockTypes'));
     }
 
     public function store(BlockStoreRequest $request, Page $page): RedirectResponse
     {
+        $data = $request->safe()->except('content_json');
+
         $page->blocks()->create([
-            ...$request->validated(),
+            ...$data,
             'display_order' => $request->integer('display_order', $page->blocks()->count()),
             'created_by' => $request->user()->id,
             'updated_by' => $request->user()->id,
@@ -43,15 +47,19 @@ class BlockController extends Controller
     {
         abort_unless($block->page_id === $page->id, 404);
 
-        return view('admin.blocks.edit', compact('page', 'block'));
+        $blockTypes = Block::allowedTypes();
+
+        return view('admin.blocks.edit', compact('page', 'block', 'blockTypes'));
     }
 
     public function update(BlockUpdateRequest $request, Page $page, Block $block): RedirectResponse
     {
         abort_unless($block->page_id === $page->id, 404);
 
+        $data = $request->safe()->except('content_json');
+
         $block->update([
-            ...$request->validated(),
+            ...$data,
             'updated_by' => $request->user()->id,
         ]);
 

@@ -19,6 +19,7 @@ class MediaStoreRequest extends FormRequest
             'type' => ['required', Rule::in(['image', 'video'])],
             'url' => ['required', 'string', 'max:2048'],
             'alt_text' => ['nullable', 'string', 'max:255'],
+            'display_order' => ['nullable', 'integer', 'min:0'],
         ];
     }
 }
