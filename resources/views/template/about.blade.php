@@ -15,24 +15,18 @@
     </svg>
     <div class="aboutWrapper">
         <div class="aboutContent glass">
-            <h2 class="subTitle">Летаем уже 28 лет</h2>
-            <p class="text">
-                Мечтаешь о незабываемых ощущениях свободного полёта? Мы – команда профессионалов!
-                Являемся официальным представителем аэроклуба «Южный ветер».  Летаем с 1998 года. Готовы
-                помочь
-                вам осуществить эту мечту!
-            </p>
-            <p class="text">
-                Наши опытные инструкторы позаботится о вашей безопасности и комфорте на протяжении всего
-                полёта.
-                Мы придерживаемся строгих стандартов безопасности, поэтому обновляем наши парапланы строго
-                придерживаясь авиационных регламентов. Ваша безопасность – наш главный приоритет!
-            </p>
-            <p class="text">
-                Полёты проводятся только при благоприятных погодных условиях, чтобы вы получили максимум
-                удовольствия!
-            </p>
+            <h2 class="subTitle">{{ $about->title }}</h2>
+            <div class="text">
+                {!! $about->desc !!}
+            </div>
         </div>
-        <img src="{{ asset('images\about.webp') }}" alt="About Paraplan Anapa" class="aboutImage">
+        @if (isset($about->video) && $about->video)
+            <video class="aboutVideo" autoplay muted loop playsinline data-src="{{ asset('storage/' . $about->video) }}"
+                preload="none">
+                <source type="video/webm">
+                Ваш браузер не поддерживает видео.
+            </video>
+        @endif
+
     </div>
 </div>

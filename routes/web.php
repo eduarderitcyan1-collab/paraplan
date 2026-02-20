@@ -1,54 +1,86 @@
 <?php
-
-use App\Http\Controllers\Admin\BlockController;
-use App\Http\Controllers\Admin\BlockItemController;
-use App\Http\Controllers\Admin\GalleryItemController;
-use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => view('welcome'))->name('welcome');
-Route::get('/kontakty/', fn () => view('contacts'))->name('contacts');
-Route::get('/about/', fn () => view('about-us'))->name('about');
-Route::get('/galereya/', fn () => view('gallery'))->name('gallery');
-Route::get('/uslugi/', fn () => view('service'))->name('service');
-Route::get('/stati/', fn () => view('stati'))->name('stati');
-Route::get('/stati-page/', fn () => view('stati-page'))->name('stati-page');
-Route::get('/obuchenie-poletam-na-paraplane/', fn () => view('training'))->name('training');
-Route::get('/marshruty/', fn () => view('marshruty'))->name('marshruty');
-Route::get('/marshrut-page/', fn () => view('marshrut-page'))->name('marshrut-page');
-Route::get('/chegem/', fn () => view('chegem'))->name('chegem');
+use App\Http\Controllers\Admin\WhyUsController;
+use App\Http\Controllers\Admin\TarifController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\SertificateController;
+use App\Http\Controllers\Admin\OfferController;
+use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\FlyPointController;
 
-Route::get('/dashboard', fn () => redirect()->route('admin.blocks.index'))
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+use App\Http\Controllers\ParaplanController;
+use App\Http\Controllers\DashboardController;
 
-Route::middleware('auth')->group(function (): void {
+Route::get('/', [ParaplanController::class, 'welcome'])->name('welcome');
+
+Route::get('/kontakty/', function () {
+    return view('contacts');
+})->name('contacts');
+
+Route::get('/about/', function () {
+    return view('about-us');
+})->name('about');
+
+Route::get('/galereya/', function () {
+    return view('gallery');
+})->name('gallery');
+
+Route::get('/uslugi', [ParaplanController::class, 'uslugi'])->name('service');
+
+
+Route::get('/stati/', function () {
+    return view('stati');
+})->name('stati');
+
+Route::get('/stati-page/', function () {
+    return view('stati-page');
+})->name('stati-page');
+
+Route::get('/obuchenie-poletam-na-paraplane/', function () {
+    return view('training');
+})->name('training');
+
+Route::get('/obuchenie-poletam-na-paraplane/', function () {
+    return view('training');
+})->name('training');
+
+Route::get('/marshruty/', function () {
+    return view('marshruty');
+})->name('marshruty');
+
+Route::get('/marshrut-page/', function () {
+    return view('marshrut-page');
+})->name('marshrut-page');
+
+Route::get('/chegem/', function () {
+    return view('chegem');
+})->name('chegem');
+
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::resource('whyUs', WhyUsController::class)->parameters([
+        'whyUs' => 'whyUs'
+    ]);
+    Route::resource('tarif', TarifController::class);
+    Route::resource('service', ServiceController::class);
+    Route::resource('team', TeamController::class);
+    Route::resource('sertificate', SertificateController::class);
+    Route::resource('offer', OfferController::class);
+    Route::resource('review', ReviewController::class);
+    Route::get('about/edit', [AboutController::class, 'edit'])
+        ->name('about.edit');
+    Route::put('about/edit', [AboutController::class, 'update'])
+        ->name('about.update');
+    Route::resource('flyPoint', FlyPointController::class);
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-Route::middleware(['auth', 'verified', 'role:admin,editor'])
-    ->prefix('admin')
-    ->as('admin.')
-    ->group(function (): void {
-        Route::resource('blocks', BlockController::class);
-        Route::post('blocks/reorder', [BlockController::class, 'reorder'])->name('blocks.reorder');
-
-        Route::prefix('blocks/{block}')->as('blocks.')->group(function (): void {
-            Route::resource('items', BlockItemController::class)->except(['show']);
-            Route::post('items/reorder', [BlockItemController::class, 'reorder'])->name('items.reorder');
-        });
-
-        Route::resource('gallery-items', GalleryItemController::class)->parameters(['gallery-items' => 'galleryItem'])->except(['show']);
-    });
-
-Route::middleware(['auth', 'verified', 'role:admin'])
-    ->prefix('admin')
-    ->as('admin.')
-    ->group(function (): void {
-        Route::resource('users', UserController::class)->only(['index', 'edit', 'update']);
-    });
 
 require __DIR__.'/auth.php';

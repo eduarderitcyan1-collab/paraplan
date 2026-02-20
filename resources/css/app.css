@@ -25,6 +25,10 @@
 @import "@fontsource/unbounded/800.css";
 @import "@fontsource/unbounded/900.css";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
     margin: 0;
     padding: 0;
@@ -389,9 +393,10 @@ body.modalOpen {
     box-shadow: 5px 5px 20px 0px #00000040;
 }
 
-.whyUs .whyUsWrapper .whyUsItem .whyUsIcon svg {
+.whyUs .whyUsWrapper .whyUsItem .whyUsIcon img {
     width: 75px;
     height: 75px;
+    object-fit: contain;
 }
 
 .whyUs .whyUsWrapper .whyUsItem .whyUsTitle {
@@ -425,7 +430,13 @@ body.modalOpen {
     text-align: left;
 }
 
-.about .aboutImage {
+.about .aboutWrapper .aboutContent .text {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.about .aboutVideo {
     width: 100%;
     height: 375px;
     border-radius: 20px;
@@ -574,7 +585,6 @@ body.modalOpen {
     z-index: 1;
 }
 
-
 .serviceSwiper .swiper-wrapper .swiper-slide .serviceWrapper .serviceTitle {
     font-family: var(--nunito);
     font-size: var(--sizeH3);
@@ -598,7 +608,6 @@ body.modalOpen {
     border-radius: 100px;
     transform: rotate(-2.5deg);
     transition: 0.8s;
-
 }
 
 .serviceSwiper .swiper-wrapper .swiper-slide .serviceLink {
@@ -623,15 +632,12 @@ body.modalOpen {
     z-index: 0;
 }
 
-.serviceSwiper .swiper-wrapper .swiper-slide:nth-child(3),
-.serviceSwiper .swiper-wrapper .swiper-slide:nth-child(4) {
-    justify-content: flex-end;
-}
-
-.serviceSwiper .swiper-wrapper .swiper-slide:nth-child(3) .serviceWrapper .servicePrice,
-.serviceSwiper .swiper-wrapper .swiper-slide:nth-child(4) .serviceWrapper .servicePrice {
+.serviceSwiper .swiper-wrapper .swiper-slide:not(:has(.serviceLink)),
+.serviceSwiper .swiper-wrapper .swiper-slide:not(:has(.serviceLink)) .serviceWrapper .servicePrice {
+    justify-content: flex-end !important;
     color: var(--white);
     background-color: var(--violet);
+    border-radius: 100px;
 }
 
 .service .serviceOther {
@@ -711,19 +717,21 @@ body.modalOpen {
     flex-direction: column;
     gap: 10px;
     padding: 25px;
-    height: 600px;
+    height: 500px;
 }
 
 .teamSwiper .swiper-wrapper .swiper-slide.glass .teamPhoto {
     position: absolute;
     top: auto;
     bottom: 12px;
-    left: 0;
-    width: 100%;
-    height: 475px;
+    left: auto;
+    right: 50%;
+    width: calc(100% - 25px);
+    height: 450px;
     object-fit: cover;
     border-radius: 20px;
     z-index: -2;
+    transform: translateX(50%);
 }
 
 .teamSwiper .swiper-wrapper .swiper-slide.glass .teamContent {
@@ -813,11 +821,11 @@ body.modalOpen {
 }
 
 .sertificate .sertificateSwiper .swiper-wrapper .swiper-slide .sertificatePhotoWrapper .sertificatePhoto {
-    width: 50%;
-    height: 50%;
+    width: 70%;
+    height: 350px;
     object-fit: cover;
     border-radius: 20px;
-    transform: rotate(2.5deg);
+    z-index: 1;
 }
 
 .sertificate .sertificateSwiper .swiper-wrapper .swiper-slide .sertificateTitle {
@@ -958,11 +966,11 @@ body.modalOpen {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: auto;
     margin-top: -50px;
     margin-right: 25px;
     gap: 10px;
-    padding: 10px;
+    padding: 10px 30px;
     background: rgba(255, 255, 255, 0.35) !important;
     font-family: var(--mulish);
     font-size: var(--sizeText);
@@ -1498,7 +1506,7 @@ img {
         padding: 10px;
     }
 
-    .whyUs .whyUsWrapper .whyUsItem .whyUsIcon svg {
+    .whyUs .whyUsWrapper .whyUsItem .whyUsIcon img {
         width: 50px;
         height: 50px;
     }
@@ -1551,16 +1559,6 @@ img {
         width: 100%;
     }
 
-    /* Команда */
-    .teamSwiper .swiper-wrapper .swiper-slide.glass {
-        padding: 25px;
-        height: 500px;
-    }
-
-    .teamSwiper .swiper-wrapper .swiper-slide.glass .teamPhoto {
-        height: 100%;
-    }
-
     /* Оффер */
     .offer .offerWrapper .offerItem .offerPhotoWrapper:before {
         height: 70%;
@@ -1607,23 +1605,6 @@ img {
 
     .flyPoint .flyPointContent .flyPointPhoto {
         height: 300px;
-    }
-
-    .flyPoint .flyPointContent .flyPointName.glass {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        width: 50%;
-        margin-top: -50px;
-        margin-right: 25px;
-        gap: 10px;
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.35) !important;
-        font-family: var(--mulish);
-        font-size: var(--sizeText);
-        color: var(--violet);
-        font-weight: 600;
     }
 
     .flyPoint .flyPointContentOther {
@@ -1767,7 +1748,7 @@ img {
         padding: 10px;
     }
 
-    .whyUs .whyUsWrapper .whyUsItem .whyUsIcon svg {
+    .whyUs .whyUsWrapper .whyUsItem .whyUsIcon img {
         width: 35px;
         height: 35px;
     }
@@ -1790,7 +1771,7 @@ img {
         margin-bottom: -35px;
     }
 
-    .about .aboutImage {
+    .about .aboutVideo {
         height: 100%;
     }
 
@@ -1875,8 +1856,9 @@ img {
     }
 
     .teamSwiper .swiper-wrapper .swiper-slide.glass .teamPhoto {
+        height: 250px;
+        width: calc(100% - 10px);
         object-fit: cover;
-        border-radius: 30px;
     }
 
     .teamSwiper .swiper-wrapper .swiper-slide.glass:before {
@@ -1909,6 +1891,11 @@ img {
     .offer .offerWrapper .offerItem .offerPrice {
         font-size: var(--sizeText);
         padding: 5px;
+    }
+
+    /* Сертификат */
+    .sertificate .sertificateSwiper .swiper-wrapper .swiper-slide .sertificatePhotoWrapper .sertificatePhoto {
+        height: 300px;
     }
 
     /* Форма */
@@ -1958,20 +1945,7 @@ img {
     }
 
     .flyPoint .flyPointContent .flyPointName.glass {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        width: 50%;
-        margin-top: -50px;
-        margin-right: 25px;
-        gap: 10px;
         padding: 10px;
-        background: rgba(255, 255, 255, 0.35) !important;
-        font-family: var(--mulish);
-        font-size: var(--sizeText);
-        color: var(--violet);
-        font-weight: 600;
     }
 
     .flyPoint .flyPointContentOther {

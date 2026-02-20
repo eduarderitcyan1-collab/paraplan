@@ -6,6 +6,71 @@ import "swiper/css/pagination";
 
 import Swiper from "swiper/bundle";
 
+import tinymce from "tinymce/tinymce";
+
+// темы и иконки
+import "tinymce/themes/silver";
+import "tinymce/icons/default";
+
+// модели (обязательные!)
+import "tinymce/models/dom";
+
+// плагины
+import "tinymce/plugins/link";
+import "tinymce/plugins/lists";
+import "tinymce/plugins/code";
+import "tinymce/plugins/table";
+import "tinymce/plugins/media";
+
+window.initTiny = function () {
+    if (tinymce.get("desc-editor")) {
+        tinymce.get("desc-editor").remove();
+    }
+
+    tinymce.init({
+        selector: "#desc-editor",
+        license_key: "gpl",
+        height: 300,
+        menubar: false,
+        plugins: "link lists code",
+        toolbar: "undo redo | bold italic | bullist numlist | link | code",
+    });
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+    window.initTiny();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const videos = document.querySelectorAll("video[data-src]");
+
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+            (entries, obs) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const video = entry.target;
+                        const source = video.querySelector("source");
+                        source.src = video.dataset.src;
+                        video.load();
+                        obs.unobserve(video);
+                    }
+                });
+            },
+            { threshold: 0.25 },
+        );
+
+        videos.forEach((video) => observer.observe(video));
+    } else {
+        // fallback для старых браузеров
+        videos.forEach((video) => {
+            const source = video.querySelector("source");
+            source.src = video.dataset.src;
+            video.load();
+        });
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
     function formatPhone(value) {
         let digits = value.replace(/\D/g, "").slice(0, 11);

@@ -2,41 +2,15 @@
     <h2 class="subTitle">Наша команда</h2>
     <div class="swiper teamSwiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide glass">
-                <img src="{{ asset('images\team.webp') }}" alt="Team Member" class="teamPhoto">
-                <div class="teamContent">
-                    <div class="teamName">Александр Счастливый</div>
-                    <div class="teamPosition glass">инструктор</div>
+            @foreach ($team as $member)
+                <div class="swiper-slide glass">
+                    <img src="{{ asset('storage/' . $member->img) }}" alt="Team Member" class="teamPhoto">
+                    <div class="teamContent">
+                        <div class="teamName">{{ $member->title }}</div>
+                        <div class="teamPosition glass">{{ $member->desc }}</div>
+                    </div>
                 </div>
-            </div>
-            <div class="swiper-slide glass">
-                <img src="{{ asset('images\team.webp') }}" alt="Team Member" class="teamPhoto">
-                <div class="teamContent">
-                    <div class="teamName">Александр Счастливый</div>
-                    <div class="teamPosition glass">инструктор</div>
-                </div>
-            </div>
-            <div class="swiper-slide glass">
-                <img src="{{ asset('images\team.webp') }}" alt="Team Member" class="teamPhoto">
-                <div class="teamContent">
-                    <div class="teamName">Александр Счастливый</div>
-                    <div class="teamPosition glass">инструктор</div>
-                </div>
-            </div>
-            <div class="swiper-slide glass">
-                <img src="{{ asset('images\team.webp') }}" alt="Team Member" class="teamPhoto">
-                <div class="teamContent">
-                    <div class="teamName">Александр Счастливый</div>
-                    <div class="teamPosition glass">инструктор</div>
-                </div>
-            </div>
-            <div class="swiper-slide glass">
-                <img src="{{ asset('images\team.webp') }}" alt="Team Member" class="teamPhoto">
-                <div class="teamContent">
-                    <div class="teamName">Александр Счастливый</div>
-                    <div class="teamPosition glass">инструктор</div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <div class="swiperNavigation">
             <div class="swiper-button-prev glass">
