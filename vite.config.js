@@ -25,6 +25,7 @@ export default defineConfig({
                 "resources/js/team-swiper.js",
                 "resources/js/whyUs-swiper.js",
                 "resources/js/stories.js",
+                "resources/css/404.css",
             ],
             refresh: true,
         }),
