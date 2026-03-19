@@ -27,6 +27,7 @@ Route::get('/kontakty', function () {
 })->name('contacts');
 
 Route::get('/galereya', [ParaplanController::class, 'galereya'])->name('gallery');
+Route::get('/form', [ParaplanController::class, 'form'])->name('form');
 
 Route::get('/uslugi', [ParaplanController::class, 'uslugi'])->name('service');
 Route::get('/marshruty', [ParaplanController::class, 'marshruty'])->name('marshruty');

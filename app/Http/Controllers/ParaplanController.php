@@ -106,4 +106,10 @@ class ParaplanController extends Controller
 
         return view('gallery', compact('galleryItems'));
     }
+
+    public function form()
+    {
+
+        return view('gallery');
+    }
 }
