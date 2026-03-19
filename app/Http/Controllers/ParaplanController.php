@@ -17,7 +17,11 @@ use App\Models\Service;
 use App\Models\Story;
 use App\Models\Tarif;
 use App\Models\Team;
+use App\Models\TrainingMaterial;
 use App\Models\WhyUs;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Throwable;
 
 class ParaplanController extends Controller
 {
@@ -107,9 +111,42 @@ class ParaplanController extends Controller
         return view('gallery', compact('galleryItems'));
     }
 
-    public function form()
+    public function submitLead(Request $request)
     {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:50'],
+            'consent' => ['accepted'],
+        ]);
 
-        return view('gallery');
+        $recipients = config('mail.lead_recipients', []);
+
+        if (empty($recipients)) {
+            return back()
+                ->withInput()
+                ->withErrors(['mail' => 'Не настроены получатели заявок. Укажите MAIL_LEAD_RECIPIENTS в .env']);
+        }
+
+        try {
+            Mail::send('emails.lead', ['lead' => $validated, 'submittedAt' => now()], function ($message) use ($recipients) {
+                $message->to($recipients)
+                    ->subject('Новая заявка с сайта Paraplan');
+            });
+        } catch (Throwable $exception) {
+            report($exception);
+
+            return back()
+                ->withInput()
+                ->withErrors(['mail' => 'Не удалось отправить заявку. Попробуйте позже.']);
+        }
+
+        return back()->with('contact_form_success', 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.');
+    }
+
+    public function training()
+    {
+        $materials = TrainingMaterial::ordered()->get()->keyBy('key');
+
+        return view('training', compact('materials'));
     }
 }

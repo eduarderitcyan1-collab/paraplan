@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\StoryController;
 use App\Http\Controllers\Admin\StoryMediaController;
 use App\Http\Controllers\Admin\TarifController;
 use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\TrainingMaterialController;
 use App\Http\Controllers\Admin\WhyUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ParaplanController;
@@ -27,7 +28,8 @@ Route::get('/kontakty', function () {
 })->name('contacts');
 
 Route::get('/galereya', [ParaplanController::class, 'galereya'])->name('gallery');
-Route::get('/form', [ParaplanController::class, 'form'])->name('form');
+
+Route::post('/thanks', [ParaplanController::class, 'submitLead'])->name('lead.submit');
 
 Route::get('/uslugi', [ParaplanController::class, 'uslugi'])->name('service');
 Route::get('/marshruty', [ParaplanController::class, 'marshruty'])->name('marshruty');
@@ -38,9 +40,7 @@ Route::get('/stati-page', function () {
     return view('stati-page');
 })->name('stati-page');
 
-Route::get('/obuchenie-poletam-na-paraplane', function () {
-    return view('training');
-})->name('training');
+Route::get('/obuchenie-poletam-na-paraplane', [ParaplanController::class, 'training'])->name('training');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
@@ -65,6 +65,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('gallery', GalleryController::class);
     Route::resource('stories', StoryController::class);
     Route::resource('stories.media', StoryMediaController::class);
+    Route::resource('training-materials', TrainingMaterialController::class);
 
     Route::get('/marshrut/{slug}', [ParaplanController::class, 'routesShow'])->name('routes.show');
 

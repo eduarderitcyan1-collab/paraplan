@@ -33,6 +33,8 @@
             class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Галерея</a>
         <a href="{{ route('stories.index') }}"
             class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Истории</a>
+        <a href="{{ route('training-materials.index') }}"
+            class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Обучение (материалы)</a>
     </nav>
 
     @auth
