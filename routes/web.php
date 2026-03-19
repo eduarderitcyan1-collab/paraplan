@@ -39,9 +39,9 @@ Route::get('/obuchenie-poletam-na-paraplane', function () {
     return view('training');
 })->name('training');
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
     Route::resource('whyUs', WhyUsController::class)->parameters([
         'whyUs' => 'whyUs',
     ]);
