@@ -41,6 +41,7 @@ Route::get('/personal-data', [ParaplanController::class, 'personalData'])
 
 Route::get('/galereya', [ParaplanController::class, 'galereya'])->name('gallery');
 
+Route::get('/thanks', [ParaplanController::class, 'thanks'])->name('thanks');
 Route::post('/thanks', [ParaplanController::class, 'submitLead'])->name('lead.submit');
 
 Route::get('/uslugi', [ParaplanController::class, 'uslugi'])->name('service');

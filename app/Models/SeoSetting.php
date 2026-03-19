@@ -13,6 +13,7 @@ class SeoSetting extends Model
 
     protected $fillable = [
         'global_indexing_enabled',
+        'favicon_path',
     ];
 
     protected $casts = [

@@ -12,6 +12,7 @@
     @include('template.favicon')
     <title>{{ $pageSeo?->meta_title ?: $composedDefaultTitle }}</title>
     @include('components.seo-meta', ['seoMetaData' => $seoMetaData])
+    @vite(['resources/css/site-widgets.css', 'resources/js/site-widgets.js'])
 </head>
 
 <body>
@@ -20,6 +21,8 @@
     @endunless
     @yield('content')
     @include('template.footer')
+    @include('partials.arrow')
+    @include('partials.cookies')
     <div class="modalOverlay" id="modalOverlay"></div>
     <div class="modal" id="modal">
         <div class="modalContent">

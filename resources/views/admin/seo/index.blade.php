@@ -32,7 +32,7 @@
         <div class="bg-white shadow rounded-xl p-6">
             <h2 class="text-lg font-semibold text-gray-800 mb-4">Глобальная индексация</h2>
 
-            <form action="{{ route('seo-pages.global-indexing.update') }}" method="POST" class="space-y-4">
+            <form action="{{ route('seo-pages.global-indexing.update') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                 @csrf
                 @method('PUT')
 
@@ -48,6 +48,25 @@
                             {{ !old('global_indexing_enabled', $settings->global_indexing_enabled) ? 'checked' : '' }}>
                         Отключена
                     </label>
+                </div>
+
+                <div class="space-y-2">
+                    <p class="text-sm font-medium text-gray-700">Favicon сайта</p>
+                    <input type="file" name="favicon_file" accept=".ico,image/x-icon,image/vnd.microsoft.icon,image/png,image/svg+xml,image/webp"
+                        class="w-full border border-gray-300 rounded-lg p-2 text-sm">
+                    <p class="text-xs text-gray-500">Поддерживаются форматы: ICO, PNG, SVG, WebP. Максимум 1 МБ.</p>
+
+                    @if (!empty($settings->favicon_path))
+                        <div class="flex items-center gap-3 mt-2">
+                            <img src="{{ asset('storage/' . $settings->favicon_path) }}" alt="Текущий favicon" class="w-8 h-8 rounded border border-gray-200 object-contain bg-white">
+                            <span class="text-xs text-gray-500">Текущий favicon активен на сайте.</span>
+                        </div>
+
+                        <label class="inline-flex items-center gap-2 text-sm text-gray-700 mt-2">
+                            <input type="checkbox" name="remove_favicon" value="1">
+                            Удалить текущий favicon
+                        </label>
+                    @endif
                 </div>
 
                 <div>

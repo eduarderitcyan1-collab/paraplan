@@ -108,13 +108,34 @@ class SeoPageController extends Controller
 
     public function updateGlobalIndexing(Request $request)
     {
+        $validated = $request->validate([
+            'global_indexing_enabled' => ['required', 'boolean'],
+            'favicon_file' => ['nullable', 'file', 'mimetypes:image/x-icon,image/vnd.microsoft.icon,image/png,image/svg+xml,image/webp', 'max:1024'],
+            'remove_favicon' => ['nullable', 'boolean'],
+        ], [
+            'favicon_file.mimetypes' => 'Favicon должен быть в формате ICO, PNG, SVG или WebP.',
+            'favicon_file.max' => 'Размер favicon не должен превышать 1 МБ.',
+        ]);
+
         $settings = SeoSetting::query()->firstOrCreate([], [
             'global_indexing_enabled' => true,
         ]);
 
-        $settings->update([
-            'global_indexing_enabled' => $request->boolean('global_indexing_enabled'),
-        ]);
+        if (($validated['remove_favicon'] ?? false) && $settings->favicon_path) {
+            Storage::disk('public')->delete($settings->favicon_path);
+            $settings->favicon_path = null;
+        }
+
+        if ($request->hasFile('favicon_file')) {
+            if ($settings->favicon_path) {
+                Storage::disk('public')->delete($settings->favicon_path);
+            }
+
+            $settings->favicon_path = $request->file('favicon_file')->store('seo/favicon', 'public');
+        }
+
+        $settings->global_indexing_enabled = (bool) $validated['global_indexing_enabled'];
+        $settings->save();
 
         return redirect()->route('seo-pages.index')->with('success', 'Глобальная индексация обновлена.');
     }

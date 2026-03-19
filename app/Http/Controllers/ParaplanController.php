@@ -23,7 +23,9 @@ use App\Models\Team;
 use App\Models\TrainingMaterial;
 use App\Models\WhyUs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Throwable;
 
 class ParaplanController extends Controller
@@ -118,8 +120,19 @@ class ParaplanController extends Controller
         return view('gallery', compact('galleryItems'));
     }
 
+    public function thanks(Request $request)
+    {
+        if (! $request->session()->has('lead_submitted')) {
+            return redirect()->route('welcome');
+        }
+
+        return view('thanks');
+    }
+
     public function submitLead(Request $request)
     {
+        $leadRequestId = (string) Str::uuid();
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:50'],
@@ -128,7 +141,22 @@ class ParaplanController extends Controller
 
         $recipients = config('mail.lead_recipients', []);
 
+        Log::channel('mail')->info('Lead submission received', [
+            'lead_request_id' => $leadRequestId,
+            'mailer' => config('mail.default'),
+            'recipient_count' => count($recipients),
+            'recipients' => $recipients,
+            'ip' => $request->ip(),
+            'user_agent' => (string) $request->userAgent(),
+            'name' => $validated['name'] ?? null,
+            'phone' => $validated['phone'] ?? null,
+        ]);
+
         if (empty($recipients)) {
+            Log::channel('mail')->warning('Lead submission skipped: recipients are not configured', [
+                'lead_request_id' => $leadRequestId,
+            ]);
+
             return back()
                 ->withInput()
                 ->withErrors(['mail' => 'Не настроены получатели заявок. Укажите MAIL_LEAD_RECIPIENTS в .env']);
@@ -139,7 +167,20 @@ class ParaplanController extends Controller
                 $message->to($recipients)
                     ->subject('Новая заявка с сайта Paraplan');
             });
+
+            Log::channel('mail')->info('Lead email send call finished without exception', [
+                'lead_request_id' => $leadRequestId,
+                'mailer' => config('mail.default'),
+            ]);
         } catch (Throwable $exception) {
+            Log::channel('mail')->error('Lead email send failed', [
+                'lead_request_id' => $leadRequestId,
+                'mailer' => config('mail.default'),
+                'exception_class' => $exception::class,
+                'exception_message' => $exception->getMessage(),
+                'exception_code' => $exception->getCode(),
+            ]);
+
             report($exception);
 
             return back()
@@ -147,7 +188,10 @@ class ParaplanController extends Controller
                 ->withErrors(['mail' => 'Не удалось отправить заявку. Попробуйте позже.']);
         }
 
-        return back()->with('contact_form_success', 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.');
+        return redirect()
+            ->route('thanks')
+            ->with('lead_submitted', true)
+            ->with('contact_form_success', 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.');
     }
 
     public function training()
