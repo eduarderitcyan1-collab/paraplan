@@ -30,10 +30,13 @@ window.initTiny = function () {
     tinymce.init({
         selector: "#desc-editor",
         license_key: "gpl",
-        height: 300,
+        height: 500,
         menubar: false,
         plugins: "link lists code",
-        toolbar: "undo redo | bold italic | bullist numlist | link | code",
+        toolbar:
+            "undo redo | blocks | bold italic | bullist numlist | link | code",
+        block_formats:
+            "Параграф=p; Заголовок H1=h1; Заголовок H2=h2; Заголовок H3=h3; Заголовок H4=h4; Заголовок H5=h5; Заголовок H6=h6",
     });
 };
 
@@ -174,42 +177,46 @@ function setRealVh() {
 }
 setRealVh();
 
-const modalButtons = document.querySelectorAll(".modalButton");
-const modal = document.getElementById("modal");
-const overlay = document.getElementById("modalOverlay");
-const closeBtn = document.getElementById("modalClose");
+document.addEventListener("DOMContentLoaded", () => {
+    const modalButtons = document.querySelectorAll(".modalButton");
+    const modal = document.getElementById("modal");
+    const overlay = document.getElementById("modalOverlay");
+    const closeBtn = document.getElementById("modalClose");
 
-function openModal() {
-    modal.classList.add("show");
-    overlay.classList.add("show");
-    document.body.classList.add("modalOpen");
-}
+    if (!modal || !overlay || !closeBtn) return;
 
-function closeModal() {
-    modal.classList.remove("show");
-    overlay.classList.remove("show");
-    document.body.classList.remove("modalOpen");
-}
+    function openModal() {
+        modal.classList.add("show");
+        overlay.classList.add("show");
+        document.body.classList.add("modalOpen");
+    }
 
-modalButtons.forEach((button) => {
-    button.addEventListener("click", function (e) {
-        e.stopPropagation();
-        openModal();
+    function closeModal() {
+        modal.classList.remove("show");
+        overlay.classList.remove("show");
+        document.body.classList.remove("modalOpen");
+    }
+
+    modalButtons.forEach((button) => {
+        button.addEventListener("click", function (e) {
+            e.stopPropagation();
+            openModal();
+        });
     });
-});
 
-closeBtn.addEventListener("click", closeModal);
+    closeBtn.addEventListener("click", closeModal);
 
-overlay.addEventListener("click", function (e) {
-    if (e.target === overlay) {
-        closeModal();
-    }
-});
+    overlay.addEventListener("click", function (e) {
+        if (e.target === overlay) {
+            closeModal();
+        }
+    });
 
-document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-        closeModal();
-    }
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            closeModal();
+        }
+    });
 });
 
 import GLightbox from "glightbox";
@@ -219,4 +226,29 @@ document.addEventListener("DOMContentLoaded", () => {
     GLightbox({
         selector: ".glightbox",
     });
+});
+
+import Sortable from "sortablejs";
+
+document.addEventListener("DOMContentLoaded", () => {
+    const gallery = document.getElementById("gallery-container");
+
+    if (gallery) {
+        new Sortable(gallery, {
+            animation: 150,
+            ghostClass: "opacity-30",
+            onEnd: function () {
+                const items = gallery.querySelectorAll("[data-id]");
+
+                items.forEach((el, index) => {
+                    const input = el.querySelector(
+                        'input[name="gallery_order[]"]',
+                    );
+                    if (input) {
+                        input.value = el.dataset.id;
+                    }
+                });
+            },
+        });
+    }
 });

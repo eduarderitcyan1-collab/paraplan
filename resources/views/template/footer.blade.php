@@ -29,7 +29,7 @@
                 <div class="menuList">
                     <a href="{{ route('service') }}" class="menuLink">Услуги</a>
                     <a href="{{ route('training') }}" class="menuLink">Обучение</a>
-                    <a href="{{ route('chegem') }}" class="menuLink">Чегем</a>
+                    <a href="{{ route('routes.show', $routsMain->slug) }}" class="menuLink">{{ $routsMain->title }}</a>
                     <a href="{{ route('about') }}" class="menuLink">О нас</a>
                     <a href="{{ route('gallery') }}" class="menuLink">Галерея</a>
                     <a href="{{ route('stati') }}" class="menuLink">Статьи</a>

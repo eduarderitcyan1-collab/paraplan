@@ -11,6 +11,10 @@ use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\FlyPointController;
+use App\Http\Controllers\Admin\RouteController;
+use App\Http\Controllers\Admin\RoutsContentController;
+use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\GalleryController;
 
 use App\Http\Controllers\ParaplanController;
 use App\Http\Controllers\DashboardController;
@@ -21,20 +25,14 @@ Route::get('/kontakty/', function () {
     return view('contacts');
 })->name('contacts');
 
-Route::get('/about/', function () {
-    return view('about-us');
-})->name('about');
-
 Route::get('/galereya/', function () {
     return view('gallery');
 })->name('gallery');
 
 Route::get('/uslugi', [ParaplanController::class, 'uslugi'])->name('service');
-
-
-Route::get('/stati/', function () {
-    return view('stati');
-})->name('stati');
+Route::get('/marshruty', [ParaplanController::class, 'marshruty'])->name('marshruty');
+Route::get('/stati', [ParaplanController::class, 'stati'])->name('stati');
+Route::get('/about', [ParaplanController::class, 'about'])->name('about');
 
 Route::get('/stati-page/', function () {
     return view('stati-page');
@@ -43,22 +41,6 @@ Route::get('/stati-page/', function () {
 Route::get('/obuchenie-poletam-na-paraplane/', function () {
     return view('training');
 })->name('training');
-
-Route::get('/obuchenie-poletam-na-paraplane/', function () {
-    return view('training');
-})->name('training');
-
-Route::get('/marshruty/', function () {
-    return view('marshruty');
-})->name('marshruty');
-
-Route::get('/marshrut-page/', function () {
-    return view('marshrut-page');
-})->name('marshrut-page');
-
-Route::get('/chegem/', function () {
-    return view('chegem');
-})->name('chegem');
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
@@ -77,6 +59,14 @@ Route::middleware('auth')->group(function () {
     Route::put('about/edit', [AboutController::class, 'update'])
         ->name('about.update');
     Route::resource('flyPoint', FlyPointController::class);
+    Route::resource('route', RouteController::class);
+    Route::resource('routsContent', RoutsContentController::class);
+    Route::resource('articles', ArticleController::class);
+    Route::resource('gallery', GalleryController::class);
+
+    Route::get('/marshrut/{slug}', [ParaplanController::class, 'routesShow'])->name('routes.show');
+
+    Route::get('/stati/{slug}', [ParaplanController::class, 'statiShow'])->name('stati.show');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

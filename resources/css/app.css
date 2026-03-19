@@ -95,6 +95,7 @@ body {
     text-transform: uppercase;
 }
 
+
 .subTitle {
     font-family: var(--nunito);
     font-size: var(--sizeH2);
@@ -261,6 +262,10 @@ body.modalOpen {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.siteHeader .container .pageTitleWrapper .pageTitle {
+    text-align: left;
 }
 
 .siteHeader .container .pageTitleWrapper .pageTitleContent .breadcrumbs {

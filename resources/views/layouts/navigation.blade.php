@@ -23,6 +23,12 @@
         <a href="{{ route('about.edit') }}" class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">О нас</a>
         <a href="{{ route('flyPoint.index') }}" class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Точки
             полетов</a>
+        <a href="{{ route('route.index') }}"
+            class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Маршруты</a>
+        <a href="{{ route('routsContent.index') }}"
+            class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Содержание маршрутов</a>
+        <a href="{{ route('articles.index') }}"
+            class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Статьи</a>
     </nav>
 
     @auth

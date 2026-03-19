@@ -13,7 +13,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     padding: 25px;
     gap: 25px;
     height: 500px;
@@ -72,7 +72,12 @@
     gap: 14.400px !important;
 }
 
-.routePageContent .subTitle {
+.routePageContent h2 {
+    font-size: var(--sizeH2);
+    text-align: left;
+}
+
+.routePageContent h3 {
     font-size: var(--sizeH3);
     text-align: left;
 }
