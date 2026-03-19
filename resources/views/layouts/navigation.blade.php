@@ -1,4 +1,4 @@
-<aside class="w-64 bg-white shadow-md min-h-screen fixed left-0 top-0 flex flex-col">
+<aside class="w-64 bg-white shadow-md h-screen fixed left-0 top-0 flex flex-col overflow-hidden">
     <a href="{{ route('welcome') }}" class="flex justify-center px-6 py-4 border-b" style="text-align: left;">
         <img src="{{ asset('/images/logo/logo.svg') }}" alt="Logo" class="w-20 h-auto">
     </a>
@@ -35,10 +35,16 @@
             class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Истории</a>
         <a href="{{ route('training-materials.index') }}"
             class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Обучение (материалы)</a>
+        <a href="{{ route('faq.index') }}"
+            class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Вопрос-ответ</a>
+        <a href="{{ route('seo-pages.index') }}"
+            class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">SEO</a>
+        <a href="{{ route('legal-pages.index') }}"
+            class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Юридические страницы</a>
     </nav>
 
     @auth
-        <div class="px-4 py-4 border-t">
+        <div class="px-4 py-4 border-t shrink-0 bg-white">
             <span class="block text-sm text-gray-600 mb-2">{{ auth()->user()->name }}</span>
             <a href="{{ route('profile.edit') }}"
                 class="block text-sm text-gray-700 hover:text-indigo-700 mb-2">Профиль</a>

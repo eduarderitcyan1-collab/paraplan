@@ -1,10 +1,17 @@
 <!DOCTYPE html>
+@php
+    $seoMetaData = \App\Support\SeoMetaResolver::resolve(request());
+    $pageSeo = $seoMetaData['page'];
+    $defaultTitle = trim($__env->yieldContent('title'));
+    $composedDefaultTitle = $defaultTitle !== '' ? $defaultTitle . ' | Параплан Анапа' : 'Параплан Анапа';
+@endphp
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @include('template.favicon')
-    <title>@yield('title') | Параплан Анапа</title>
+    <title>{{ $pageSeo?->meta_title ?: $composedDefaultTitle }}</title>
+    @include('components.seo-meta', ['seoMetaData' => $seoMetaData])
 </head>
 
 <body>

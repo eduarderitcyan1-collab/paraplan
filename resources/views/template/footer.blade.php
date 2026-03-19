@@ -11,16 +11,18 @@
                     официальным представителем аэроклуба «Южный ветер».  Летаем с 1998 года. Готовы помочь вам
                     осуществить
                     эту мечту!</p>
-                <a href="/" class="text">© Copyright параплан-анапа.рф - {{ date('Y') }}</a>
+                <a href="/" class="text">© Все права защищены параплан-анапа.рф - {{ date('Y') }}</a>
                 <div class="legalInfo">
-                    <a href="#" class="legalLink text" target="_blank" rel="nofollow">Политика
-                        конфиденциальности</a>
-                    <a href="#" class="legalLink text" target="_blank" rel="nofollow">Согласие на обработку
-                        персональных
-                        данных</a>
+                    <a href="{{ route('privacy-policy') }}" class="legalLink text" target="_blank" rel="nofollow noopener noreferrer">
+                        Политика конфиденциальности
+                    </a>
+
+                    <a href="{{ route('personal-data') }}" class="legalLink text" target="_blank" rel="nofollow noopener noreferrer">
+                        Согласие на обработку персональных данных
+                    </a>
                     <a href="https://sumnikoff.ru" class="legalLink text" target="_blank">Создание и продвижение сайтов
-                        Sumnikoff
-                        IT Group</a>
+                        ИТ Сумникофф
+                    </a>
                 </div>
             </div>
         </div>

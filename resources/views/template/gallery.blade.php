@@ -2,24 +2,17 @@
     <h2 class="subTitle">Фотогалерея</h2>
     <div class="swiper gallerySwiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <img src="{{ asset('images\flypoint.webp') }}" alt="Gallery Image" class="galleryPhoto">
-            </div>
-            <div class="swiper-slide">
-                <img src="{{ asset('images\flypoint.webp') }}" alt="Gallery Image" class="galleryPhoto">
-            </div>
-            <div class="swiper-slide">
-                <img src="{{ asset('images\flypoint.webp') }}" alt="Gallery Image" class="galleryPhoto">
-            </div>
-            <div class="swiper-slide">
-                <img src="{{ asset('images\flypoint.webp') }}" alt="Gallery Image" class="galleryPhoto">
-            </div>
-            <div class="swiper-slide">
-                <img src="{{ asset('images\flypoint.webp') }}" alt="Gallery Image" class="galleryPhoto">
-            </div>
-            <div class="swiper-slide">
-                <img src="{{ asset('images\flypoint.webp') }}" alt="Gallery Image" class="galleryPhoto">
-            </div>
+            @forelse ($gallery as $item)
+                <div class="swiper-slide">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="{{ asset('storage/' . $item->path) }}" alt="Gallery Image" class="galleryPhoto" loading="lazy">
+                </div>
+            @empty
+                <div class="swiper-slide">
+                    <div class="flex items-center justify-center h-40 text-gray-500">
+                        Фотографий пока нет.
+                    </div>
+                </div>
+            @endforelse
         </div>
         <div class="swiperNavigation">
             <div class="swiper-button-prev glass">

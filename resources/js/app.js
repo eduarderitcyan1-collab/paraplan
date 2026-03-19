@@ -26,6 +26,7 @@ window.initTiny = async function () {
                 import("tinymce/plugins/link"),
                 import("tinymce/plugins/lists"),
                 import("tinymce/plugins/code"),
+                import("tinymce/plugins/image"),
                 import("tinymce/plugins/table"),
                 import("tinymce/plugins/media"),
             ]);
@@ -45,11 +46,53 @@ window.initTiny = async function () {
         license_key: "gpl",
         height: 500,
         menubar: false,
-        plugins: "link lists code",
+        plugins: "link lists code image table media",
         toolbar:
-            "undo redo | blocks | bold italic | bullist numlist | link | code",
+            "undo redo | blocks | bold italic underline | alignleft aligncenter alignright | bullist numlist | link image media table | code",
         block_formats:
             "Параграф=p; Заголовок H1=h1; Заголовок H2=h2; Заголовок H3=h3; Заголовок H4=h4; Заголовок H5=h5; Заголовок H6=h6",
+        entity_encoding: "raw",
+        convert_urls: false,
+        relative_urls: false,
+        remove_script_host: false,
+        branding: false,
+        image_title: true,
+        automatic_uploads: true,
+        images_file_types: "jpg,jpeg,png,gif,webp",
+        images_upload_handler: (blobInfo) =>
+            new Promise((resolve, reject) => {
+                const formData = new FormData();
+                formData.append("file", blobInfo.blob(), blobInfo.filename());
+
+                fetch("/editor/upload", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN":
+                            document
+                                .querySelector('meta[name="csrf-token"]')
+                                ?.getAttribute("content") || "",
+                    },
+                    body: formData,
+                    credentials: "same-origin",
+                })
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Не удалось загрузить изображение");
+                        }
+
+                        return response.json();
+                    })
+                    .then((json) => {
+                        if (!json || typeof json.location !== "string") {
+                            throw new Error("Некорректный ответ сервера");
+                        }
+
+                        resolve(json.location);
+                    })
+                    .catch((error) => {
+                        reject(error.message || "Ошибка загрузки");
+                    });
+            }),
     });
 };
 
@@ -58,32 +101,48 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    const videos = document.querySelectorAll("video[data-src]");
+    const lazyVideos = document.querySelectorAll("video[data-src]");
+    const lazyImages = document.querySelectorAll("img[data-src]");
+
+    const loadMedia = (element) => {
+        if (!element) return;
+
+        if (element.tagName === "VIDEO") {
+            const source = element.querySelector("source");
+            if (source) {
+                source.src = element.dataset.src;
+                element.load();
+            }
+            return;
+        }
+
+        if (element.tagName === "IMG") {
+            element.src = element.dataset.src;
+            element.removeAttribute("data-src");
+            return;
+        }
+    };
 
     if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(
             (entries, obs) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        const video = entry.target;
-                        const source = video.querySelector("source");
-                        source.src = video.dataset.src;
-                        video.load();
-                        obs.unobserve(video);
+                        const media = entry.target;
+                        loadMedia(media);
+                        obs.unobserve(media);
                     }
                 });
             },
             { threshold: 0.25 },
         );
 
-        videos.forEach((video) => observer.observe(video));
+        lazyVideos.forEach((video) => observer.observe(video));
+        lazyImages.forEach((img) => observer.observe(img));
     } else {
         // fallback для старых браузеров
-        videos.forEach((video) => {
-            const source = video.querySelector("source");
-            source.src = video.dataset.src;
-            video.load();
-        });
+        lazyVideos.forEach((video) => loadMedia(video));
+        lazyImages.forEach((img) => loadMedia(img));
     }
 });
 
@@ -153,7 +212,7 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    $(".accordion-item").on("click", function () {
+    $(".accordion-title").on("click", function () {
         const $item = $(this).closest(".accordion-item");
         const isActive = $item.hasClass("active");
 
@@ -273,4 +332,44 @@ document.addEventListener("DOMContentLoaded", () => {
             },
         });
     }
+
+    const sortableLists = document.querySelectorAll("[data-sortable-list]");
+
+    sortableLists.forEach((list) => {
+        const sortUrl = list.getAttribute("data-sort-url");
+        if (!sortUrl) return;
+
+        new Sortable(list, {
+            animation: 150,
+            ghostClass: "opacity-30",
+            onEnd: async () => {
+                const ids = Array.from(list.querySelectorAll("[data-id]"))
+                    .map((row) => Number(row.getAttribute("data-id")))
+                    .filter((value) => Number.isInteger(value) && value > 0);
+
+                try {
+                    const response = await fetch(sortUrl, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN":
+                                document
+                                    .querySelector('meta[name="csrf-token"]')
+                                    ?.getAttribute("content") || "",
+                            Accept: "application/json",
+                        },
+                        body: JSON.stringify({ ids }),
+                        credentials: "same-origin",
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Не удалось сохранить порядок");
+                    }
+                } catch (error) {
+                    console.error(error);
+                    window.location.reload();
+                }
+            },
+        });
+    });
 });

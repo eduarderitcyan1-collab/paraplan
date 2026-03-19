@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\About;
 use App\Models\Article;
 use App\Models\ArticleGallery;
+use App\Models\Faq;
 use App\Models\FlyPoint;
 use App\Models\Gallery;
+use App\Models\HomeSeoInfo;
 use App\Models\Offer;
 use App\Models\Review;
 use App\Models\Route;
@@ -43,8 +45,11 @@ class ParaplanController extends Controller
             ->whereHas('media')
             ->latest()
             ->get();
+        $gallery = Gallery::ordered()->photos()->take(10)->get();
+        $faqs = Faq::ordered()->get();
+        $homeSeoInfo = HomeSeoInfo::query()->first();
 
-        return view('welcome', compact('whyUs', 'tarifs', 'services', 'team', 'sertificates', 'offers', 'reviews', 'about', 'flyPoints', 'routes', 'stories'));
+        return view('welcome', compact('whyUs', 'tarifs', 'services', 'team', 'sertificates', 'offers', 'reviews', 'about', 'flyPoints', 'routes', 'stories', 'gallery', 'faqs', 'homeSeoInfo'));
     }
 
     public function uslugi()
@@ -148,5 +153,27 @@ class ParaplanController extends Controller
         $materials = TrainingMaterial::ordered()->get()->keyBy('key');
 
         return view('training', compact('materials'));
+    }
+
+    public function privacyPolicy()
+    {
+        $page = \App\Models\LegalPage::forKey(\App\Models\LegalPage::KEY_PRIVACY);
+
+        if (! $page) {
+            abort(404);
+        }
+
+        return view('privacy-policy', compact('page'));
+    }
+
+    public function personalData()
+    {
+        $page = \App\Models\LegalPage::forKey(\App\Models\LegalPage::KEY_CONSENT);
+
+        if (! $page) {
+            abort(404);
+        }
+
+        return view('personal-data', compact('page'));
     }
 }
