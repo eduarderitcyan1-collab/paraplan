@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\Admin\RoutsContentController;
 use App\Http\Controllers\Admin\SertificateController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\StoryController;
+use App\Http\Controllers\Admin\StoryMediaController;
 use App\Http\Controllers\Admin\TarifController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\WhyUsController;
@@ -60,6 +62,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('routsContent', RoutsContentController::class);
     Route::resource('articles', ArticleController::class);
     Route::resource('gallery', GalleryController::class);
+    Route::resource('stories', StoryController::class);
+    Route::resource('stories.media', StoryMediaController::class);
 
     Route::get('/marshrut/{slug}', [ParaplanController::class, 'routesShow'])->name('routes.show');
 

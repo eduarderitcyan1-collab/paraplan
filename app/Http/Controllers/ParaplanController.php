@@ -14,6 +14,7 @@ use App\Models\RoutsContent;
 use App\Models\RoutsContentGallery;
 use App\Models\Sertificate;
 use App\Models\Service;
+use App\Models\Story;
 use App\Models\Tarif;
 use App\Models\Team;
 use App\Models\WhyUs;
@@ -32,8 +33,14 @@ class ParaplanController extends Controller
         $about = About::first();
         $flyPoints = FlyPoint::ordered()->get();
         $routes = Route::ordered()->get();
+        $stories = Story::query()
+            ->where('is_active', true)
+            ->with(['media' => fn ($query) => $query->orderBy('sort')->orderBy('id')])
+            ->whereHas('media')
+            ->latest()
+            ->get();
 
-        return view('welcome', compact('whyUs', 'tarifs', 'services', 'team', 'sertificates', 'offers', 'reviews', 'about', 'flyPoints', 'routes'));
+        return view('welcome', compact('whyUs', 'tarifs', 'services', 'team', 'sertificates', 'offers', 'reviews', 'about', 'flyPoints', 'routes', 'stories'));
     }
 
     public function uslugi()

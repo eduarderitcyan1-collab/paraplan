@@ -31,8 +31,8 @@
             class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Статьи</a>
         <a href="{{ route('gallery.index') }}"
             class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Галерея</a>
-        {{-- <a href="{{ route('istoria.index') }}"
-            class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Истории</a> --}}
+        <a href="{{ route('stories.index') }}"
+            class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Истории</a>
     </nav>
 
     @auth

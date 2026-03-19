@@ -1,6 +1,6 @@
     @extends('app')
     @section('title', 'Главная')
-    @vite(['resources/css/app.css', 'resources/css/welcome.css', 'resources/js/app.js', 'resources/js/whyUs-swiper.js', 'resources/js/tarif-swiper.js', 'resources/js/service-swiper.js', 'resources/js/team-swiper.js', 'resources/js/sertificate-swiper.js', 'resources/js/reviews-swiper.js', 'resources/js/flypoint-swiper.js', 'resources/js/gallery-swiper.js'])
+    @vite(['resources/css/app.css', 'resources/css/welcome.css', 'resources/js/app.js', 'resources/js/whyUs-swiper.js', 'resources/js/tarif-swiper.js', 'resources/js/service-swiper.js', 'resources/js/team-swiper.js', 'resources/js/sertificate-swiper.js', 'resources/js/reviews-swiper.js', 'resources/js/flypoint-swiper.js', 'resources/js/gallery-swiper.js', 'resources/js/stories.js'])
     @section('content')
         <div class="page">
             <div class="container banner">
@@ -18,56 +18,53 @@
         </div>
         <div class="page">
             <div class="container history" id="nextBlock">
-                <div class="historyWrapper">
-                    <div class="historyItem">
-                        <div class="historyImage">
-                            <img src="{{ asset('images\tarif.webp') }}" alt="History Paraplan Anapa">
+                @if ($stories->isNotEmpty())
+                    <div class="stories-container">
+                        <button class="nav-btn nav-prev" id="storiesNavPrev" type="button" aria-label="Предыдущие истории">
+                            &lt;
+                        </button>
+                        <button class="nav-btn nav-next" id="storiesNavNext" type="button" aria-label="Следующие истории">
+                            &gt;
+                        </button>
+
+                        <div class="stories-wrapper" id="storiesWrapper">
+                            @foreach ($stories as $story)
+                                <div class="story" style="--story-border: {{ $story->border_color ?: '#2ecc71' }};">
+                                    @foreach ($story->media as $media)
+                                        <div class="story-media" data-type="{{ $media->type }}"
+                                            data-src="{{ asset('storage/' . $media->path) }}"></div>
+                                    @endforeach
+
+                                    @if ($story->preview)
+                                        <img src="{{ asset('storage/' . $story->preview) }}" alt="{{ $story->title }}"
+                                            class="avatar">
+                                    @else
+                                        @php
+                                            $firstMedia = $story->media->first();
+                                            $firstPhoto = $story->media->firstWhere('type', 'photo');
+                                            $avatarPath = $firstPhoto?->path ?? ($firstMedia?->path);
+                                        @endphp
+
+                                        @if ($avatarPath)
+                                            <img src="{{ asset('storage/' . $avatarPath) }}" alt="{{ $story->title }}"
+                                                class="avatar">
+                                        @endif
+                                    @endif
+
+                                    <p class="historyTitle text">{{ $story->title }}</p>
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="historyTitle text">
-                            Летай в Кучугурах
-                        </div>
-                    </div>
-                    <div class="historyItem">
-                        <div class="historyImage">
-                            <img src="{{ asset('images\tarif.webp') }}" alt="History Paraplan Anapa">
-                        </div>
-                        <div class="historyTitle text">
-                            Летай в Кучугурах
-                        </div>
-                    </div>
-                    <div class="historyItem">
-                        <div class="historyImage">
-                            <img src="{{ asset('images\tarif.webp') }}" alt="History Paraplan Anapa">
-                        </div>
-                        <div class="historyTitle text">
-                            Летай в Кучугурах
-                        </div>
-                    </div>
-                    <div class="historyItem">
-                        <div class="historyImage">
-                            <img src="{{ asset('images\tarif.webp') }}" alt="History Paraplan Anapa">
-                        </div>
-                        <div class="historyTitle text">
-                            Летай в Кучугурах
-                        </div>
-                    </div>
-                    <div class="historyItem">
-                        <div class="historyImage">
-                            <img src="{{ asset('images\tarif.webp') }}" alt="History Paraplan Anapa">
-                        </div>
-                        <div class="historyTitle text">
-                            Летай в Кучугурах
-                        </div>
-                    </div>
-                    <div class="historyItem">
-                        <div class="historyImage">
-                            <img src="{{ asset('images\tarif.webp') }}" alt="History Paraplan Anapa">
-                        </div>
-                        <div class="historyTitle text">
-                            Летай в Кучугурах
+
+                        <div class="lightbox" id="storiesLightbox">
+                            <div class="lightbox-content">
+                                <div class="progress-container"></div>
+                                <div class="lightbox-media-container"></div>
+                                <button class="lightbox-close" type="button" aria-label="Закрыть историю">&times;</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
             @include('template.whyUs')
             @include('template.socialBlock')
