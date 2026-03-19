@@ -1,23 +1,14 @@
 /* Баннер */
+.page {
+    position: relative;
+    padding: 50px 100px;
+}
+
 .page:nth-child(1) {
-    background-image: url('/public/images/bannerBack.webp');
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: calc(var(--vh) * 100);
+    height: calc(var(--vh, 1vh) * 100);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-.page:nth-child(1):before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: calc(var(--vh) * 100);
-    background: rgba(0, 0, 0, 0.25) !important;
-    z-index: 0;
 }
 
 .page:nth-child(1) .banner {
@@ -36,12 +27,63 @@
     justify-content: space-between;
     align-items: center;
     gap: 25px;
+    z-index: 10;
 }
 
-.page {
-    padding: 50px 100px;
+.bannerMedia {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
 }
 
+.bannerMedia video,
+.bannerMedia div {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bannerMedia .bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+/* Для старого статического баннера fallback */
+.page:nth-child(1):before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 0;
+}
+
+/* Заголовок баннера */
+.pageTitle {
+    color: white;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+/* Ховер стрелка вниз */
+.page .bannerContent a svg {
+    transition: transform 0.3s ease;
+}
+
+.page .bannerContent a:hover svg {
+    transform: translateY(5px);
+}
 .siteHeader {
     display: block;
     padding: 0;

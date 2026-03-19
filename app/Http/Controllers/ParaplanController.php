@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\About;
 use App\Models\Article;
 use App\Models\ArticleGallery;
+use App\Models\Banner;
 use App\Models\Faq;
 use App\Models\FlyPoint;
 use App\Models\Gallery;
@@ -48,8 +49,9 @@ class ParaplanController extends Controller
         $gallery = Gallery::ordered()->photos()->take(10)->get();
         $faqs = Faq::ordered()->get();
         $homeSeoInfo = HomeSeoInfo::query()->first();
+        $banner = Banner::first();
 
-        return view('welcome', compact('whyUs', 'tarifs', 'services', 'team', 'sertificates', 'offers', 'reviews', 'about', 'flyPoints', 'routes', 'stories', 'gallery', 'faqs', 'homeSeoInfo'));
+        return view('welcome', compact('whyUs', 'tarifs', 'services', 'team', 'sertificates', 'offers', 'reviews', 'about', 'flyPoints', 'routes', 'stories', 'gallery', 'faqs', 'homeSeoInfo', 'banner'));
     }
 
     public function uslugi()

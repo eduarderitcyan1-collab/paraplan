@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\EditorUploadController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FlyPointController;
@@ -98,6 +99,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('banner/edit', [BannerController::class, 'edit'])->name('banner.edit');
+    Route::put('banner', [BannerController::class, 'update'])->name('banner.update');
 });
 
 require __DIR__.'/auth.php';
