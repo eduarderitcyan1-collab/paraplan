@@ -22,6 +22,7 @@ export default defineConfig({
                 "resources/js/tarif-swiper.js",
                 "resources/js/team-swiper.js",
                 "resources/js/whyUs-swiper.js",
+                "resources/js/stories.js",
             ],
             refresh: true,
         }),
