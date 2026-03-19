@@ -6,23 +6,36 @@ import "swiper/css/pagination";
 
 import Swiper from "swiper/bundle";
 
-import tinymce from "tinymce/tinymce";
+let tinyBootPromise;
 
-// темы и иконки
-import "tinymce/themes/silver";
-import "tinymce/icons/default";
+window.initTiny = async function () {
+    const editor = document.querySelector("#desc-editor");
 
-// модели (обязательные!)
-import "tinymce/models/dom";
+    // TinyMCE работает только в standards mode, на остальных страницах просто пропускаем инициализацию.
+    if (!editor || document.compatMode !== "CSS1Compat") {
+        return;
+    }
 
-// плагины
-import "tinymce/plugins/link";
-import "tinymce/plugins/lists";
-import "tinymce/plugins/code";
-import "tinymce/plugins/table";
-import "tinymce/plugins/media";
+    if (!tinyBootPromise) {
+        tinyBootPromise = (async () => {
+            const [{ default: tinymce }] = await Promise.all([
+                import("tinymce/tinymce"),
+                import("tinymce/themes/silver"),
+                import("tinymce/icons/default"),
+                import("tinymce/models/dom"),
+                import("tinymce/plugins/link"),
+                import("tinymce/plugins/lists"),
+                import("tinymce/plugins/code"),
+                import("tinymce/plugins/table"),
+                import("tinymce/plugins/media"),
+            ]);
 
-window.initTiny = function () {
+            return tinymce;
+        })();
+    }
+
+    const tinymce = await tinyBootPromise;
+
     if (tinymce.get("desc-editor")) {
         tinymce.get("desc-editor").remove();
     }
@@ -225,6 +238,15 @@ import "glightbox/dist/css/glightbox.css";
 document.addEventListener("DOMContentLoaded", () => {
     GLightbox({
         selector: ".glightbox",
+        autoplayVideos: true,
+        plyr: {
+            css: "https://cdn.plyr.io/3.6.12/plyr.css",
+            js: "https://cdn.plyr.io/3.6.12/plyr.js",
+            config: {
+                autoplay: false,
+                muted: false,
+            },
+        },
     });
 });
 

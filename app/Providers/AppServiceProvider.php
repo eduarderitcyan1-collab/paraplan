@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\Models\Route;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,7 +22,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Получаем основной контент маршрутов (или любые данные)
-        $routsMain = Route::main()->contents()->first(); // или ->all() для всех
+        // Route::main() может вернуть null, если нет "основного" маршрута
+        $routsMain = Route::main()?->contents()->first(); // или ->all() для всех
 
         // Делаем переменную доступной во всех view
         View::share('routsMain', $routsMain);

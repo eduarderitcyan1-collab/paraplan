@@ -15,9 +15,9 @@
     </svg>
     <div class="aboutWrapper">
         <div class="aboutContent glass">
-            <h2 class="subTitle">{{ $about->title }}</h2>
+            <h2 class="subTitle">{{  $about?->title }}</h2>
             <div class="text">
-                {!! $about->desc !!}
+                {!!  $about?->desc !!}
             </div>
         </div>
         @if (isset($about->video) && $about->video)

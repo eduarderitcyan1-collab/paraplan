@@ -37,7 +37,14 @@
                                 <td class="px-6 py-4 text-sm">{{ $item->id }}</td>
 
                                 <td class="px-6 py-4 text-sm">
-                                    {{ $item->path }}
+                                    @if ($item->type === 'photo')
+                                        <img src="{{ asset('storage/' . $item->path) }}" class="h-32 w-32 rounded-md object-cover" alt="">
+                                    @elseif ($item->type === 'video')
+                                        <video class="h-32 w-48 rounded-md" controls muted>
+                                            <source src="{{ asset('storage/' . $item->path) }}" type="video/webm">
+                                            Ваш браузер не поддерживает видео.
+                                        </video>
+                                    @endif
                                 </td>
 
                                 <td class="px-6 py-4 text-sm">
@@ -51,7 +58,7 @@
                                 <td class="px-6 py-4 text-right space-x-2">
 
                                     <a href="{{ route('gallery.edit', $item) }}"
-                                        class="px-3 py-1.5 bg-yellow-400 text-white text-xs rounded-md hover:bg-yellow-500">
+                                        class="inline-flex w-28 justify-center px-3 py-1.5 bg-yellow-400 text-white text-xs rounded-md hover:bg-yellow-500">
                                         Редактировать
                                     </a>
 
@@ -61,7 +68,7 @@
                                         @method('DELETE')
 
                                         <button onclick="return confirm('Удалить?')"
-                                            class="px-3 py-1.5 bg-red-600 text-white text-xs rounded-md hover:bg-red-700">
+                                            class="inline-flex w-28 justify-center px-3 py-1.5 bg-red-600 text-white text-xs rounded-md hover:bg-red-700">
                                             Удалить
                                         </button>
                                     </form>

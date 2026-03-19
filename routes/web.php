@@ -1,44 +1,41 @@
 <?php
+
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\FlyPointController;
+use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\OfferController;
+use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\RouteController;
+use App\Http\Controllers\Admin\RoutsContentController;
+use App\Http\Controllers\Admin\SertificateController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\TarifController;
+use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\WhyUsController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ParaplanController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Admin\WhyUsController;
-use App\Http\Controllers\Admin\TarifController;
-use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\Admin\TeamController;
-use App\Http\Controllers\Admin\SertificateController;
-use App\Http\Controllers\Admin\OfferController;
-use App\Http\Controllers\Admin\ReviewController;
-use App\Http\Controllers\Admin\AboutController;
-use App\Http\Controllers\Admin\FlyPointController;
-use App\Http\Controllers\Admin\RouteController;
-use App\Http\Controllers\Admin\RoutsContentController;
-use App\Http\Controllers\Admin\ArticleController;
-use App\Http\Controllers\Admin\GalleryController;
-
-use App\Http\Controllers\ParaplanController;
-use App\Http\Controllers\DashboardController;
-
 Route::get('/', [ParaplanController::class, 'welcome'])->name('welcome');
 
-Route::get('/kontakty/', function () {
+Route::get('/kontakty', function () {
     return view('contacts');
 })->name('contacts');
 
-Route::get('/galereya/', function () {
-    return view('gallery');
-})->name('gallery');
+Route::get('/galereya', [ParaplanController::class, 'galereya'])->name('gallery');
 
 Route::get('/uslugi', [ParaplanController::class, 'uslugi'])->name('service');
 Route::get('/marshruty', [ParaplanController::class, 'marshruty'])->name('marshruty');
 Route::get('/stati', [ParaplanController::class, 'stati'])->name('stati');
 Route::get('/about', [ParaplanController::class, 'about'])->name('about');
 
-Route::get('/stati-page/', function () {
+Route::get('/stati-page', function () {
     return view('stati-page');
 })->name('stati-page');
 
-Route::get('/obuchenie-poletam-na-paraplane/', function () {
+Route::get('/obuchenie-poletam-na-paraplane', function () {
     return view('training');
 })->name('training');
 
@@ -46,7 +43,7 @@ Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashb
 
 Route::middleware('auth')->group(function () {
     Route::resource('whyUs', WhyUsController::class)->parameters([
-        'whyUs' => 'whyUs'
+        'whyUs' => 'whyUs',
     ]);
     Route::resource('tarif', TarifController::class);
     Route::resource('service', ServiceController::class);

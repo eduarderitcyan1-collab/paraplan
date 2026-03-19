@@ -10,93 +10,27 @@
             </div>
 
             <div id="photo" class="tab-content active">
-                <a href="{{ asset('images/tarif.webp') }}" class="glightbox" data-gallery="photo">
-                    <img src="{{ asset('images/tarif.webp') }}" class="galleryItem">
-                </a>
-                <a href="{{ asset('images/tarif.webp') }}" class="glightbox" data-gallery="photo">
-                    <img src="{{ asset('images/tarif.webp') }}" class="galleryItem">
-                </a>
-                <a href="{{ asset('images/tarif.webp') }}" class="glightbox" data-gallery="photo">
-                    <img src="{{ asset('images/tarif.webp') }}" class="galleryItem">
-                </a>
-                <a href="{{ asset('images/tarif.webp') }}" class="glightbox" data-gallery="photo">
-                    <img src="{{ asset('images/tarif.webp') }}" class="galleryItem">
-                </a>
-                <a href="{{ asset('images/tarif.webp') }}" class="glightbox" data-gallery="photo">
-                    <img src="{{ asset('images/tarif.webp') }}" class="galleryItem">
-                </a>
-                <a href="{{ asset('images/tarif.webp') }}" class="glightbox" data-gallery="photo">
-                    <img src="{{ asset('images/tarif.webp') }}" class="galleryItem">
-                </a>
-                <a href="{{ asset('images/tarif.webp') }}" class="glightbox" data-gallery="photo">
-                    <img src="{{ asset('images/tarif.webp') }}" class="galleryItem">
-                </a>
-                <a href="{{ asset('images/tarif.webp') }}" class="glightbox" data-gallery="photo">
-                    <img src="{{ asset('images/tarif.webp') }}" class="galleryItem">
-                </a>
-                <a href="{{ asset('images/tarif.webp') }}" class="glightbox" data-gallery="photo">
-                    <img src="{{ asset('images/tarif.webp') }}" class="galleryItem">
-                </a>
-                <a href="{{ asset('images/tarif.webp') }}" class="glightbox" data-gallery="photo">
-                    <img src="{{ asset('images/tarif.webp') }}" class="galleryItem">
-                </a>
-                <a href="{{ asset('images/tarif.webp') }}" class="glightbox" data-gallery="photo">
-                    <img src="{{ asset('images/tarif.webp') }}" class="galleryItem">
-                </a>
-                <a href="{{ asset('images/tarif.webp') }}" class="glightbox" data-gallery="photo">
-                    <img src="{{ asset('images/tarif.webp') }}" class="galleryItem">
-                </a>
+                @forelse ($galleryItems->where('type', 'photo') as $item)
+                    <a href="{{ asset('storage/' . $item->path) }}" class="glightbox" data-gallery="photo" data-type="image">
+                        <img src="{{ asset('storage/' . $item->path) }}" class="galleryItem" alt="Фото галереи">
+                    </a>
+                @empty
+                    <div>Пока нет фото в галерее.</div>
+                @endforelse
             </div>
 
             <div id="video" class="tab-content">
-                <a href="https://rutube.ru/play/embed/35246fd5e14244d7b49a770a1add5c20" class="glightbox"
-                    data-gallery="video">
-                    <img src="{{ asset('images/about.webp') }}" class="galleryItem">
-                </a>
-                <a href="https://rutube.ru/play/embed/35246fd5e14244d7b49a770a1add5c20" class="glightbox"
-                    data-gallery="video">
-                    <img src="{{ asset('images/about.webp') }}" class="galleryItem">
-                </a>
-                <a href="https://rutube.ru/play/embed/35246fd5e14244d7b49a770a1add5c20" class="glightbox"
-                    data-gallery="video">
-                    <img src="{{ asset('images/about.webp') }}" class="galleryItem">
-                </a>
-                <a href="https://rutube.ru/play/embed/35246fd5e14244d7b49a770a1add5c20" class="glightbox"
-                    data-gallery="video">
-                    <img src="{{ asset('images/about.webp') }}" class="galleryItem">
-                </a>
-                <a href="https://rutube.ru/play/embed/35246fd5e14244d7b49a770a1add5c20" class="glightbox"
-                    data-gallery="video">
-                    <img src="{{ asset('images/about.webp') }}" class="galleryItem">
-                </a>
-                <a href="https://rutube.ru/play/embed/35246fd5e14244d7b49a770a1add5c20" class="glightbox"
-                    data-gallery="video">
-                    <img src="{{ asset('images/about.webp') }}" class="galleryItem">
-                </a>
-                <a href="https://rutube.ru/play/embed/35246fd5e14244d7b49a770a1add5c20" class="glightbox"
-                    data-gallery="video">
-                    <img src="{{ asset('images/about.webp') }}" class="galleryItem">
-                </a>
-                <a href="https://rutube.ru/play/embed/35246fd5e14244d7b49a770a1add5c20" class="glightbox"
-                    data-gallery="video">
-                    <img src="{{ asset('images/about.webp') }}" class="galleryItem">
-                </a>
-                <a href="https://rutube.ru/play/embed/35246fd5e14244d7b49a770a1add5c20" class="glightbox"
-                    data-gallery="video">
-                    <img src="{{ asset('images/about.webp') }}" class="galleryItem">
-                </a>
-                <a href="https://rutube.ru/play/embed/35246fd5e14244d7b49a770a1add5c20" class="glightbox"
-                    data-gallery="video">
-                    <img src="{{ asset('images/about.webp') }}" class="galleryItem">
-                </a>
-                <a href="https://rutube.ru/play/embed/35246fd5e14244d7b49a770a1add5c20" class="glightbox"
-                    data-gallery="video">
-                    <img src="{{ asset('images/about.webp') }}" class="galleryItem">
-                </a>
-                <a href="https://rutube.ru/play/embed/35246fd5e14244d7b49a770a1add5c20" class="glightbox"
-                    data-gallery="video">
-                    <img src="{{ asset('images/about.webp') }}" class="galleryItem">
-                </a>
+                @forelse ($galleryItems->where('type', 'video') as $item)
+                    <a href="{{ asset('storage/' . $item->path) }}" class="glightbox" data-gallery="video" data-type="video"
+                        data-width="100vw" data-height="100vh">
+                        <video class="galleryItem" muted playsinline preload="metadata">
+                            <source src="{{ asset('storage/' . $item->path) }}" type="video/webm">
+                            Ваш браузер не поддерживает видео.
+                        </video>
+                    </a>
+                @empty
+                    <div>Пока нет видео в галерее.</div>
+                @endforelse
             </div>
         </div>
     </div>
