@@ -9,6 +9,7 @@ use App\Models\Service;
 use App\Models\Team;
 use App\Models\Sertificate;
 use App\Models\Offer;
+use App\Models\Gallery;
 use App\Models\Review;
 
 class DashboardController extends Controller
@@ -22,7 +23,17 @@ class DashboardController extends Controller
         $sertificateCount = Sertificate::count();
         $offerCount = Offer::count();
         $reviewCount = Review::count();
+        $galleryCount = Gallery::count();
 
-        return view('dashboard', compact('offerCount', 'whyUsCount', 'tarifCount', 'serviceCount', 'teamCount', 'sertificateCount', 'reviewCount'));
+        return view('dashboard', compact(
+            'offerCount',
+            'whyUsCount',
+            'tarifCount',
+            'serviceCount',
+            'teamCount',
+            'sertificateCount',
+            'reviewCount',
+            'galleryCount',
+        ));
     }
 }

@@ -73,6 +73,15 @@
                 ])
             </a>
 
+            <!-- GALLERY -->
+            <a href="{{ route('gallery.index') }}" class="flex flex-col group dashboard-card">
+                @include('components.dashboard-card', [
+                    'title' => 'Галерея',
+                    'description' => 'Управление фото и видео для сайта.',
+                    'count' => $galleryCount ?? 0,
+                ])
+            </a>
+
         </div>
     </div>
 </x-app-layout>

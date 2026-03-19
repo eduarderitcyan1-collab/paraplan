@@ -4,7 +4,7 @@
     </a>
 
 
-    <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+    <nav class="flex-1 min-h-0 px-4 py-6 space-y-2 overflow-y-auto">
         <a href="{{ route('dashboard') }}" class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Панель
             управления</a>
         <a href="{{ route('whyUs.index') }}" class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Почему
