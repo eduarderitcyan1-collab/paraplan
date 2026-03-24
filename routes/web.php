@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\EditorUploadController;
+use App\Http\Controllers\Admin\ExternalServiceController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FlyPointController;
 use App\Http\Controllers\Admin\GalleryController;
@@ -92,6 +93,14 @@ Route::middleware('auth')->group(function () {
     // update-маршрутом ресурса и попадать в model binding (404).
     Route::put('seo-pages/global-indexing', [SeoPageController::class, 'updateGlobalIndexing'])
         ->name('seo-pages.global-indexing.update');
+
+    // Редактор robots.txt
+    Route::get('seo-pages/robots', [SeoPageController::class, 'editRobots'])
+        ->name('seo-pages.robots.edit');
+    Route::put('seo-pages/robots', [SeoPageController::class, 'updateRobots'])
+        ->name('seo-pages.robots.update');
+
+    Route::resource('external-services', ExternalServiceController::class)->except(['show']);
 
     Route::resource('seo-pages', SeoPageController::class)->except(['show']);
 

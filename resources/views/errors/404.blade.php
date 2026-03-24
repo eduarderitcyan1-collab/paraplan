@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{-- @include('components.seo-meta') --}}
     {{-- @include('partials.favicon') --}}
+    @include('components.external-services-scripts')
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&family=Russo+One&display=swap"
         rel="stylesheet">
     <title>404</title>

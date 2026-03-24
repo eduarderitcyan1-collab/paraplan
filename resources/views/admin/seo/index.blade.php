@@ -16,6 +16,20 @@
                     </a>
                 @endif
 
+                <a href="{{ route('seo-pages.robots.edit') }}"
+                    class="inline-flex items-center px-4 py-2 bg-gray-700 text-white text-sm font-medium rounded-lg shadow hover:bg-gray-800 transition">
+                    Редактировать robots.txt
+                </a>
+                <a href="{{ asset('robots.txt') }}" target="_blank" rel="noopener"
+                    class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-800 text-sm font-medium rounded-lg shadow hover:bg-gray-300 transition">
+                    Открыть robots.txt
+                </a>
+
+                <a href="{{ route('external-services.index') }}"
+                    class="inline-flex items-center px-4 py-2 bg-teal-600 text-white text-sm font-medium rounded-lg shadow hover:bg-teal-700 transition">
+                    Скрипты сайта
+                </a>
+
                 <a href="{{ route('seo-pages.create') }}"
                     class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg shadow hover:bg-indigo-700 transition">
                     Добавить SEO-страницу

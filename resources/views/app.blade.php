@@ -12,6 +12,7 @@
     @include('template.favicon')
     <title>{{ $pageSeo?->meta_title ?: $composedDefaultTitle }}</title>
     @include('components.seo-meta', ['seoMetaData' => $seoMetaData])
+    @include('components.external-services-scripts')
     @vite(['resources/css/site-widgets.css', 'resources/js/site-widgets.js'])
 </head>
 

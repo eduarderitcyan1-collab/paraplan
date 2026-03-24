@@ -8,6 +8,7 @@ use App\Models\SeoPage;
 use App\Models\SeoSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class SeoPageController extends Controller
 {
@@ -138,6 +139,37 @@ class SeoPageController extends Controller
         $settings->save();
 
         return redirect()->route('seo-pages.index')->with('success', 'Глобальная индексация обновлена.');
+    }
+
+    public function editRobots()
+    {
+        $path = public_path('robots.txt');
+        $content = File::exists($path) ? File::get($path) : "User-agent: *\nDisallow:\n";
+
+        return view('admin.seo.robots', compact('content'));
+    }
+
+    public function updateRobots(Request $request)
+    {
+        $data = $request->validate([
+            'robots' => ['nullable', 'string'],
+            'mode' => ['nullable', 'in:open,close'],
+        ]);
+
+        if (!empty($data['mode'])) {
+            if ($data['mode'] === 'open') {
+                $content = "User-agent: *\nDisallow: /admin\n";
+            } else {
+                $content = "User-agent: *\nDisallow: /\n";
+            }
+        } else {
+            $content = $data['robots'] ?? '';
+        }
+
+        $path = public_path('robots.txt');
+        File::put($path, $content);
+
+        return redirect()->route('seo-pages.index')->with('success', 'robots.txt обновлён.');
     }
 
     private function validateData(Request $request): array
