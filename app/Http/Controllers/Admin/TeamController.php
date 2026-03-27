@@ -23,7 +23,7 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'img' => 'nullable|image|max:2048',
+            'img' => 'nullable|image|mimes:webp|max:2048',
             'title' => 'required|string|max:255',
             'desc' => 'required|string',
             'order' => 'nullable|integer',
@@ -48,7 +48,7 @@ class TeamController extends Controller
     public function update(Request $request, Team $team)
     {
         $request->validate([
-            'img' => 'nullable|image|max:2048',
+            'img' => 'nullable|image|mimes:webp|max:2048',
             'title' => 'required|string|max:255',
             'desc' => 'required|string',
             'order' => 'nullable|integer',

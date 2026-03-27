@@ -23,7 +23,7 @@ class SertificateController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'img_file' => 'required|file|image|mimes:png,jpg,jpeg,svg',
+            'img_file' => 'required|file|image|mimes:webp|max:2048',
             'title' => 'required|string|max:255',
             'price' => 'required|integer',
             'order' => 'nullable|integer',
@@ -49,7 +49,7 @@ class SertificateController extends Controller
     public function update(Request $request, Sertificate $sertificate)
     {
         $request->validate([
-            'img_file' => 'nullable|file|image|mimes:png,jpg,jpeg,svg',
+            'img_file' => 'nullable|file|image|mimes:webp|max:2048',
             'title' => 'required|string|max:255',
             'price' => 'required|integer',
             'order' => 'nullable|integer',

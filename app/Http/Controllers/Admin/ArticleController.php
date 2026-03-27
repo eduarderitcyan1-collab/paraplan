@@ -63,10 +63,10 @@ class ArticleController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'img' => 'nullable|image|max:2048',
+            'img' => 'nullable|image|mimes:webp|max:2048',
             'slug' => 'nullable|string|max:255|unique:articles,slug,' . $article->id,
             'desc'  => 'required|string',
-            'gallery.*' => 'nullable|image|max:2048',
+            'gallery.*' => 'nullable|image|mimes:webp|max:2048',
             'order' => 'nullable|integer',
         ]);
 

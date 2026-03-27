@@ -48,7 +48,7 @@ class FlyPointController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'desc' => 'string',
-            'img' => 'image|max:2048',
+            'img' => 'image|mimes:webp|max:2048',
             'link' => 'url|max:255',
             'order' => 'integer',
         ]);
