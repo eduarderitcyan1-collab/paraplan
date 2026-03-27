@@ -23,7 +23,7 @@ class TarifController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'img_file' => 'nullable|image|mimes:jpg,jpeg,png,svg',
+            'img_file' => 'nullable|image|mimes:webp',
             'title' => 'required|string|max:255',
             'time' => 'required|string|max:255',
             'price' => 'required|string|max:255',

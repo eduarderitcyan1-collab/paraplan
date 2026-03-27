@@ -29,7 +29,7 @@ class ReviewController extends Controller
             'desc' => 'required|string',
             'published_at' => 'nullable|date',
             'order' => 'nullable|integer',
-            'photos.*' => 'nullable|image|max:2048',
+            'photos.*' => 'nullable|image|mimes:webp|max:2048',
         ]);
 
         $review = Review::create($request->only([
@@ -67,7 +67,7 @@ class ReviewController extends Controller
             'desc' => 'required|string',
             'published_at' => 'nullable|date',
             'order' => 'nullable|integer',
-            'photos.*' => 'nullable|image|max:2048',
+            'photos.*' => 'nullable|image|mimes:webp|max:2048',
             'delete_photos.*' => 'nullable|integer',
         ]);
 

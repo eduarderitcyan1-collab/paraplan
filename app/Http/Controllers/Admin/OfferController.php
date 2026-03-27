@@ -31,7 +31,7 @@ class OfferController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'img' => 'required|image|max:2048',
+            'img' => 'required|image|mimes:webp|max:2048',
             'title' => 'required|string|max:255',
             'desc' => 'nullable|string',
             'order' => 'nullable|integer',
@@ -65,7 +65,7 @@ class OfferController extends Controller
     public function update(Request $request, Offer $offer)
     {
         $validated = $request->validate([
-            'img' => 'nullable|image|max:2048',
+            'img' => 'nullable|image|mimes:webp|max:2048',
             'title' => 'required|string|max:255',
             'desc' => 'nullable|string',
             'order' => 'nullable|integer',

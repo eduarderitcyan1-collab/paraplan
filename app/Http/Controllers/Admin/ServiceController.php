@@ -23,7 +23,7 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'img_file' => 'nullable|image|mimes:jpg,jpeg,png,svg',
+            'img_file' => 'nullable|image|mimes:webp|max:2048',
             'title' => 'required|string|max:255',
             'desc' => 'required|string',
             'price' => 'required|integer|min:0',
@@ -51,7 +51,7 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service)
     {
         $request->validate([
-            'img_file' => 'nullable|image|mimes:jpg,jpeg,png,svg',
+            'img_file' => 'nullable|image|mimes:webp|max:2048',
             'title' => 'required|string|max:255',
             'desc' => 'required|string',
             'price' => 'required|integer|min:0',
