@@ -3,7 +3,7 @@
     <!-- Image Upload -->
     <div>
         <label for="img_file" class="block text-sm font-medium text-gray-700 mb-1">Изображение</label>
-        <input type="file" id="img_file" name="img_file" accept=".jpg,.jpeg,.png,.svg"
+        <input type="file" id="img_file" name="img_file"
             class="block w-full border border-gray-300 rounded-lg shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm text-gray-700" />
         <x-input-error :messages="$errors->get('img_file')" class="mt-1" />
 
