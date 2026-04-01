@@ -1,10 +1,15 @@
-<div class="container gallery">
+<div class="container gallery items-center">
     <h2 class="subTitle">Фотогалерея</h2>
     <div class="swiper gallerySwiper">
         <div class="swiper-wrapper">
             @forelse ($gallery as $item)
                 <div class="swiper-slide">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="{{ asset('storage/' . $item->path) }}" alt="Gallery Image" class="galleryPhoto" loading="lazy">
+                    <a href="{{ asset('storage/' . $item->path) }}" class="glightbox" data-gallery="gallery"
+                        data-type="image">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                            data-src="{{ asset('storage/' . $item->path) }}" alt="Gallery Image" class="galleryPhoto"
+                            loading="lazy">
+                    </a>
                 </div>
             @empty
                 <div class="swiper-slide">
@@ -33,4 +38,5 @@
             </div>
         </div>
     </div>
+    <a href="{{ route('gallery') }}" class="button w-1/4">Посмотреть галерею</a>
 </div>

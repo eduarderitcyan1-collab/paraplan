@@ -13,11 +13,13 @@
                     эту мечту!</p>
                 <a href="/" class="text">© Все права защищены параплан-анапа.рф - {{ date('Y') }}</a>
                 <div class="legalInfo">
-                    <a href="{{ route('privacy-policy') }}" class="legalLink text" target="_blank" rel="nofollow noopener noreferrer">
+                    <a href="{{ route('privacy-policy') }}" class="legalLink text" target="_blank"
+                        rel="nofollow noopener noreferrer">
                         Политика конфиденциальности
                     </a>
 
-                    <a href="{{ route('personal-data') }}" class="legalLink text" target="_blank" rel="nofollow noopener noreferrer">
+                    <a href="{{ route('personal-data') }}" class="legalLink text" target="_blank"
+                        rel="nofollow noopener noreferrer">
                         Согласие на обработку персональных данных
                     </a>
                     <a href="https://sumnikoff.ru" class="legalLink text" target="_blank">Создание и продвижение сайтов
@@ -31,7 +33,7 @@
                 <div class="menuList">
                     <a href="{{ route('service') }}" class="menuLink">Услуги</a>
                     <a href="{{ route('training') }}" class="menuLink">Обучение</a>
-                    @if($routsMain)
+                    @if ($routsMain)
                         <a href="{{ route('routes.show', $routsMain->slug) }}" class="menuLink">
                             {{ $routsMain->title }}
                         </a>
@@ -79,7 +81,8 @@
         </div>
         <div class="fourthSection glass">
             <div class="sectionItem">
-                <a href="#" class="review">
+                <a href="https://yandex.ru/maps/org/paraplany_anapa/95112171191/?from=mapframe&ll=37.308687%2C44.879492&z=17"
+                    target="_blank" rel="nofollow" class="review">
                     <svg class="reviewIcon" xmlns="http://www.w3.org/2000/svg" width="144" height="34"
                         viewBox="0 0 144 34" fill="none">
                         <path
@@ -111,7 +114,8 @@
                             fill="white" />
                     </svg>
                 </a>
-                <a href="#" class="review">
+                <a href="https://2gis.ru/anapa/firm/70000001078938000/tab/reviews" target="_blank" rel="nofollow"
+                    class="review">
                     <svg class="reviewIcon" xmlns="http://www.w3.org/2000/svg" width="141" height="34"
                         viewBox="0 0 141 34" fill="none">
                         <path
@@ -186,8 +190,8 @@
                             </svg>
                         </a>
                     </div>
-                    <a href="tel:+79886233440" class="socialLink glass">
-                        +7 (988) 623-34-40
+                    <a href="tel:+79182138630" class="socialLink glass">
+                        +7 (918) 213-86-30
                     </a>
                 </div>
             </div>

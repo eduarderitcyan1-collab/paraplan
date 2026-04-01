@@ -30,8 +30,8 @@
                 </svg>
             </a>
         </div>
-        <a href="tel:+79886233440" class="socialLink glass">
-            +7 (988) 623-34-40
+        <a href="tel:+79182138630" class="socialLink glass">
+            +7 (918) 213-86-30
         </a>
     </div>
 </div>

@@ -5,7 +5,8 @@
             <p class="text">Только реальные отзывы из проверенного источника</p>
         </div>
         <div class="reviewContent">
-            <a href="#" class="review glass">
+            <a href="https://yandex.ru/maps/org/paraplany_anapa/95112171191/?from=mapframe&ll=37.308687%2C44.879492&z=17"
+                target="_blank" rel="nofollow" class="review glass">
                 <svg class="reviewIcon" xmlns="http://www.w3.org/2000/svg" width="144" height="34"
                     viewBox="0 0 144 34" fill="none">
                     <path
@@ -43,16 +44,9 @@
         <div class="swiper-wrapper">
             @foreach ($reviews as $review)
                 <div class="swiper-slide glass">
-                    <div class="authorIcon glass">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="480" height="600" viewBox="0 0 480 600"
-                            fill="none">
-                            <path
-                                d="M240 240C306.276 240 360 186.274 360 120C360 53.726 306.276 0 240 0C173.726 0 120 53.726 120 120C120 186.274 173.726 240 240 240Z"
-                                fill="white" />
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M480 500C480 372.36 372.56 280 240 280C107.44 280 0 372.36 0 500L0.0799942 560C0.0799942 570.608 4.2944 580.784 11.7956 588.284C19.2972 595.784 29.4712 600 40.08 600H440C450.608 600 460.784 595.784 468.284 588.284C475.784 580.784 480 570.608 480 560V500Z"
-                                fill="white" />
-                        </svg>
+                    <div class="reviewMetaData">
+                        <p class="authorName subTitle">{{ $review->title }}</p>
+                        <div class="reviewDate text">{{ $review->published_at_formatted }}</div>
                     </div>
                     <div class="reviewContent">
                         <p class="text">
@@ -60,13 +54,12 @@
                         </p>
                         <div class="reviewPhotos">
                             @foreach ($review->photos as $photo)
-                                <img src="{{ asset('/storage/' . $photo->path) }}" alt="Review photo"
-                                    class="reviewPhoto">
+                                <a href="{{ asset('storage/' . $photo->path) }}" class="glightbox" data-gallery="photo"
+                                    data-type="image">
+                                    <img src="{{ asset('/storage/' . $photo->path) }}" alt="Review photo"
+                                        class="reviewPhoto">
+                                </a>
                             @endforeach
-                        </div>
-                        <div class="reviewMetaData">
-                            <p class="authorName subTitle">{{ $review->title }}</p>
-                            <div class="reviewDate text">{{ $review->published_at_formatted }}</div>
                         </div>
                     </div>
                 </div>

@@ -2,11 +2,11 @@ import Swiper from "swiper/bundle";
 
 var swiperProd = new Swiper(".teamSwiper", {
     loop: true,
-    // spaceBetween: 25,
+    spaceBetween: 25,
     centeredSlides: true,
     navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+        nextEl: ".team-next",
+        prevEl: ".team-prev",
     },
 
     breakpoints: {

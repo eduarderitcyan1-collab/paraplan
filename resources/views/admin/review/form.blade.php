@@ -10,6 +10,13 @@
 </div>
 
 <div>
+    <label class="block text-sm font-medium mb-1">Дата публикации</label>
+    <input type="date" name="published_at"
+        value="{{ old('published_at', isset($review->published_at) ? $review->published_at->format('Y-m-d') : '') }}"
+        class="w-full border-gray-300 rounded-lg shadow-sm">
+</div>
+
+<div>
     <label class="block text-sm font-medium mb-1">Порядок</label>
     <input type="number" name="order" value="{{ old('order', $review->order ?? '') }}"
         class="w-full border-gray-300 rounded-lg shadow-sm">
