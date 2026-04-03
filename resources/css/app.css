@@ -829,8 +829,14 @@ body.modalOpen {
     width: 250px;
     height: 350px;
     object-fit: contain;
-    border-radius: 20px;
+    border-radius: 0px;
     z-index: 1;
+}
+
+.sertificatePhotoOverlay {
+    z-index: 999;
+    rotate: 2.5deg;
+    padding: 10px;
 }
 
 .sertificate .sertificateSwiper .swiper-wrapper .swiper-slide .sertificateTitle {

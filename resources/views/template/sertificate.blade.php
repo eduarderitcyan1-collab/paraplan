@@ -6,7 +6,10 @@
             @foreach ($sertificates as $sertificate)
                 <div class="swiper-slide">
                     <div class="sertificatePhotoWrapper">
-                        <img src="{{ asset('storage/' . $sertificate->img) }}" alt="Sertificate" class="sertificatePhoto">
+                        <div class="sertificatePhotoOverlay">
+                            <img src="{{ asset('storage/' . $sertificate->img) }}" alt="Sertificate"
+                                class="sertificatePhoto">
+                        </div>
                     </div>
                     <div class="sertificateTitle">{{ $sertificate->title }}</div>
                     <div class="sertificateContent">
