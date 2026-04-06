@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\WhyUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ParaplanController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\RedirectRuleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ParaplanController::class, 'welcome'])->name('welcome');
@@ -112,6 +113,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('banner/edit', [BannerController::class, 'edit'])->name('banner.edit');
     Route::put('banner', [BannerController::class, 'update'])->name('banner.update');
+
+    Route::get('redirect-rules', [RedirectRuleController::class, 'index'])->name('redirect-rules.index');
+    Route::post('redirect-rules', [RedirectRuleController::class, 'store'])->name('redirect-rules.store');
+    Route::get('redirect-rules/{redirectRule}/edit', [RedirectRuleController::class, 'edit'])->name('redirect-rules.edit');
+    Route::patch('redirect-rules/{redirectRule}', [RedirectRuleController::class, 'update'])->name('redirect-rules.update');
+    Route::delete('redirect-rules/{redirectRule}', [RedirectRuleController::class, 'destroy'])->name('redirect-rules.destroy');
 });
 
 require __DIR__.'/auth.php';

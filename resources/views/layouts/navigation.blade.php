@@ -41,8 +41,10 @@
             class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">SEO</a>
         <a href="{{ route('legal-pages.index') }}"
             class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Юридические страницы</a>
-        <a href="{{ route('banner.edit') }}"
-            class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Баннер (главная)</a>
+        <a href="{{ route('banner.edit') }}" class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Баннер
+            (главная)</a>
+        <a href="{{ route('redirect-rules.index') }}"
+            class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Редиректы</a>
     </nav>
 
     @auth

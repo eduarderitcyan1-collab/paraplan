@@ -4,6 +4,7 @@ use App\Http\Middleware\EnsureUserHasRole;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use App\Http\Middleware\HandleUrlRedirects;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -27,6 +28,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
             'role' => EnsureUserHasRole::class,
         ]);
+
+        // 👇 добавляешь сюда
+        $middleware->append(HandleUrlRedirects::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
