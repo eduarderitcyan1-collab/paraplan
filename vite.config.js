@@ -13,6 +13,7 @@ export default defineConfig({
                 "resources/css/marshruty.css",
                 "resources/css/stati.css",
                 "resources/css/site-widgets.css",
+                "resources/css/road.css",
                 "resources/js/app.js",
                 "resources/js/site-widgets.js",
                 "resources/js/flypoint-swiper.js",
