@@ -22,6 +22,7 @@ use App\Models\Tarif;
 use App\Models\Team;
 use App\Models\TrainingMaterial;
 use App\Models\WhyUs;
+use App\Models\Road;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -38,7 +39,10 @@ class ParaplanController extends Controller
         $team = Team::ordered()->get();
         $sertificates = Sertificate::ordered()->get();
         $offers = Offer::ordered()->get();
-        $reviews = Review::ordered()->get();
+        $reviews = Review::ordered()->get()->map(function ($review) {
+            $review->desc = \Illuminate\Support\Str::limit($review->desc, 100); // ограничиваем 100 символами
+            return $review;
+        });
         $about = About::first();
         $flyPoints = FlyPoint::ordered()->get();
         $routes = Route::ordered()->get();
@@ -62,7 +66,10 @@ class ParaplanController extends Controller
         $services = Service::ordered()->get();
         $team = Team::ordered()->get();
         $sertificates = Sertificate::ordered()->get();
-        $reviews = Review::ordered()->get();
+        $reviews = Review::ordered()->get()->map(function ($review) {
+            $review->desc = \Illuminate\Support\Str::limit($review->desc, 100); // ограничиваем 100 символами
+            return $review;
+        });
         $flyPoints = FlyPoint::ordered()->get();
         $routes = Route::ordered()->get();
 
@@ -73,7 +80,10 @@ class ParaplanController extends Controller
     {
         $whyUs = WhyUs::ordered()->get();
         $flyPoints = FlyPoint::ordered()->get();
-        $reviews = Review::ordered()->get();
+        $reviews = Review::ordered()->get()->map(function ($review) {
+            $review->desc = \Illuminate\Support\Str::limit($review->desc, 100); // ограничиваем 100 символами
+            return $review;
+        });
         $team = Team::ordered()->get();
         $about = About::first();
 
@@ -221,5 +231,12 @@ class ParaplanController extends Controller
         }
 
         return view('personal-data', compact('page'));
+    }
+
+    public function road()
+    {
+        $road = Road::first();
+
+        return view('road', compact('road'));
     }
 }

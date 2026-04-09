@@ -43,7 +43,10 @@
     <div class="swiper reviewsSwiper">
         <div class="swiper-wrapper">
             @foreach ($reviews as $review)
-                <div class="swiper-slide glass">
+                <div class="swiper-slide glass position-relative">
+                    @if ($review->link)
+                        <a href="{{ $review->link }}" target="_blank" class="stretched-link"></a>
+                    @endif
                     <div class="reviewMetaData">
                         <p class="authorName subTitle">{{ $review->title }}</p>
                         <div class="reviewDate text">{{ $review->published_at_formatted }}</div>

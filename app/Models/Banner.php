@@ -10,5 +10,6 @@ class Banner extends Model
         'title',
         'media_path',
         'type',
+        'mobile_media_path',
     ];
 }

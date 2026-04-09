@@ -15,6 +15,7 @@ class Review extends Model
         'desc',
         'published_at',
         'order',
+        'link', // добавили link
     ];
 
     // кастим published_at в Carbon, без времени

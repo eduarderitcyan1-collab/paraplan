@@ -20,8 +20,13 @@ class BannerController extends Controller
     {
         $request->validate([
             'title' => 'nullable|string|max:255',
+
+            // десктоп
             'media' => 'nullable|file|mimes:jpg,jpeg,png,webp,mp4,webm',
             'type' => 'required|in:image,video',
+
+            // мобильный
+            'mobile_media_path' => 'nullable|file|mimes:jpg,jpeg,png,webp,mp4,webm',
         ]);
 
         $banner = Banner::first();
@@ -30,8 +35,10 @@ class BannerController extends Controller
             $banner = new Banner;
         }
 
+        /**
+         * ДЕСКТОП
+         */
         if ($request->hasFile('media')) {
-            // удалить старый файл
             if ($banner->media_path) {
                 Storage::disk('public')->delete($banner->media_path);
             }
@@ -40,8 +47,24 @@ class BannerController extends Controller
             $banner->media_path = $path;
         }
 
-        $banner->title = $request->title;
         $banner->type = $request->type;
+
+        /**
+         * МОБИЛКА
+         */
+        if ($request->hasFile('mobile_media_path')) {
+            if ($banner->mobile_media_path) {
+                Storage::disk('public')->delete($banner->mobile_media_path);
+            }
+
+            $mobilePath = $request->file('mobile_media_path')->store('banner', 'public');
+            $banner->mobile_media_path = $mobilePath;
+        }
+
+        /**
+         * ОБЩЕЕ
+         */
+        $banner->title = $request->title;
 
         $banner->save();
 

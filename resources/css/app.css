@@ -220,7 +220,7 @@ body.modalOpen {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #0E0D588C;
+    background: rgba(14, 13, 88, 0.549);
     z-index: -1;
 }
 
@@ -282,6 +282,36 @@ body.modalOpen {
     line-height: 1.5em;
     font-weight: 600;
 }
+
+.socialBlock__fixed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    position: fixed;
+    top: auto;
+    bottom: 50%;
+    left: auto;
+    right: 25px;
+    transform: translateY(50%);
+    padding: 15px 20px;
+    z-index: 1;
+}
+
+.socialBlock__fixed .socialLink {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.socialBlock__fixed .socialLink:hover {
+    transform: scale(1.15) translateY(-2px);
+}
+
+.socialBlock__fixed .socialLink svg {
+    width: 33px;
+    height: 33px;
+}
+
 
 /* Футер */
 .siteFooter .container .oneSection {
@@ -1058,7 +1088,7 @@ body.modalOpen {
     text-align: center;
 }
 
-.startPoint iframe {
+iframe {
     border-radius: 20px;
 }
 
@@ -1148,6 +1178,12 @@ body.modalOpen {
     height: 35px;
 }
 
+.socialBlock .socialWrapper .socialLink.glass {
+    background: linear-gradient(80deg, rgba(255, 162, 45, 1) 0%, rgba(255, 234, 0, 1) 100%) !important;
+    color: var(--violet) !important;
+    border: none;
+}
+
 /* Карусель */
 .swiper {
     width: 100%;
@@ -1184,14 +1220,15 @@ body.modalOpen {
 .button {
     font-family: var(--mulish);
     font-size: var(--sizeText);
-    color: var(--violet);
+    color: var(--violet) !important;
     font-weight: 700;
-    background-color: var(--orange);
+    background: linear-gradient(80deg, rgba(255, 162, 45, 1) 0%, rgba(255, 234, 0, 1) 100%) !important;
     padding: 15px 60px;
     border-radius: 100px;
     justify-content: center;
     border: none;
     cursor: pointer;
+    border: none !important;
 }
 
 .button.glass {
@@ -1331,7 +1368,7 @@ body.modalOpen {
 }
 
 .reviews .reviewsSwiper {
-    height: 400px;
+    height: 375px;
     border-radius: 20px;
 }
 
@@ -1368,10 +1405,11 @@ body.modalOpen {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 25px;
+    margin-top: auto;
 }
 
 .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent .reviewPhotos .reviewPhoto {
-    height: 175px;
+    height: 125px;
 }
 
 .reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent .text {
@@ -1385,13 +1423,28 @@ body.modalOpen {
     gap: 10px;
 }
 
-.reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewContent .reviewMetaData .subTitle {
+.reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewMetaData .authorName {
     text-align: left;
     font-size: var(--sizeH3);
 }
 
+.reviews .reviewsSwiper .swiper-wrapper .swiper-slide .reviewMetaData .reviewDate {
+    font-size: var(--sizeText);
+}
+
 .reviews .reviewsSwiper .swiper-pagination-bullet-active {
     background-color: var(--white);
+}
+
+.stretched-link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.reviewPhotos a {
+    position: relative;
+    z-index: 2;
 }
 
 img {
@@ -1496,6 +1549,24 @@ img {
 
     .swiperMobileNavigation {
         display: flex;
+    }
+
+    .socialBlock__fixed {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        transform: translateY(0%);
+        padding: 15px;
+        width: 100%;
+        border-radius: 0 !important;
+    }
+
+    .socialBlock__fixed .socialLink svg {
+        width: 28px;
+        height: 28px;
     }
 
     /* Меню */
@@ -1628,7 +1699,7 @@ img {
     }
 
     /* Старт точки */
-    .startPoint iframe {
+    iframe {
         height: 300px;
     }
 
@@ -1969,7 +2040,7 @@ img {
     }
 
     /* Старт точки */
-    .startPoint iframe {
+    iframe {
         height: 175px;
     }
 

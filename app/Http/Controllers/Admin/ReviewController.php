@@ -29,6 +29,7 @@ class ReviewController extends Controller
             'desc' => 'required|string',
             'published_at' => 'nullable|date',
             'order' => 'nullable|integer',
+            'link' => 'nullable|string|max:255', // добавлено
             'photos.*' => 'nullable|image|mimes:webp|max:2048',
         ]);
 
@@ -36,7 +37,8 @@ class ReviewController extends Controller
             'title',
             'desc',
             'published_at',
-            'order'
+            'order',
+            'link', // добавлено
         ]));
 
         if ($request->hasFile('photos')) {
@@ -67,12 +69,19 @@ class ReviewController extends Controller
             'desc' => 'required|string',
             'published_at' => 'nullable|date',
             'order' => 'nullable|integer',
+            'link' => 'nullable|string|max:255', // добавлено
             'photos.*' => 'nullable|image|mimes:webp|max:2048',
             'delete_photos.*' => 'nullable|integer',
         ]);
 
         // обновляем данные отзыва
-        $review->update($request->only(['title', 'desc', 'published_at', 'order']));
+        $review->update($request->only([
+            'title', 
+            'desc', 
+            'published_at', 
+            'order',
+            'link', // добавлено
+        ]));
 
         // удаляем отмеченные фото
         if ($request->filled('delete_photos')) {

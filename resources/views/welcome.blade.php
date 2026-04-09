@@ -6,25 +6,36 @@
             <div class="container banner">
                 @include('template.menu')
                 <div class="bannerMedia absolute top-0 left-0 w-full h-full -z-10 overflow-hidden">
-                    @if ($banner)
+                    <!-- Desktop > 700px -->
+                    <div class="hidden md:block w-full h-full">
                         @if ($banner->type === 'video')
                             <video class="w-full h-full object-cover" autoplay loop muted playsinline>
                                 <source src="{{ Storage::url($banner->media_path) }}" type="video/mp4">
-                                Тег video не поддерживается вашим браузером.
                             </video>
                         @else
                             <div class="w-full h-full object-cover"
-                                style="background-image: url('{{ Storage::url($banner->media_path) }}'); background-size: cover; background-position: center;">
+                                style="background-image: url('{{ Storage::url($banner->media_path) }}');
+                    background-size: cover;
+                    background-position: center;">
                             </div>
                         @endif
-                    @else
-                        <!-- fallback изображение -->
-                        <div class="w-full h-full object-cover"
-                            style="background-image: url('{{ asset('images/bannerBack.webp') }}'); background-size: cover; background-position: center;">
-                        </div>
-                    @endif
-                    <!-- overlay -->
-                    <div class="absolute top-0 left-0 w-full h-full bg-black/25"></div>
+                    </div>
+
+                    <!-- Mobile ≤ 700px -->
+                    <div class="block md:hidden w-full h-full">
+                        @php $mobile = $banner->mobile_media_path ?: $banner->media_path; @endphp
+                        @if ($banner->type === 'video')
+                            <video class="w-full h-full object-cover" autoplay loop muted playsinline>
+                                <source src="{{ Storage::url($mobile) }}" type="video/mp4">
+                            </video>
+                        @else
+                            <div class="w-full h-full object-cover"
+                                style="background-image: url('{{ Storage::url($mobile) }}');
+                    background-size: cover;
+                    background-position: center;">
+                            </div>
+                        @endif
+                    </div>
                 </div>
                 <div class="bannerContent z-10 flex flex-col justify-between items-center gap-6">
                     <h1 class="pageTitle text-white text-center text-4xl font-bold">

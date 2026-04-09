@@ -25,22 +25,48 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">Тип медиа</label>
                     <select name="type"
                         class="block w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        <option value="image" {{ (old('type', $banner->type ?? '') == 'image') ? 'selected' : '' }}>Изображение</option>
-                        <option value="video" {{ (old('type', $banner->type ?? '') == 'video') ? 'selected' : '' }}>Видео</option>
+                        <option value="image" {{ old('type', $banner->type ?? '') == 'image' ? 'selected' : '' }}>
+                            Изображение</option>
+                        <option value="video" {{ old('type', $banner->type ?? '') == 'video' ? 'selected' : '' }}>
+                            Видео</option>
                     </select>
                 </div>
 
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Файл баннера</label>
-                    <input type="file" name="media" 
-                        class="block w-full text-gray-700 rounded-lg" />
+                    <input type="file" name="media" class="block w-full text-gray-700 rounded-lg" />
 
-                    @if(!empty($banner->media_path))
+                    @if (!empty($banner->media_path))
                         <div class="mt-4">
-                            @if($banner->type === 'image')
-                                <img src="{{ Storage::url($banner->media_path) }}" alt="banner" class="w-64 rounded-lg shadow">
+                            @if ($banner->type === 'image')
+                                <img src="{{ Storage::url($banner->media_path) }}" alt="banner"
+                                    class="w-64 rounded-lg shadow">
                             @else
-                                <video src="{{ Storage::url($banner->media_path) }}" class="w-64 rounded-lg shadow" autoplay loop muted></video>
+                                <video src="{{ Storage::url($banner->media_path) }}" class="w-64 rounded-lg shadow"
+                                    autoplay loop muted></video>
+                            @endif
+                        </div>
+                    @endif
+                </div>
+
+                <div class="mb-6 border-t pt-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Мобильный баннер (≤700px)</h2>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Файл мобильного баннера</label>
+                        <input type="file" name="mobile_media_path" class="block w-full text-gray-700 rounded-lg" />
+                        <p class="text-xs text-gray-500 mt-1">
+                            Рекомендуемый размер для мобильного баннера — до 700px по ширине
+                        </p>
+                    </div>
+                    @if (!empty($banner->mobile_media_path))
+                        <div class="mt-4">
+                            @if ($banner->type === 'image')
+                                <img src="{{ Storage::url($banner->mobile_media_path) }}" alt="mobile banner"
+                                    class="w-64 rounded-lg shadow">
+                            @else
+                                <video src="{{ Storage::url($banner->mobile_media_path) }}"
+                                    class="w-64 rounded-lg shadow" autoplay loop muted></video>
                             @endif
                         </div>
                     @endif

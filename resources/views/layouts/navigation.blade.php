@@ -45,6 +45,8 @@
             (главная)</a>
         <a href="{{ route('redirect-rules.index') }}"
             class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Редиректы</a>
+        <a href="{{ route('road.edit') }}" class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Как
+            доехать?</a>
     </nav>
 
     @auth

@@ -1,0 +1,36 @@
+.roadWrapper {
+    display: grid;
+    grid-template-columns: 1fr 30%;
+    gap: 25px;
+}
+
+.roadWrapper .roadContent {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.roadWrapper .roadContent .subTitle {
+    text-align: left;
+}
+
+.roadWrapper .roadContent .text {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.roadWrapper .roadVideo {
+    border-radius: 15px;
+    width: 100%;
+}
+
+@media(max-width: 1200px) {
+    .roadWrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .roadWrapper .roadContent .subTitle {
+        text-align: center;
+    }
+}

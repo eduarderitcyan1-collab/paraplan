@@ -23,6 +23,8 @@ use App\Http\Controllers\Admin\TarifController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\TrainingMaterialController;
 use App\Http\Controllers\Admin\WhyUsController;
+use App\Http\Controllers\Admin\RoadController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ParaplanController;
 use App\Http\Controllers\ProfileController;
@@ -52,6 +54,8 @@ Route::get('/stati', [ParaplanController::class, 'stati'])->name('stati');
 Route::get('/stati/{slug}', [ParaplanController::class, 'statiShow'])->name('stati.show');
 
 Route::get('/about', [ParaplanController::class, 'about'])->name('about');
+
+Route::get('/road', [ParaplanController::class, 'road'])->name('road');
 
 Route::get('/obuchenie-poletam-na-paraplane', [ParaplanController::class, 'training'])->name('training');
 
@@ -83,6 +87,10 @@ Route::middleware('auth')->group(function () {
     Route::put('faq/reorder', [FaqController::class, 'reorder'])->name('faq.reorder');
     Route::resource('faq', FaqController::class)->except(['show']);
     Route::post('editor/upload', [EditorUploadController::class, 'store'])->name('editor.upload');
+    Route::get('road/edit', [RoadController::class, 'edit'])
+        ->name('road.edit');
+    Route::put('road/edit', [RoadController::class, 'update'])
+        ->name('road.update');
 
     Route::get('home-seo-info/create', [HomeSeoInfoController::class, 'create'])->name('home-seo-info.create');
     Route::post('home-seo-info', [HomeSeoInfoController::class, 'store'])->name('home-seo-info.store');
