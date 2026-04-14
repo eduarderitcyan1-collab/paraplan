@@ -514,7 +514,7 @@ body.modalOpen {
 
 .tarifPrice {
     font-family: var(--nunito);
-    font-size: var(--sizeH3);
+    font-size: var(--sizeText);
     color: var(--white);
     font-weight: 800;
     text-transform: uppercase;
