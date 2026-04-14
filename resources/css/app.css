@@ -79,6 +79,7 @@ body {
     --sizeH1: clamp(1.25rem, 0.9531rem + 1.3575vw, 3.125rem);
     --sizeH2: clamp(1rem, 0.7624rem + 1.086vw, 2.5rem);
     --sizeH3: clamp(1rem, 0.8812rem + 0.543vw, 1.75rem);
+    --sizeH4: clamp(0.85rem, 0.75rem + 0.45vw, 1.4rem);
     --sizeText: clamp(0.75rem, 0.6906rem + 0.2715vw, 1.125rem);
     --mulish: 'Mulish', sans-serif;
     --nunito: 'Nunito Sans', sans-serif;
@@ -514,7 +515,7 @@ body.modalOpen {
 
 .tarifPrice {
     font-family: var(--nunito);
-    font-size: var(--sizeText);
+    font-size: var(--sizeH4);
     color: var(--white);
     font-weight: 800;
     text-transform: uppercase;
