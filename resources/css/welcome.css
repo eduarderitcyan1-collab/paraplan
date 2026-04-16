@@ -288,7 +288,6 @@
 }
 
 .lightbox-content {
-    --story-media-scale: 1;
     position: relative;
     width: min(90vw, 360px);
     height: min(90vh, 640px);
@@ -317,9 +316,11 @@
     object-fit: contain;
     display: block;
     background: #000;
-    transform: scale(var(--story-media-scale));
-    transform-origin: center;
-    transition: transform .2s ease;
+}
+
+.lightbox-content.is-portrait-media .lightbox-video,
+.lightbox-content.is-portrait-media .lightbox-image {
+    object-fit: cover;
 }
 
 .progress-container {

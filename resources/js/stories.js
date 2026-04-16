@@ -32,10 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const DEFAULT_MEDIA_WIDTH = 9;
     const DEFAULT_MEDIA_HEIGHT = 16;
     const LIGHTBOX_MAX_WIDTH = 840;
-    const DESKTOP_BREAKPOINT = 1024;
-    const DESKTOP_VIEWPORT_LIMIT = 0.96;
-    const MOBILE_VIEWPORT_LIMIT = 0.9;
-    const DESKTOP_PORTRAIT_MEDIA_SCALE = 1.28;
+    const GENERAL_VIEWPORT_LIMIT = 0.96;
+    const PORTRAIT_VIEWPORT_HEIGHT_RATIO = 0.9;
+    const PORTRAIT_VIEWPORT_WIDTH_LIMIT = 0.96;
     let currentMediaSize = {
         width: DEFAULT_MEDIA_WIDTH,
         height: DEFAULT_MEDIA_HEIGHT,
@@ -47,21 +46,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const hasValidSize = Number.isFinite(width) && Number.isFinite(height) && width > 0 && height > 0;
         const mediaWidth = hasValidSize ? width : DEFAULT_MEDIA_WIDTH;
         const mediaHeight = hasValidSize ? height : DEFAULT_MEDIA_HEIGHT;
-        const isDesktop = window.innerWidth >= DESKTOP_BREAKPOINT;
-        const viewportLimit = isDesktop ? DESKTOP_VIEWPORT_LIMIT : MOBILE_VIEWPORT_LIMIT;
+        const isPortrait = mediaHeight > mediaWidth;
+        const ratio = mediaWidth / mediaHeight;
 
         currentMediaSize = {
             width: mediaWidth,
             height: mediaHeight,
         };
 
-        const isPortrait = hasValidSize && mediaHeight > mediaWidth;
-        const mediaScale = isDesktop && isPortrait ? DESKTOP_PORTRAIT_MEDIA_SCALE : 1;
-        lightboxContent.style.setProperty('--story-media-scale', `${mediaScale}`);
+        lightboxContent.classList.toggle('is-portrait-media', isPortrait);
 
-        const maxWidth = Math.min(window.innerWidth * viewportLimit, LIGHTBOX_MAX_WIDTH);
-        const maxHeight = window.innerHeight * viewportLimit;
-        const ratio = mediaWidth / mediaHeight;
+        if (isPortrait) {
+            const targetHeight = window.innerHeight * PORTRAIT_VIEWPORT_HEIGHT_RATIO;
+            const targetWidth = Math.min(
+                window.innerWidth * PORTRAIT_VIEWPORT_WIDTH_LIMIT,
+                targetHeight * ratio,
+            );
+
+            lightboxContent.style.width = `${Math.round(targetWidth)}px`;
+            lightboxContent.style.height = `${Math.round(targetHeight)}px`;
+            return;
+        }
+
+        const maxWidth = Math.min(window.innerWidth * GENERAL_VIEWPORT_LIMIT, LIGHTBOX_MAX_WIDTH);
+        const maxHeight = window.innerHeight * GENERAL_VIEWPORT_LIMIT;
 
         let targetWidth = maxWidth;
         let targetHeight = targetWidth / ratio;
