@@ -31,7 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const PHOTO_DURATION = 15;
     const DEFAULT_MEDIA_WIDTH = 9;
     const DEFAULT_MEDIA_HEIGHT = 16;
-    const LIGHTBOX_MAX_WIDTH = 640;
+    const LIGHTBOX_MAX_WIDTH = 840;
+    const DESKTOP_BREAKPOINT = 1024;
+    const DESKTOP_VIEWPORT_LIMIT = 0.96;
+    const MOBILE_VIEWPORT_LIMIT = 0.9;
+    const DESKTOP_PORTRAIT_MEDIA_SCALE = 1.28;
     let currentMediaSize = {
         width: DEFAULT_MEDIA_WIDTH,
         height: DEFAULT_MEDIA_HEIGHT,
@@ -43,14 +47,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const hasValidSize = Number.isFinite(width) && Number.isFinite(height) && width > 0 && height > 0;
         const mediaWidth = hasValidSize ? width : DEFAULT_MEDIA_WIDTH;
         const mediaHeight = hasValidSize ? height : DEFAULT_MEDIA_HEIGHT;
+        const isDesktop = window.innerWidth >= DESKTOP_BREAKPOINT;
+        const viewportLimit = isDesktop ? DESKTOP_VIEWPORT_LIMIT : MOBILE_VIEWPORT_LIMIT;
 
         currentMediaSize = {
             width: mediaWidth,
             height: mediaHeight,
         };
 
-        const maxWidth = Math.min(window.innerWidth * 0.9, LIGHTBOX_MAX_WIDTH);
-        const maxHeight = window.innerHeight * 0.9;
+        const isPortrait = hasValidSize && mediaHeight > mediaWidth;
+        const mediaScale = isDesktop && isPortrait ? DESKTOP_PORTRAIT_MEDIA_SCALE : 1;
+        lightboxContent.style.setProperty('--story-media-scale', `${mediaScale}`);
+
+        const maxWidth = Math.min(window.innerWidth * viewportLimit, LIGHTBOX_MAX_WIDTH);
+        const maxHeight = window.innerHeight * viewportLimit;
         const ratio = mediaWidth / mediaHeight;
 
         let targetWidth = maxWidth;

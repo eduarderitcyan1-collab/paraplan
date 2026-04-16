@@ -288,11 +288,12 @@
 }
 
 .lightbox-content {
+    --story-media-scale: 1;
     position: relative;
     width: min(90vw, 360px);
     height: min(90vh, 640px);
-    max-width: 90vw;
-    max-height: 90vh;
+    max-width: 96vw;
+    max-height: 96vh;
     border-radius: 16px;
     overflow: hidden;
     background: #000;
@@ -316,6 +317,9 @@
     object-fit: contain;
     display: block;
     background: #000;
+    transform: scale(var(--story-media-scale));
+    transform-origin: center;
+    transition: transform .2s ease;
 }
 
 .progress-container {
