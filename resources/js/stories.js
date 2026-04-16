@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const PHOTO_DURATION = 15;
     const DEFAULT_MEDIA_WIDTH = 9;
     const DEFAULT_MEDIA_HEIGHT = 16;
-    const LIGHTBOX_MAX_WIDTH = 840;
     const GENERAL_VIEWPORT_LIMIT = 0.96;
     const PORTRAIT_VIEWPORT_HEIGHT_RATIO = 1; // full viewport height
     const PORTRAIT_VIEWPORT_WIDTH_LIMIT = 0.96;
@@ -48,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mediaHeight = hasValidSize ? height : DEFAULT_MEDIA_HEIGHT;
         const isPortrait = mediaHeight > mediaWidth;
         const ratio = mediaWidth / mediaHeight;
+        const viewportHeight = window.innerHeight;
 
         currentMediaSize = {
             width: mediaWidth,
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lightboxContent.classList.toggle('is-portrait-media', isPortrait);
 
         if (isPortrait) {
-            const targetHeight = window.innerHeight * PORTRAIT_VIEWPORT_HEIGHT_RATIO;
+            const targetHeight = viewportHeight * PORTRAIT_VIEWPORT_HEIGHT_RATIO;
             const targetWidth = Math.min(
                 window.innerWidth * PORTRAIT_VIEWPORT_WIDTH_LIMIT,
                 targetHeight * ratio,
@@ -68,16 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const maxWidth = Math.min(window.innerWidth * GENERAL_VIEWPORT_LIMIT, LIGHTBOX_MAX_WIDTH);
-        const maxHeight = window.innerHeight * GENERAL_VIEWPORT_LIMIT;
-
-        let targetWidth = maxWidth;
-        let targetHeight = targetWidth / ratio;
-
-        if (targetHeight > maxHeight) {
-            targetHeight = maxHeight;
-            targetWidth = targetHeight * ratio;
-        }
+        const targetHeight = viewportHeight;
+        const targetWidth = Math.min(
+            window.innerWidth * GENERAL_VIEWPORT_LIMIT,
+            targetHeight * ratio,
+        );
 
         lightboxContent.style.width = `${Math.round(targetWidth)}px`;
         lightboxContent.style.height = `${Math.round(targetHeight)}px`;
