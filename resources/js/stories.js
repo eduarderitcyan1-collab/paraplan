@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const DEFAULT_MEDIA_HEIGHT = 16;
     const LIGHTBOX_MAX_WIDTH = 840;
     const GENERAL_VIEWPORT_LIMIT = 0.96;
-    const PORTRAIT_VIEWPORT_HEIGHT_RATIO = 0.9;
+    const PORTRAIT_VIEWPORT_HEIGHT_RATIO = 1; // full viewport height
     const PORTRAIT_VIEWPORT_WIDTH_LIMIT = 0.96;
     let currentMediaSize = {
         width: DEFAULT_MEDIA_WIDTH,

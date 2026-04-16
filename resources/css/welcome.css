@@ -323,6 +323,19 @@
     object-fit: cover;
 }
 
+/* Override specifically for stories lightbox: make content full viewport height */
+#storiesLightbox {
+    padding: 0;
+}
+
+#storiesLightbox .lightbox-content {
+    height: 100vh;
+    max-height: 100vh;
+    width: auto;
+    max-width: 96vw;
+    border-radius: 0;
+}
+
 .progress-container {
     position: absolute;
     top: 15px;
