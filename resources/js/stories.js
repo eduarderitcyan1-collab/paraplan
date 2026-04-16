@@ -34,10 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const GENERAL_VIEWPORT_LIMIT = 0.96;
     const PORTRAIT_VIEWPORT_HEIGHT_RATIO = 1; // full viewport height
     const PORTRAIT_VIEWPORT_WIDTH_LIMIT = 0.96;
+    const FULLSCREEN_VIDEO_BREAKPOINT = 1024;
     let currentMediaSize = {
         width: DEFAULT_MEDIA_WIDTH,
         height: DEFAULT_MEDIA_HEIGHT,
     };
+    let currentMediaType = 'photo';
 
     const viewedMedia = new Map();
 
@@ -54,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ratio = mediaWidth / mediaHeight;
         const viewport = getViewportSize();
         const viewportHeight = viewport.height;
+        const isFullscreenVideo = currentMediaType === 'video' && viewport.width <= FULLSCREEN_VIDEO_BREAKPOINT;
 
         currentMediaSize = {
             width: mediaWidth,
@@ -61,6 +64,13 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         lightboxContent.classList.toggle('is-portrait-media', isPortrait);
+        lightboxContent.classList.toggle('is-fullscreen-video', isFullscreenVideo);
+
+        if (isFullscreenVideo) {
+            lightboxContent.style.width = `${Math.round(viewport.width)}px`;
+            lightboxContent.style.height = `${Math.round(viewportHeight)}px`;
+            return;
+        }
 
         if (isPortrait) {
             const targetHeight = viewportHeight * PORTRAIT_VIEWPORT_HEIGHT_RATIO;
@@ -159,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const loadCurrentMedia = () => {
         const item = mediaItems[currentMediaIndex];
+        currentMediaType = item.type;
 
         mediaContainer.innerHTML = '';
         fitLightboxToMedia(DEFAULT_MEDIA_WIDTH, DEFAULT_MEDIA_HEIGHT);
@@ -222,6 +233,8 @@ document.addEventListener('DOMContentLoaded', () => {
         lightbox.classList.remove('active');
         clearInterval(autoAdvanceInterval);
         mediaContainer.innerHTML = '';
+        currentMediaType = 'photo';
+        lightboxContent.classList.remove('is-fullscreen-video');
         fitLightboxToMedia(DEFAULT_MEDIA_WIDTH, DEFAULT_MEDIA_HEIGHT);
     };
 

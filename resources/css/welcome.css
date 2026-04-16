@@ -323,6 +323,10 @@
     object-fit: cover;
 }
 
+#storiesLightbox .lightbox-content.is-fullscreen-video .lightbox-video {
+    object-fit: cover;
+}
+
 /* Override specifically for stories lightbox: make content full viewport height */
 #storiesLightbox {
     padding: 0;
