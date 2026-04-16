@@ -326,11 +326,13 @@
 /* Override specifically for stories lightbox: make content full viewport height */
 #storiesLightbox {
     padding: 0;
+    height: 100dvh;
+    min-height: 100dvh;
 }
 
 #storiesLightbox .lightbox-content {
-    height: 100vh;
-    max-height: 100vh;
+    height: 100dvh;
+    max-height: 100dvh;
     width: auto;
     max-width: 100vw;
     border-radius: 0;

@@ -41,13 +41,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const viewedMedia = new Map();
 
+    const getViewportSize = () => ({
+        width: window.visualViewport?.width || window.innerWidth,
+        height: window.visualViewport?.height || window.innerHeight,
+    });
+
     const fitLightboxToMedia = (width, height) => {
         const hasValidSize = Number.isFinite(width) && Number.isFinite(height) && width > 0 && height > 0;
         const mediaWidth = hasValidSize ? width : DEFAULT_MEDIA_WIDTH;
         const mediaHeight = hasValidSize ? height : DEFAULT_MEDIA_HEIGHT;
         const isPortrait = mediaHeight > mediaWidth;
         const ratio = mediaWidth / mediaHeight;
-        const viewportHeight = window.innerHeight;
+        const viewport = getViewportSize();
+        const viewportHeight = viewport.height;
 
         currentMediaSize = {
             width: mediaWidth,
@@ -59,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isPortrait) {
             const targetHeight = viewportHeight * PORTRAIT_VIEWPORT_HEIGHT_RATIO;
             const targetWidth = Math.min(
-                window.innerWidth * PORTRAIT_VIEWPORT_WIDTH_LIMIT,
+                viewport.width * PORTRAIT_VIEWPORT_WIDTH_LIMIT,
                 targetHeight * ratio,
             );
 
@@ -70,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const targetHeight = viewportHeight;
         const targetWidth = Math.min(
-            window.innerWidth * GENERAL_VIEWPORT_LIMIT,
+            viewport.width * GENERAL_VIEWPORT_LIMIT,
             targetHeight * ratio,
         );
 
@@ -356,14 +362,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    wrapper.addEventListener('scroll', updateNavButtons);
-    window.addEventListener('resize', () => {
+    const handleViewportResize = () => {
         updateLayout();
 
         if (lightbox.classList.contains('active')) {
             fitLightboxToMedia(currentMediaSize.width, currentMediaSize.height);
         }
-    });
+    };
+
+    wrapper.addEventListener('scroll', updateNavButtons);
+    window.addEventListener('resize', handleViewportResize);
+    window.visualViewport?.addEventListener('resize', handleViewportResize);
 
     updateStoryBorders();
     updateLayout();
