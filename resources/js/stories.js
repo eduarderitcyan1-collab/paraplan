@@ -11,11 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    const lightboxContent = lightbox.querySelector('.lightbox-content');
     const mediaContainer = lightbox.querySelector('.lightbox-media-container');
     const progressContainer = lightbox.querySelector('.progress-container');
     const closeBtn = lightbox.querySelector('.lightbox-close');
     const navPrev = document.getElementById('storiesNavPrev');
     const navNext = document.getElementById('storiesNavNext');
+
+    if (!lightboxContent || !mediaContainer || !progressContainer) {
+        return;
+    }
 
     let currentStoryIndex = 0;
     let currentMediaIndex = 0;
@@ -24,8 +29,41 @@ document.addEventListener('DOMContentLoaded', () => {
     let autoAdvanceInterval = null;
     let mediaDuration = 0;
     const PHOTO_DURATION = 15;
+    const DEFAULT_MEDIA_WIDTH = 9;
+    const DEFAULT_MEDIA_HEIGHT = 16;
+    const LIGHTBOX_MAX_WIDTH = 640;
+    let currentMediaSize = {
+        width: DEFAULT_MEDIA_WIDTH,
+        height: DEFAULT_MEDIA_HEIGHT,
+    };
 
     const viewedMedia = new Map();
+
+    const fitLightboxToMedia = (width, height) => {
+        const hasValidSize = Number.isFinite(width) && Number.isFinite(height) && width > 0 && height > 0;
+        const mediaWidth = hasValidSize ? width : DEFAULT_MEDIA_WIDTH;
+        const mediaHeight = hasValidSize ? height : DEFAULT_MEDIA_HEIGHT;
+
+        currentMediaSize = {
+            width: mediaWidth,
+            height: mediaHeight,
+        };
+
+        const maxWidth = Math.min(window.innerWidth * 0.9, LIGHTBOX_MAX_WIDTH);
+        const maxHeight = window.innerHeight * 0.9;
+        const ratio = mediaWidth / mediaHeight;
+
+        let targetWidth = maxWidth;
+        let targetHeight = targetWidth / ratio;
+
+        if (targetHeight > maxHeight) {
+            targetHeight = maxHeight;
+            targetWidth = targetHeight * ratio;
+        }
+
+        lightboxContent.style.width = `${Math.round(targetWidth)}px`;
+        lightboxContent.style.height = `${Math.round(targetHeight)}px`;
+    };
 
     const getMediaType = (item) => {
         if (item.dataset.type === 'photo' || item.dataset.type === 'video') {
@@ -104,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const item = mediaItems[currentMediaIndex];
 
         mediaContainer.innerHTML = '';
+        fitLightboxToMedia(DEFAULT_MEDIA_WIDTH, DEFAULT_MEDIA_HEIGHT);
 
         if (item.type === 'video') {
             const video = document.createElement('video');
@@ -112,6 +151,10 @@ document.addEventListener('DOMContentLoaded', () => {
             video.muted = true;
             video.playsInline = true;
             mediaContainer.appendChild(video);
+
+            video.onloadedmetadata = () => {
+                fitLightboxToMedia(video.videoWidth, video.videoHeight);
+            };
 
             video.oncanplay = () => {
                 mediaDuration = video.duration || 5;
@@ -140,6 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
         img.alt = 'Story photo';
 
         img.onload = () => {
+            fitLightboxToMedia(img.naturalWidth, img.naturalHeight);
             mediaContainer.appendChild(img);
             mediaDuration = PHOTO_DURATION;
             createProgressBars();
@@ -159,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lightbox.classList.remove('active');
         clearInterval(autoAdvanceInterval);
         mediaContainer.innerHTML = '';
+        fitLightboxToMedia(DEFAULT_MEDIA_WIDTH, DEFAULT_MEDIA_HEIGHT);
     };
 
     const goToPrevMedia = () => {
@@ -299,9 +344,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     wrapper.addEventListener('scroll', updateNavButtons);
-    window.addEventListener('resize', updateLayout);
+    window.addEventListener('resize', () => {
+        updateLayout();
+
+        if (lightbox.classList.contains('active')) {
+            fitLightboxToMedia(currentMediaSize.width, currentMediaSize.height);
+        }
+    });
 
     updateStoryBorders();
     updateLayout();
+    fitLightboxToMedia(DEFAULT_MEDIA_WIDTH, DEFAULT_MEDIA_HEIGHT);
     setTimeout(updateLayout, 100);
 });
