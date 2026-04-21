@@ -213,7 +213,7 @@
 .story p {
     font-size: 14px;
     font-weight: 500;
-    color: #262626;
+    color: var(--white);
     white-space: normal;
     word-break: break-word;
     max-width: 150px;
