@@ -5,8 +5,8 @@ var swiperProd = new Swiper(".gallerySwiper", {
     // spaceBetween: 25,
     centeredSlides: true,
     navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+        nextEl: ".gallery-next",
+        prevEl: ".gallery-prev",
     },
 
     breakpoints: {

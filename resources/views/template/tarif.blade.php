@@ -26,7 +26,7 @@
         </div>
         @if (count($tarifs) >= 5)
             <div class="swiperNavigation">
-                <div class="swiper-button-prev glass">
+                <div class="swiper-button-prev tarif-prev glass">
                     <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27"
                         fill="none">
                         <path d="M13.979 26L1.9582 13.9792L13.979 1.9584" stroke="white" stroke-width="2"
@@ -34,7 +34,7 @@
                         <path d="M1.95836 13.979L26 13.979" stroke="white" stroke-width="2" stroke-linecap="round" />
                     </svg>
                 </div>
-                <div class="swiper-button-next glass">
+                <div class="swiper-button-next tarif-next glass">
                     <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27"
                         fill="none">
                         <path d="M13.0209 1L25.0417 13.0208L13.0209 25.0416" stroke="white" stroke-width="2"

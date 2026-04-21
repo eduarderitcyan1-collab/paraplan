@@ -373,3 +373,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const burger = document.getElementById("burger");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    if (burger && mobileMenu) {
+        burger.addEventListener("click", function () {
+            mobileMenu.classList.toggle("active");
+        });
+    }
+});

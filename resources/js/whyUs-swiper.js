@@ -29,8 +29,8 @@ function toggleWhyUsSwiper() {
             loop: true,
             centeredSlides: true,
             navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
+                nextEl: ".why-us-next",
+                prevEl: ".why-us-prev",
             },
         });
     } else {

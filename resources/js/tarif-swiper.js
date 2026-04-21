@@ -4,8 +4,8 @@ var swiperProd = new Swiper(".tarifSwiper", {
     spaceBetween: 25,
     loop: true,
     navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+        nextEl: ".tarif-next",
+        prevEl: ".tarif-prev",
     },
     breakpoints: {
         0: {
@@ -13,7 +13,11 @@ var swiperProd = new Swiper(".tarifSwiper", {
             spaceBetween: 10,
         },
         450: {
-            slidesPerView: 2,
+            slidesPerView: 2.5,
+            spaceBetween: 15,
+        },
+        768: {
+            slidesPerView: 2.5,
         },
         1000: {
             slidesPerView: 3,

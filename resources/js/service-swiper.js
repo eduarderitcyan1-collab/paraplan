@@ -4,8 +4,8 @@ var swiperProd = new Swiper(".serviceSwiper", {
     loop: true,
     spaceBetween: 25,
     navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+        nextEl: ".service-next",
+        prevEl: ".service-prev",
     },
 
     breakpoints: {

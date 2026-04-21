@@ -45,6 +45,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
+    overflow-x: hidden;
 }
 
 *::-webkit-scrollbar {
@@ -76,11 +77,11 @@ body {
     --orange: #FFA22D;
     --violet: #4A49C4;
     --dark: #454545;
-    --sizeH1: clamp(1.25rem, 0.9531rem + 1.3575vw, 3.125rem);
+    --sizeH1: clamp(1.5rem, 1.1rem + 1.4vw, 3.25rem);
     --sizeH2: clamp(1rem, 0.7624rem + 1.086vw, 2.5rem);
     --sizeH3: clamp(1rem, 0.8812rem + 0.543vw, 1.75rem);
     --sizeH4: clamp(0.85rem, 0.75rem + 0.45vw, 1.4rem);
-    --sizeText: clamp(0.75rem, 0.6906rem + 0.2715vw, 1.125rem);
+    --sizeText: clamp(0.9rem, 0.8rem + 0.4vw, 1.125rem);
     --mulish: 'Mulish', sans-serif;
     --nunito: 'Nunito Sans', sans-serif;
     --unbounded: 'Unbounded', sans-serif;
@@ -205,11 +206,7 @@ body.modalOpen {
     position: relative;
     padding: 50px 100px;
     gap: 50px;
-    overflow: hidden;
-}
-
-.page {
-    padding: 0 100px;
+    overflow: visible;
 }
 
 .page:before,
@@ -311,6 +308,79 @@ body.modalOpen {
 .socialBlock__fixed .socialLink svg {
     width: 33px;
     height: 33px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* Обычное меню */
+.menuList {
+    display: flex;
+    gap: 20px;
+}
+
+.menuLink {
+    text-decoration: none;
+    color: #000;
+}
+
+/* Бургер */
+.burger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.burger span {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+/* Мобильное меню */
+.mobileMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    display: none;
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    font-family: var(--mulish);
+    font-size: var(--sizeText);
+}
+
+.mobileMenu.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 📱 Адаптив */
+@media (max-width: 700px) {
+    .menuList {
+        display: none;
+    }
+
+    .burger {
+        display: flex;
+    }
+
+    .leftMenu,
+    .rightMenu {
+        display: none !important;
+    }
 }
 
 
@@ -1093,6 +1163,16 @@ iframe {
     border-radius: 20px;
 }
 
+.startPointGrid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.startPointGrid .startPoint .text {
+    display: none;
+}
+
 /* Призыв к действию */
 .recording {
     align-items: center;
@@ -1135,7 +1215,7 @@ iframe {
 .menu .logo .logoImage {
     width: 75px;
     height: auto;
-    border-radius: 0px;
+    border-radius: 0px !important;
 }
 
 .menu .menuList .menuLink {
@@ -1176,7 +1256,7 @@ iframe {
 
 .socialBlock .socialWrapper .socialLink:not(.glass) svg {
     width: 35px;
-    height: 35px;
+    height: 30px;
 }
 
 .socialBlock .socialWrapper .socialLink.glass {
@@ -1801,7 +1881,8 @@ img {
     .menu,
     .menuList {
         gap: 10px;
-        width: 100%
+        width: 100%;
+        justify-content: space-between !important;
     }
 
     .menuList {
@@ -1813,7 +1894,7 @@ img {
     }
 
     .menu .logo .logoImage {
-        width: 30px;
+        width: 50px;
     }
 
     /* Почему мы */
@@ -2043,6 +2124,10 @@ img {
     /* Старт точки */
     iframe {
         height: 175px;
+    }
+
+    .startPointGrid {
+        grid-template-columns: repeat(1, 1fr);
     }
 
     /* Призыв к действию */

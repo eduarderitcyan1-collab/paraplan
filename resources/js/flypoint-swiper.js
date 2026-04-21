@@ -28,8 +28,8 @@ function toggleflyPointSwiper() {
             spaceBetween: 10,
             loop: true,
             navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
+                nextEl: ".flyPoint-next",
+                prevEl: ".flyPoint-prev",
             },
         });
     } else {

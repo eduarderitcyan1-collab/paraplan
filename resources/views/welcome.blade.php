@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="bannerContent z-10 flex flex-col justify-between items-center gap-6">
-                    <h1 class="pageTitle text-white text-center text-4xl font-bold">
+                    <h1 class="pageTitle text-white">
                         {{ $banner->title ?? 'Счастье не за морем, счастье - над ним' }}
                     </h1>
                     <a href="#nextBlock" class="mt-4">
