@@ -1,5 +1,9 @@
 <div class="container formBlock">
-    <img src="{{ asset('images/form-block.webp') }}" alt="Paraplan Anapa" class="formPhoto">
+    <video class="formVideo" autoplay muted loop playsinline
+        data-src="{{ asset('images/video/form-video.webm') }}" preload="none">
+        <source type="video/webm">
+        Ваш браузер не поддерживает видео.
+    </video>
     <div class="formWrapper glass">
         <h2 class="subTitle">Запишитесь на полет на параплане сегодня</h2>
         <p class="text">Заполните форму и мы свяжемся с Вами в ближайшее время!</p>
