@@ -45,7 +45,7 @@
             @foreach ($reviews as $review)
                 <div class="swiper-slide glass position-relative">
                     @if ($review->link)
-                        <a href="{{ $review->link }}" target="_blank" class="stretched-link"></a>
+                        <a href="{{ $review->link }}" target="_blank" rel="nofollow" class="stretched-link"></a>
                     @endif
                     <div class="reviewMetaData">
                         <p class="authorName subTitle">{{ $review->title }}</p>
