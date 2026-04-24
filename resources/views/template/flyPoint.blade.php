@@ -60,7 +60,7 @@
     <div class="content">
         <div class="subTitle">{{ $routsMain?->title }}</div>
         <div class="text">
-            {!! $routsMain?->desc !!}
+            {{ \Illuminate\Support\Str::limit(strip_tags($routsMain?->desc), 150) }}
         </div>
     </div>
 </a>
