@@ -350,7 +350,7 @@ body.modalOpen {
     top: 100%;
     left: 0;
     width: 100%;
-    background: #fff;
+    background: rgb(0, 0, 0, 0.1);
     display: none;
     flex-direction: column;
     padding: 10px;
@@ -359,6 +359,10 @@ body.modalOpen {
     z-index: 10;
     font-family: var(--mulish);
     font-size: var(--sizeText);
+}
+
+.mobileMenu .menuLink {
+    color: var(--white);
 }
 
 .mobileMenu.active {
@@ -527,7 +531,7 @@ body.modalOpen {
 
 .about .aboutWrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 25px;
 }
 
@@ -542,10 +546,10 @@ body.modalOpen {
     gap: 14px;
 }
 
-.about .aboutVideo {
+.aboutVideo {
     width: 100%;
-    height: 100%;
-    border-radius: 20px;
+    height: 250px;
+    border-radius: 100%;
     object-fit: cover;
 }
 
@@ -624,7 +628,7 @@ body.modalOpen {
 
 .tarif .tarifPremium {
     display: grid;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: 250px 1fr 250px;
     align-items: center;
     gap: 25px;
 }
@@ -637,6 +641,7 @@ body.modalOpen {
     width: 100%;
     height: 250px;
     border-radius: 50%;
+    object-fit: contain;
 }
 
 .tarif .tarifWar {
@@ -874,21 +879,6 @@ body.modalOpen {
 .teamSwiper .swiper-wrapper .swiper-slide:not(.swiper-slide-active) {
     opacity: 0.6;
     transform: scale(0.75);
-}
-
-.teamSwiper .swiper-wrapper .swiper-slide.glass:before {
-    content: "";
-    position: absolute;
-    top: auto;
-    bottom: 12px;
-    left: auto;
-    right: 50%;
-    width: calc(100% - 25px);
-    height: 250px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, #4A49C4 100%);
-    border-radius: 20px;
-    z-index: -1;
-    transform: translateX(50%);
 }
 
 /* Сертификат */
@@ -1936,8 +1926,9 @@ img {
         margin-bottom: -35px;
     }
 
-    .about .aboutVideo {
+    .aboutVideo {
         height: 100%;
+        border-radius: 20px;
     }
 
     /* Свяжитесь с нами */
@@ -2024,11 +2015,6 @@ img {
         height: 250px;
         width: calc(100% - 10px);
         object-fit: cover;
-    }
-
-    .teamSwiper .swiper-wrapper .swiper-slide.glass:before {
-        width: calc(100% - 10px);
-        height: 175px;
     }
 
     /* Оффер */

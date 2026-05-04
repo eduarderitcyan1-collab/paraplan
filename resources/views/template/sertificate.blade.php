@@ -21,7 +21,7 @@
                 </div>
             @endforeach
         </div>
-        @if (count($sertificates) >= 4)
+        @if (count($sertificates) >= 3)
             <div class="swiperNavigation">
                 <div class="swiper-button-prev sertificate-prev glass">
                     <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27"

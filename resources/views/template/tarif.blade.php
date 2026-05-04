@@ -46,7 +46,11 @@
         @endif
     </div>
     <div class="tarifPremium glass modalButton">
-        <img src="{{ asset('images\tarif.webp') }}" alt="Tarif" class="tarifPhoto">
+        <video class="aboutVideo" autoplay muted loop playsinline data-src="{{ asset('images/video/form-video.webm') }}"
+            preload="none">
+            <source type="video/webm">
+            Ваш браузер не поддерживает видео.
+        </video>
         <div class="tarifPremiumContent">
             <div class="tarifWrapper">
                 <div class="tarifTitle">Премиум+</div>
@@ -68,6 +72,7 @@
             </ul>
             <div class="button modal">Записаться</div>
         </div>
+        <img src="{{ asset('images\bracelet.webp') }}" alt="Tarif" class="tarifPhoto glass">
     </div>
     <div class="tarifWar glass modalButton">
         <img src="{{ asset('images\war.webp') }}" alt="Tarif" class="tarifPhoto glass">

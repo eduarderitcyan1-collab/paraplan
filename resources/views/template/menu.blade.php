@@ -21,7 +21,7 @@
                 <a href="{{ route('about') }}" class="menuLink">О нас</a>
             </div>
 
-            <div class="mobileMenu" id="mobileMenu">
+            <div class="mobileMenu glass" id="mobileMenu">
                 <a href="{{ route('service') }}" class="menuLink">Услуги</a>
                 <a href="{{ route('training') }}" class="menuLink">Обучение</a>
                 <a href="{{ route('marshruty') }}" class="menuLink">Маршруты</a>

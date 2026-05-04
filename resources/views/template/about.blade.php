@@ -15,18 +15,10 @@
     </svg>
     <div class="aboutWrapper">
         <div class="aboutContent glass">
-            <h2 class="subTitle">{{  $about?->title }}</h2>
+            <h2 class="subTitle">{{ $about?->title }}</h2>
             <div class="text">
-                {!!  $about?->desc !!}
+                {!! $about?->desc !!}
             </div>
         </div>
-        @if (isset($about->video) && $about->video)
-            <video class="aboutVideo" autoplay muted loop playsinline data-src="{{ asset('storage/' . $about->video) }}"
-                preload="none">
-                <source type="video/webm">
-                Ваш браузер не поддерживает видео.
-            </video>
-        @endif
-
     </div>
 </div>
