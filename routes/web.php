@@ -50,12 +50,14 @@ Route::post('/thanks', [ParaplanController::class, 'submitLead'])->name('lead.su
 
 Route::get('/uslugi', [ParaplanController::class, 'uslugi'])->name('service');
 Route::get('/marshruty', [ParaplanController::class, 'marshruty'])->name('marshruty');
+Route::get('/marshrut/{slug}', [ParaplanController::class, 'routesShow'])->name('routes.show');
 Route::get('/stati', [ParaplanController::class, 'stati'])->name('stati');
 Route::get('/stati/{slug}', [ParaplanController::class, 'statiShow'])->name('stati.show');
 
 Route::get('/about', [ParaplanController::class, 'about'])->name('about');
 
 Route::get('/road', [ParaplanController::class, 'road'])->name('road');
+
 
 Route::get('/obuchenie-poletam-na-paraplane', [ParaplanController::class, 'training'])->name('training');
 
@@ -112,8 +114,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('external-services', ExternalServiceController::class)->except(['show']);
 
     Route::resource('seo-pages', SeoPageController::class)->except(['show']);
-
-    Route::get('/marshrut/{slug}', [ParaplanController::class, 'routesShow'])->name('routes.show');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
