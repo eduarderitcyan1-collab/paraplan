@@ -72,7 +72,6 @@
             </ul>
             <div class="button modal">Записаться</div>
         </div>
-        <img src="{{ asset('images\bracelet.webp') }}" alt="Tarif" class="tarifPhoto glass">
     </div>
     <div class="tarifWar glass modalButton">
         <img src="{{ asset('images\war.webp') }}" alt="Tarif" class="tarifPhoto glass">

@@ -752,21 +752,28 @@ body.modalOpen {
 }
 
 .service .serviceOther {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    align-items: center;
+    gap: 25px;
+}
+
+.service .serviceOther .serviceOther_content {
     display: flex;
     flex-direction: column;
     gap: 25px;
 }
 
-.service .serviceOther .text {
+.service .serviceOther .serviceOther_content .text {
     margin: 0;
 }
 
-.service .serviceOther .subTitle {
+.service .serviceOther .serviceOther_content .subTitle {
     font-size: var(--sizeH3);
     text-align: left;
 }
 
-.service .serviceOther .subTitle span {
+.service .serviceOther .serviceOther_content .subTitle span {
     color: var(--orange);
 }
 
@@ -1987,6 +1994,15 @@ img {
     /* Услуги */
     .serviceSwiper .swiper-wrapper .swiper-slide {
         padding: 25px 10px;
+    }
+
+    .service .serviceOther {
+        grid-template-columns: 1fr;
+    }
+
+    .service .serviceOther img {
+        height: 175px;
+        object-fit: contain;
     }
 
     .serviceSwiper .swiper-wrapper .swiper-slide .serviceWrapper .servicePrice {
