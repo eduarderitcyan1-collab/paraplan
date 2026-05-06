@@ -15,8 +15,8 @@
                         @else
                             <div class="w-full h-full object-cover"
                                 style="background-image: url('{{ Storage::url($banner->media_path) }}');
-                    background-size: cover;
-                    background-position: center;">
+                                    background-size: cover;
+                                    background-position: center;">
                             </div>
                         @endif
                     </div>
@@ -31,8 +31,8 @@
                         @else
                             <div class="w-full h-full object-cover"
                                 style="background-image: url('{{ Storage::url($mobile) }}');
-                    background-size: cover;
-                    background-position: center;">
+                                background-size: cover;
+                                background-position: center;">
                             </div>
                         @endif
                     </div>
