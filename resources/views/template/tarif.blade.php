@@ -46,8 +46,8 @@
         @endif
     </div>
     <div class="tarifPremium glass modalButton">
-        <video class="aboutVideo" autoplay muted loop playsinline data-src="{{ asset('images/video/form-video.webm') }}"
-            preload="none">
+        <video class="aboutVideo" autoplay muted loop playsinline
+            data-src="{{ asset('images/video/15200091638317.webm') }}" preload="none">
             <source type="video/webm">
             Ваш браузер не поддерживает видео.
         </video>
